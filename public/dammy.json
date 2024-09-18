@@ -1,0 +1,223 @@
+[
+    {
+      "id": "1",
+      "image": "https://i.ibb.co/19K2dXY/premium-photo-1691223714882-57a432c4edaf.jpg",
+      "title": "New Policies Spark Debate in Parliament",
+      "category": "Politics",
+      "region": "United Kingdom",
+      "description": "Lawmakers debate the introduction of controversial new policies affecting healthcare and education.",
+      "date_time": "2024-09-18 10:00",
+      "breaking_news": true,
+      "popular_news": false
+    },
+    {
+      "id": "2",
+      "image": "https://i.ibb.co/qjmxGtm/istockphoto-1183338499-612x612.jpg",
+      "title": "Champions League Final: A Thrilling Showdown",
+      "category": "Sports",
+      "region": "Europe",
+      "description": "The much-anticipated Champions League final ends in a nail-biting finish with unexpected twists.",
+      "date_time": "2024-09-17 21:45",
+      "breaking_news": false,
+      "popular_news": true
+    },
+    {
+      "id": "3",
+      "image": "https://i.ibb.co/5BRxDsL/240-F-871934458-l-Y0a-NNs-ORh0fvm-Rp-JVb0-I1-RHB2-Zcas-Qj.jpg",
+      "title": "Apple Unveils New iPhone with Advanced Features",
+      "category": "Technology",
+      "region": "United States",
+      "description": "Apple's latest iPhone model features enhanced security, AI integration, and longer battery life.",
+      "date_time": "2024-09-17 12:30",
+      "breaking_news": false,
+      "popular_news": true
+    },
+    {
+      "id": "4",
+      "image": "https://i.ibb.co/dtgVcTp/breaking-news-background-modern-banner-30di23quewlg12e5.jpg",
+      "title": "Hollywood Walkout: Actors Join Writers on Strike",
+      "category": "Entertainment",
+      "region": "United States",
+      "description": "Hollywood actors join the ongoing writers' strike, demanding fair wages and better working conditions.",
+      "date_time": "2024-09-18 09:15",
+      "breaking_news": true,
+      "popular_news": false
+    },
+    {
+      "id": "5",
+      "image": "https://i.ibb.co/xsDRjxP/photo-1444653614773-995cb1ef9efa.jpg",
+      "title": "Election Results Show Close Race for Presidency",
+      "category": "Politics",
+      "region": "United States",
+      "description": "The latest election results show a tight race between the leading candidates in the presidential election.",
+      "date_time": "2024-09-18 08:30",
+      "breaking_news": true,
+      "popular_news": true
+    },
+    {
+      "id": "6",
+      "image": "https://i.ibb.co/Fn9Lm51/240-F-568553096-NSh-Sv-PJtx-I6oz9ddu-IKQTG3an-Cw-OUBw-M.jpg",
+      "title": "Olympic Games Opening Ceremony: Highlights",
+      "category": "Sports",
+      "region": "Global",
+      "description": "The Olympic Games kick off with a spectacular opening ceremony showcasing cultural diversity and unity.",
+      "date_time": "2024-09-16 19:30",
+      "breaking_news": false,
+      "popular_news": true
+    },
+    {
+      "id": "7",
+      "image": "https://i.ibb.co/PwFVfdy/news-report-concept-background-design-1017-14197.jpg",
+      "title": "Tech Startups Raise Billions in New Funding Rounds",
+      "category": "Technology",
+      "region": "Global",
+      "description": "Leading tech startups secure record-breaking investments as venture capitalists pour money into AI and fintech.",
+      "date_time": "2024-09-16 11:45",
+      "breaking_news": false,
+      "popular_news": true
+    },
+    {
+      "id": "8",
+      "image": "https://i.ibb.co/sgxgsMN/360-F-182472344-f-QKaz-Lf-Hof7-Xz-Pw-Jmq1-RVTp-Nq-KGDHGom.jpg",
+      "title": "Box Office Hits: The Top-Grossing Movies of the Year",
+      "category": "Entertainment",
+      "region": "Global",
+      "description": "This year's box office has seen some major hits, with several films crossing the billion-dollar mark.",
+      "date_time": "2024-09-17 14:00",
+      "breaking_news": false,
+      "popular_news": true
+    },
+    {
+      "id": "9",
+      "image": "https://i.ibb.co/C8kVnr9/newspaper-background-layout-banner.jpg",
+      "title": "New Sanctions on Foreign Interference in Elections",
+      "category": "Politics",
+      "region": "Europe",
+      "description": "The government imposes strict sanctions on countries involved in meddling with national elections.",
+      "date_time": "2024-09-18 16:00",
+      "breaking_news": true,
+      "popular_news": false
+    },
+    {
+      "id": "10",
+      "image": "https://i.ibb.co/j3ktw5Z/breaking-news-screen-banner-template-260nw-2181698391.webp",
+      "title": "Football Star Announces Retirement After Historic Career",
+      "category": "Sports",
+      "region": "South America",
+      "description": "A legendary football player announces their retirement, leaving behind a remarkable legacy in the sport.",
+      "date_time": "2024-09-17 17:15",
+      "breaking_news": false,
+      "popular_news": true
+    },
+    {
+      "id": "11",
+      "image": "https://i.ibb.co/rkcQRy9/breaking-news-banner-template-world-260nw-1704658294.webp",
+      "title": "Tech Conference: Innovators Discuss Future Trends",
+      "category": "Technology",
+      "region": "Asia",
+      "description": "Top innovators gather at the annual tech conference to discuss the future of AI, blockchain, and quantum computing.",
+      "date_time": "2024-09-18 09:00",
+      "breaking_news": false,
+      "popular_news": true
+    },
+    {
+      "id": "12",
+      "image": "https://i.ibb.co/qjmxGtm/istockphoto-1183338499-612x612.jpg",
+      "title": "Movie Premieres: Exciting New Releases for the Fall",
+      "category": "Entertainment",
+      "region": "United States",
+      "description": "Hollywood is buzzing with excitement as new movie premieres bring fresh stories and thrilling action to the big screen.",
+      "date_time": "2024-09-17 20:00",
+      "breaking_news": false,
+      "popular_news": true
+    },
+    {
+      "id": "13",
+      "image": "https://i.ibb.co/HgHw377/istockphoto-2080356903-2048x2048.jpg",
+      "title": "New Tax Reform Bill Causes Political Divide",
+      "category": "Politics",
+      "region": "Australia",
+      "description": "Political parties are divided over a new tax reform bill that could significantly impact businesses and households.",
+      "date_time": "2024-09-18 07:45",
+      "breaking_news": true,
+      "popular_news": false
+    },
+    {
+      "id": "14",
+      "image": "https://i.ibb.co/5BRxDsL/240-F-871934458-l-Y0a-NNs-ORh0fvm-Rp-JVb0-I1-RHB2-Zcas-Qj.jpg",
+      "title": "Star Player Scores a Hat-trick in Championship Final",
+      "category": "Sports",
+      "region": "Europe",
+      "description": "The star player leads their team to victory by scoring a hat-trick in the championship final.",
+      "date_time": "2024-09-16 22:30",
+      "breaking_news": false,
+      "popular_news": true
+    },
+    {
+      "id": "15",
+      "image": "https://i.ibb.co/xsDRjxP/photo-1444653614773-995cb1ef9efa.jpg",
+      "title": "Tech Giants Face New Regulations",
+      "category": "Technology",
+      "region": "Global",
+      "description": "Governments introduce new regulations aimed at curbing the influence of tech giants in the digital market.",
+      "date_time": "2024-09-18 12:00",
+      "breaking_news": true,
+      "popular_news": true
+    },
+    {
+      "id": "16",
+      "image": "https://i.ibb.co/xsDRjxP/photo-1444653614773-995cb1ef9efa.jpg",
+      "title": "Famous Director Reveals New Sci-Fi Project",
+      "category": "Entertainment",
+      "region": "Global",
+      "description": "A renowned director teases their upcoming sci-fi movie, set to revolutionize the genre with cutting-edge special effects.",
+      "date_time": "2024-09-17 18:45",
+      "breaking_news": false,
+      "popular_news": true
+    },
+    {
+      "id": "17",
+      "image": "https://i.ibb.co/HgHw377/istockphoto-2080356903-2048x2048.jpg",
+      "title": "Government Faces Criticism Over Foreign Policy Decisions",
+      "category": "Politics",
+      "region": "Middle East",
+      "description": "The government's recent foreign policy decisions have sparked controversy both at home and abroad.",
+      "date_time": "2024-09-18 15:00",
+      "breaking_news": true,
+      "popular_news": false
+    },
+    {
+      "id": "18",
+      "image": "https://example.com/image18.jpg",
+      "title": "Star Athlete Breaks World Record in 100m Sprint",
+      "category": "Sports",
+      "region": "Africa",
+      "description": "A star athlete sets a new world record in the 100m sprint, making headlines across the sports world.",
+      "date_time": "2024-09-16 13:00",
+      "breaking_news": false,
+      "popular_news": true
+    },
+    {
+      "id": "19",
+      "image": "https://i.ibb.co/19K2dXY/premium-photo-1691223714882-57a432c4edaf.jpg",
+      "title": "New AI Breakthroughs in Machine Learning",
+      "category": "Technology",
+      "region": "United States",
+      "description": "Recent breakthroughs in AI and machine learning promise to revolutionize various industries, from healthcare to finance.",
+      "date_time": "2024-09-18 14:30",
+      "breaking_news": true,
+      "popular_news": false
+    },
+    {
+      "id": "20",
+      "image": "https://example.com/image20.jpg",
+      "title": "Award-Winning Film Director Announces New Project",
+      "category": "Entertainment",
+      "region": "Global",
+      "description": "An award-winning film director announces a new project that has been highly anticipated by fans and critics alike.",
+      "date_time": "2024-09-17 16:00",
+      "breaking_news": false,
+      "popular_news": true
+    }
+  ]
+  
