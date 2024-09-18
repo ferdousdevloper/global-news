@@ -104,7 +104,7 @@ const Footer = () => {
                     href="#"
                     className="hover:dark:text-violet-600"
                   >
-                    Link
+                    Links
                   </a>
                 </li>
                 <li>
