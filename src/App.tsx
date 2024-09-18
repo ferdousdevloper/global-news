@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Global News
         </a>
         <button className="btn btn-primary">Primary</button>
         <h1>ferdous</h1>
