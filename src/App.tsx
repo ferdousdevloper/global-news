@@ -19,6 +19,7 @@ function App() {
           Global News
         </a>
         <button className="btn btn-primary">Primary</button>
+        <h1>ferdous</h1>
       </header>
     </div>
   );
