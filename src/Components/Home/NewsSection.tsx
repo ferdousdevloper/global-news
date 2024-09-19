@@ -24,9 +24,9 @@ const NewsSection: React.FC = () => {
 
   return (
     <div className="container mx-auto my-10" style={{ width: '85%' }}>
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col lg:flex-row gap-5">
         {/* Left side: 75% width, all news */}
-        <div className="lg:w-9/12 w-full">
+        <div className="lg:w-9/12 w-full bg-slate-900 p-5 rounded-xl">
         <h2 className="text-3xl font-bold mb-4">All News</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {allNews.map((item) => (
@@ -44,7 +44,7 @@ const NewsSection: React.FC = () => {
         </div>
 
         {/* Right side: 25% width, latest news */}
-        <div className="lg:w-3/12 w-full">
+        <div className="lg:w-3/12 w-full bg-slate-900 p-5 rounded-xl">
           <h2 className="text-2xl font-bold mb-4">Latest News</h2>
           <div className="space-y-6">
             {latestNews.map((item) => (

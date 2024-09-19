@@ -1,5 +1,6 @@
 import React from 'react';
 import './SignInPage.css'; // Import custom CSS for shapes
+import { Link } from 'react-router-dom';
 
 
 
@@ -15,7 +16,7 @@ const SignInPage = () => {
           <h2 className="text-white text-4xl font-bold">Welcome Back!</h2>
           <p className="text-white mt-4 text-lg">Don't have any account? Please register!!</p>
           <button className="mt-6 px-6 py-3 border-2 border-white text-white rounded-full hover:bg-white hover:text-[#02AA08] transition">
-            Register
+            <Link to="/register">Register</Link> 
           </button>
         </div>
 
