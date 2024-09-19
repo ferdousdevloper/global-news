@@ -1,12 +1,67 @@
-import React from "react";
-import "./SignInPage.css"; // You can use the same CSS for shapes
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
+import Swal from 'sweetalert2'; 
+import "./SignInPage.css"; 
 
 const RegisterPage = () => {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { createUser, loading } = useContext(AuthContext) || {};
+  const navigate = useNavigate(); 
+
+  const validatePassword = (password) => {
+    const upperCasePattern = /[A-Z]/;
+    const lowerCasePattern = /[a-z]/;
+    const numberPattern = /[0-9]/;
+
+    return (
+      upperCasePattern.test(password) &&
+      lowerCasePattern.test(password) &&
+      numberPattern.test(password)
+    );
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(""); // Reset error
+
+    if (!validatePassword(password)) {
+      setError("Password must contain at least one uppercase letter, one lowercase letter, and one number.");
+      return;
+    }
+
+    if (!createUser) {
+      return;
+    }
+    
+    try {
+      await createUser(email, password);
+      Swal.fire({
+        icon: 'success',
+        title: 'Registration Successful!',
+        text: 'You have successfully created your account.',
+        confirmButtonColor: '#02AA08',
+      }).then(() => {
+        navigate('/'); 
+      });
+    } catch (error) {
+      setError("Failed to create an account. Please try again.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Registration Failed!',
+        text: 'Please check your details and try again.',
+        confirmButtonColor: '#02AA08',
+      });
+    }
+  };
+
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gray-900 overflow-hidden font-montserrat">
       {/* Register Container */}
-      <div className="relative flex  w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden z-10 border border-[#02AA08]">
+      <div className="relative flex w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden z-10 border border-[#02AA08]">
         {/* Left Side - Sign In */}
         <div className="w-1/2 bg-[#02AA08] p-8 flex flex-col justify-center items-center">
           <h2 className="text-white text-4xl font-bold">Welcome!</h2>
@@ -27,49 +82,64 @@ const RegisterPage = () => {
             or use your email for registration
           </p>
 
-          {/* Name Input */}
-          <div className="mb-4">
-            <label className="block text-gray-400" htmlFor="name">
-              Full Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              placeholder="Full Name"
-              className="w-full px-4 py-2 mt-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#02AA08]"
-            />
-          </div>
+          {/* Error Message */}
+          {error && <p className="text-red-500 mb-4">{error}</p>}
 
-          {/* Email Input */}
-          <div className="mb-4">
-            <label className="block text-gray-400" htmlFor="email">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Email"
-              className="w-full px-4 py-2 mt-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#02AA08]"
-            />
-          </div>
+          <form onSubmit={handleSubmit}>
+            {/* Name Input */}
+            <div className="mb-4">
+              <label className="block text-gray-400" htmlFor="name">
+                Full Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Full Name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                className="w-full px-4 py-2 mt-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#02AA08]"
+              />
+            </div>
 
-          {/* Password Input */}
-          <div className="mb-6">
-            <label className="block text-gray-400" htmlFor="password">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              placeholder="*****"
-              className="w-full px-4 py-2 mt-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#02AA08]"
-            />
-          </div>
+            {/* Email Input */}
+            <div className="mb-4">
+              <label className="block text-gray-400" htmlFor="email">
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-2 mt-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#02AA08]"
+              />
+            </div>
 
-          {/* Register Button */}
-          <button className="w-full py-2 bg-[#02AA08] text-white rounded-md hover:bg-green-400 transition">
-            REGISTER
-          </button>
+            {/* Password Input */}
+            <div className="mb-6">
+              <label className="block text-gray-400" htmlFor="password">
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                placeholder="*****"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-2 mt-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#02AA08]"
+              />
+            </div>
+
+            {/* Register Button */}
+            <button
+              type="submit"
+              className="w-full py-2 bg-[#02AA08] text-white rounded-md hover:bg-green-400 transition"
+              disabled={loading}
+            >
+              {loading ? "REGISTERING..." : "REGISTER"}
+            </button>
+          </form>
         </div>
       </div>
 

@@ -1,11 +1,24 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { user, logOut } = useContext(AuthContext) || {}; // Assuming user and logout are provided
 
   const toggleMenu = (): void => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = async () => {
+    if (logOut) {
+      try {
+        await logOut();
+        // Handle successful logout (e.g., redirect to homepage or show a message)
+      } catch (error) {
+        console.error("Failed to log out", error);
+      }
+    }
   };
 
   return (
@@ -96,18 +109,27 @@ const NavBar: React.FC = () => {
           </NavLink>
         </div>
 
-        {/* Right Side: Login Button */}
+        {/* Right Side: Login/Logout Button */}
         <div className="hidden md:block">
-          <NavLink
-            to="/login"
-            className={({ isActive }) =>
-              `block px-4 py-2 rounded ${
-                isActive ? "bg-[#02AA08]" : "bg-[#02AA08] hover:bg-[#1b5c1d]"
-              } text-white px-8`
-            }
-          >
-            Login
-          </NavLink>
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className="block px-4 py-2 rounded bg-[#02AA08] hover:bg-[#1b5c1d] text-white"
+            >
+              Logout
+            </button>
+          ) : (
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded ${
+                  isActive ? "bg-[#02AA08]" : "bg-[#02AA08] hover:bg-[#1b5c1d]"
+                } text-white px-8`
+              }
+            >
+              Login
+            </NavLink>
+          )}
         </div>
 
         {/* Hamburger Menu Icon (for small screens) */}
@@ -206,16 +228,25 @@ const NavBar: React.FC = () => {
           >
             Entertainment
           </NavLink>
-          <NavLink
-            to="/login"
-            className={({ isActive }) =>
-              `block px-4 py-2 rounded ${
-                isActive ? "bg-[#02AA08]" : "bg-[#02AA08] hover:bg-[#1b5c1d]"
-              } text-white mt-2`
-            }
-          >
-            Login
-          </NavLink>
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className="block px-4 py-2 rounded bg-[#02AA08] hover:bg-[#1b5c1d] text-white mt-2"
+            >
+              Logout
+            </button>
+          ) : (
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded ${
+                  isActive ? "bg-[#02AA08]" : "bg-[#02AA08] hover:bg-[#1b5c1d]"
+                } text-white mt-2`
+              }
+            >
+              Login
+            </NavLink>
+          )}
         </div>
       )}
     </nav>

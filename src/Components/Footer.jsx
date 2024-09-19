@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import moment from "moment";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
@@ -99,7 +100,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="text-sm text-center py-10">
-          © 2024 Global News. All Rights Reserved (Team GAMMA)
+          © {moment().format("MMM Do YYYY") } Global News. All Rights Reserved (Team GAMMA)
         </div>
       </footer>
     </div>
