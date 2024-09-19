@@ -1,0 +1,116 @@
+/* Background Shapes */
+.bg-rectangle {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-color: #02AA08;
+    top: 10%;
+    left: 10%;
+    transform: rotate(45deg);
+    opacity: 0.4;
+    z-index: -1;
+  }
+  
+  .bg-ellipse {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: #02AA08;
+    border-radius: 50%;
+    top: 40%;
+    right: 10%;
+    opacity: 0.3;
+    z-index: -1;
+  }
+  
+  .bg-polygon {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    background-color: #02AA08;
+    bottom: 10%;
+    left: 30%;
+    opacity: 0.5;
+    z-index: -1;
+  }
+  
+  /* Small Circle */
+  .bg-circle-small {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #02AA08;
+    border-radius: 50%;
+    top: 20%;
+    left: 50%;
+    opacity: 0.6;
+    z-index: -1;
+  }
+  
+  /* Large Circle */
+  .bg-circle-large {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background-color: #02AA08;
+    border-radius: 50%;
+    top: 60%;
+    right: 5%;
+    opacity: 0.2;
+    z-index: -1;
+  }
+  
+  /* Triangle */
+  .bg-triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    border-bottom: 100px solid #02AA08;
+    top: 25%;
+    right: 40%;
+    opacity: 0.5;
+    z-index: -1;
+  }
+  
+  /* Diamond */
+  .bg-diamond {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: #02AA08;
+    top: 15%;
+    left: 5%;
+    transform: rotate(45deg);
+    opacity: 0.3;
+    z-index: -1;
+  }
+  
+  /* Parallelogram */
+  .bg-parallelogram {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    background-color: #02AA08;
+    transform: skew(20deg);
+    bottom: 15%;
+    right: 25%;
+    opacity: 0.4;
+    z-index: -1;
+  }
+  
+  /* Oval */
+  .bg-oval {
+    position: absolute;
+    width: 250px;
+    height: 150px;
+    background-color: #02AA08;
+    border-radius: 50%;
+    top: 70%;
+    left: 20%;
+    opacity: 0.3;
+    z-index: -1;
+  }
+  
