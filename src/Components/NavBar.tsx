@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -13,31 +13,73 @@ const NavBar: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center p-4">
         {/* Left Side: Global News */}
         <div className="text-2xl font-bold">
-          <Link to="/">GLOBAL NEWS</Link>
+          <NavLink to="/">
+            <h1 className="text-center text-4xl font-bold tracking-widest">
+              <span className="text-[#02AA08]">Global</span> News
+            </h1>
+          </NavLink>
         </div>
 
         {/* Middle: Menu Links (Responsive) */}
         <div className="hidden md:flex space-x-6">
-          <Link to="/" className="hover:text-gray-400">Home</Link>
-          <Link to="/all-news" className="hover:text-gray-400">All News</Link>
-          <Link to="/category/politics" className="hover:text-gray-400">Politics</Link>
-          <Link to="/category/sports" className="hover:text-gray-400">Sports</Link>
-          <Link to="/category/technology" className="hover:text-gray-400">Technology</Link>
-          <Link to="/category/entertainment" className="hover:text-gray-400">Entertainment</Link>
+          <NavLink 
+            to="/"
+            className={({ isActive }) => `px-2 py-1 rounded ${isActive ? 'bg-[#02AA08] text-white' : 'hover:bg-[#02AA08] hover:text-white'}`}
+          >
+            Home
+          </NavLink>
+          <NavLink 
+            to="/all-news" 
+            className={({ isActive }) => `px-2 py-1 rounded ${isActive ? 'bg-[#02AA08] text-white' : 'hover:bg-[#02AA08] hover:text-white'}`}
+          >
+            All News
+          </NavLink>
+          <NavLink 
+            to="/category/politics" 
+            className={({ isActive }) => `px-2 py-1 rounded ${isActive ? 'bg-[#02AA08] text-white' : 'hover:bg-[#02AA08] hover:text-white'}`}
+          >
+            Politics
+          </NavLink>
+          <NavLink 
+            to="/category/sports" 
+            className={({ isActive }) => `px-2 py-1 rounded ${isActive ? 'bg-[#02AA08] text-white' : 'hover:bg-[#02AA08] hover:text-white'}`}
+          >
+            Sports
+          </NavLink>
+          <NavLink 
+            to="/category/technology" 
+            className={({ isActive }) => `px-2 py-1 rounded ${isActive ? 'bg-[#02AA08] text-white' : 'hover:bg-[#02AA08] hover:text-white'}`}
+          >
+            Technology
+          </NavLink>
+          <NavLink 
+            to="/category/entertainment" 
+            className={({ isActive }) => `px-2 py-1 rounded ${isActive ? 'bg-[#02AA08] text-white' : 'hover:bg-[#02AA08] hover:text-white'}`}
+          >
+            Entertainment
+          </NavLink>
         </div>
 
         {/* Right Side: Login Button */}
         <div className="hidden md:block">
-          <Link to="/login" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+          <NavLink 
+            to="/login" 
+            className={({ isActive }) => `px-4 py-2 rounded ${isActive ? 'bg-blue-600' : 'bg-blue-500 hover:bg-blue-600'} text-white`}
+          >
             Login
-          </Link>
+          </NavLink>
         </div>
 
         {/* Hamburger Menu Icon (for small screens) */}
         <div className="md:hidden">
           <button onClick={toggleMenu}>
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+              />
             </svg>
           </button>
         </div>
@@ -46,15 +88,48 @@ const NavBar: React.FC = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-gray-700 text-white space-y-2 px-4 py-2">
-          <Link to="/" className="block hover:text-gray-400">Home</Link>
-          <Link to="/all-news" className="block hover:text-gray-400">All News</Link>
-          <Link to="/category/politics" className="block hover:text-gray-400">Politics</Link>
-          <Link to="/category/sports" className="block hover:text-gray-400">Sports</Link>
-          <Link to="/category/technology" className="block hover:text-gray-400">Technology</Link>
-          <Link to="/category/entertainment" className="block hover:text-gray-400">Entertainment</Link>
-          <Link to="/login" className="block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mt-2">
+          <NavLink 
+            to="/" 
+            className={({ isActive }) => `block px-2 py-1 rounded ${isActive ? 'bg-[#02AA08] text-white' : 'hover:bg-[#02AA08] hover:text-white'}`}
+          >
+            Home
+          </NavLink>
+          <NavLink 
+            to="/all-news" 
+            className={({ isActive }) => `block px-2 py-1 rounded ${isActive ? 'bg-[#02AA08] text-white' : 'hover:bg-[#02AA08] hover:text-white'}`}
+          >
+            All News
+          </NavLink>
+          <NavLink 
+            to="/category/politics" 
+            className={({ isActive }) => `block px-2 py-1 rounded ${isActive ? 'bg-[#02AA08] text-white' : 'hover:bg-[#02AA08] hover:text-white'}`}
+          >
+            Politics
+          </NavLink>
+          <NavLink 
+            to="/category/sports" 
+            className={({ isActive }) => `block px-2 py-1 rounded ${isActive ? 'bg-[#02AA08] text-white' : 'hover:bg-[#02AA08] hover:text-white'}`}
+          >
+            Sports
+          </NavLink>
+          <NavLink 
+            to="/category/technology" 
+            className={({ isActive }) => `block px-2 py-1 rounded ${isActive ? 'bg-[#02AA08] text-white' : 'hover:bg-[#02AA08] hover:text-white'}`}
+          >
+            Technology
+          </NavLink>
+          <NavLink 
+            to="/category/entertainment" 
+            className={({ isActive }) => `block px-2 py-1 rounded ${isActive ? 'bg-[#02AA08] text-white' : 'hover:bg-[#02AA08] hover:text-white'}`}
+          >
+            Entertainment
+          </NavLink>
+          <NavLink 
+            to="/login" 
+            className={({ isActive }) => `block px-4 py-2 rounded ${isActive ? 'bg-blue-600' : 'bg-blue-500 hover:bg-blue-600'} text-white mt-2`}
+          >
             Login
-          </Link>
+          </NavLink>
         </div>
       )}
     </nav>
