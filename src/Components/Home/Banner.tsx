@@ -56,7 +56,7 @@ const Banner: React.FC = () => {
       >
         {news.map((item) => (
           <SwiperSlide key={item.id}>
-            <img src={item.image} alt={item.title} className="banner-image" />
+            <img src={item.image} alt={item.title} className="banner-image max-h-[700px]" />
             <div className="swiper-slide-content bg-black bg-opacity-50 text-white p-4 absolute bottom-0 w-full">
               {/* Optional content if you want to add titles or anything on the image */}
             </div>
