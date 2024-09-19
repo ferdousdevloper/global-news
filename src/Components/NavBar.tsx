@@ -62,9 +62,9 @@ const NavBar: React.FC = () => {
 
         {/* Right Side: Login Button */}
         <div className="hidden md:block">
-          <NavLink 
+        <NavLink 
             to="/login" 
-            className={({ isActive }) => `px-4 py-2 rounded ${isActive ? 'bg-blue-600' : 'bg-blue-500 hover:bg-blue-600'} text-white`}
+            className={({ isActive }) => `block px-4 py-2 rounded ${isActive ? 'bg-[#02AA08]' : 'bg-[#02AA08] hover:bg-[#1b5c1d]'} text-white px-8`}
           >
             Login
           </NavLink>
@@ -126,7 +126,7 @@ const NavBar: React.FC = () => {
           </NavLink>
           <NavLink 
             to="/login" 
-            className={({ isActive }) => `block px-4 py-2 rounded ${isActive ? 'bg-blue-600' : 'bg-blue-500 hover:bg-blue-600'} text-white mt-2`}
+            className={({ isActive }) => `block px-4 py-2 rounded ${isActive ? 'bg-[#02AA08]' : 'bg-[#02AA08] hover:bg-[#1b5c1d]'} text-white mt-2`}
           >
             Login
           </NavLink>
