@@ -6,6 +6,7 @@ import ErrorPage from "./Pages/ErrorPage";
 import SignInPage from "./Pages/SignInPage";
 import RegisterPage from "./Pages/RegisterPage";
 import Politics from "./Pages/Politics";
+import Contact from "./Pages/Contact";
 
 const Root = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const Root = createBrowserRouter([
       {
         path: "/category/politics",
         element: <Politics />,
+      },
+      {
+        path: '/contact',
+        element: <Contact></Contact>
       },
       {
         path: "/login",
