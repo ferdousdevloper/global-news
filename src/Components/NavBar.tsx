@@ -107,6 +107,19 @@ const NavBar: React.FC = () => {
           >
             Entertainment
           </NavLink>
+
+          <NavLink
+            to="/category/entertainment"
+            className={({ isActive }) =>
+              `px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            More 
+          </NavLink>
         </div>
 
         {/* Right Side: Login/Logout Button */}
