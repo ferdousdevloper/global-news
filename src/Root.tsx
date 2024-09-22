@@ -6,6 +6,9 @@ import ErrorPage from "./Pages/ErrorPage";
 import SignInPage from "./Pages/SignInPage";
 import RegisterPage from "./Pages/RegisterPage";
 import Politics from "./Pages/Politics";
+import Gallery from "./Pages/Gallery";
+import Feature from "./Pages/Feature";
+import Tech from "./Pages/Tech";
 
 const Root = createBrowserRouter([
   {
@@ -20,6 +23,18 @@ const Root = createBrowserRouter([
       {
         path: "/category/politics",
         element: <Politics />,
+      },
+      {
+        path: "/category/tech",
+        element: <Tech />,
+      },
+      {
+        path: "/category/feature",
+        element: <Feature />,
+      },
+      {
+        path: "/category/gallery",
+        element: <Gallery />,
       },
       {
         path: "/login",

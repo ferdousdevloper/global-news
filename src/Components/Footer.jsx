@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import moment from "moment";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import GotoTop from "./GotoTop";
 
 const Footer = () => {
   return (
@@ -99,8 +100,14 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="text-sm text-center py-10">
-          © {moment().format("MMM Do YYYY") } Global News. All Rights Reserved (Team GAMMA)
+        <div className="text-sm text-center py-10 flex justify-around items-center">
+          <span className="">
+            © {moment().format("MMM Do YYYY")} Global News. All Rights Reserved
+            (Team GAMMA)
+          </span>
+          <span>
+            <GotoTop></GotoTop>
+          </span>
         </div>
       </footer>
     </div>
