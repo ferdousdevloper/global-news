@@ -40,9 +40,10 @@ const Root = createBrowserRouter([
       {
         path: "/category/gallery",
         element: <Gallery />,
-
+      },
+      {
         path: '/contact',
-        element: <Contact></Contact>
+        element: <Contact></Contact>,
 
       },
       {
