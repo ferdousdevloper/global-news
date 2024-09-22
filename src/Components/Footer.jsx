@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import moment from "moment";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -64,9 +65,9 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
+                  <Link to="/contact">
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
