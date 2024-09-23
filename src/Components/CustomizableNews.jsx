@@ -1,23 +1,50 @@
 import React from 'react';
 
-const CustomizableNews = () => {
+const CustomizableNews = ({ openFilter }) => {
+    console.log(openFilter)
     return (
-        <div className='flex'>
-            <div className="dropdown dropdown-hover z-30 absolute">
-                <div tabIndex={0} role="button" className="btn btn-outline bg-none border-none border-b-2 m-1 w-48 hover:bg-none">Hoverfgfgfg</div>
-                <ul tabIndex={0} className="dropdown-content menu z-[1] w-48">
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 2</a></li>
-                </ul>
+        <div className={`flex gap-8 justify-end -mb-[48px] ${openFilter ? "block" : "hidden"}`}>
+
+
+            <div className="dropdown dropdown-hover z-30">
+                <select className="bg-transparent border-b-2 border-green-700 w-full max-w-xs p-2">
+                    <option className='disabled selected text-[#02AA08]' >Pick the best JS framework</option>
+                    <option className='text-[#02AA08]'>Svelte</option>
+                    <option className='text-[#02AA08]'>Vue</option>
+                    <option className='text-[#02AA08]'>React</option>
+                </select>
+            </div>
+            <div className="dropdown dropdown-hover z-30">
+                <select className="bg-transparent border-b-2 border-green-700 w-full max-w-xs p-2">
+                    <option className='disabled selected text-[#02AA08]' >Pick the best JS framework</option>
+                    <option className='text-[#02AA08]'>Svelte</option>
+                    <option className='text-[#02AA08]'>Vue</option>
+                    <option className='text-[#02AA08]'>React</option>
+                </select>
+            </div>
+            <div className="dropdown dropdown-hover z-30">
+                <select className="bg-transparent border-b-2 border-green-700 w-full max-w-xs p-2">
+                    <option className='disabled selected text-[#02AA08]' >Pick the best JS framework</option>
+                    <option className='text-[#02AA08]'>Svelte</option>
+                    <option className='text-[#02AA08]'>Vue</option>
+                    <option className='text-[#02AA08]'>React</option>
+                </select>
+            </div>
+            <div className="dropdown dropdown-hover z-30">
+                <select className="bg-transparent border-b-2 border-green-700 w-full max-w-xs p-2">
+                    <option className='disabled selected text-[#02AA08]' >Pick the best JS framework</option>
+                    <option className='text-[#02AA08]'>Svelte</option>
+                    <option className='text-[#02AA08]'>Vue</option>
+                    <option className='text-[#02AA08]'>React</option>
+                </select>
+            </div>
+            <div className='z-30'>
+                <button className='btn bg-[#02AA08]'>search</button>
+            </div>
+            <div className='z-30'>
+                <button className='btn bg-[#02AA08]'>reset</button>
             </div>
 
-            <div className="dropdown dropdown-hover z-30 absolute left-52">
-                <div tabIndex={0} role="button" className="btn m-1">Hover</div>
-                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 2</a></li>
-                </ul>
-            </div>
         </div>
     );
 };
