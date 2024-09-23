@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import { Link } from "react-router-dom";
 
 const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -168,6 +170,60 @@ const NavBar: React.FC = () => {
         {/* Right Side: Login/Logout Button */}
         <div className="hidden md:block">
           {user ? (
+            <div
+              className="dropdown dropdown-end tooltip tooltip-left"
+              data-tip={user.displayName}
+            >
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full ">
+                  <img
+                    src={
+                      user?.photoURL ||
+                      "https://i.ibb.co/vY5bFQR/2151033973-min.jpg"
+                    }
+                  />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content mt-3 z-[99] px-2 py-10 shadow-4xl shadow bg-black rounded-box w-64 border   "
+              >
+                <img
+                  src={
+                    user?.photoURL ||
+                    "https://i.ibb.co/vY5bFQR/2151033973-min.jpg"
+                  }
+                  alt=""
+                  className="w-32 h-32 mx-auto rounded-full  aspect-square mb-6"
+                />
+                <li>
+                  <p className=" btn mb-3">
+                    <span>{user?.displayName || "user name not found"}</span>
+                  </p>
+                </li>
+                <li>
+                  <span className="btn mb-3">
+                    {user?.email || "email not found"}
+                  </span>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="btn btn-sm btn-error text-white"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <Link to="/login">
+              <button className=" px-4 py-2 rounded bg-[#02AA08] hover:bg-[#1b5c1d]">
+                Login
+              </button>
+            </Link>
+          )}
+          {/* {user ? (
             <button
               onClick={handleLogout}
               className="block px-4 py-2 rounded bg-[#02AA08] hover:bg-[#1b5c1d] text-white"
@@ -185,7 +241,7 @@ const NavBar: React.FC = () => {
             >
               Login
             </NavLink>
-          )}
+          )} */}
         </div>
 
         {/* Hamburger Menu Icon (for small screens) */}
@@ -554,12 +610,42 @@ const NavBar: React.FC = () => {
           </NavLink>
 
           {user ? (
-            <button
-              onClick={handleLogout}
-              className="block px-4 py-2 rounded bg-[#02AA08] hover:bg-[#1b5c1d] text-white mt-2"
-            >
-              Logout
-            </button>
+            <div>
+              <div>
+                <h1 className="text-lg py-2">User Profile</h1>
+                <hr />
+                <div className="flex items-center justify-center gap-4">
+                <img
+                  src={
+                    user?.photoURL ||
+                    "https://i.ibb.co/vY5bFQR/2151033973-min.jpg"
+                  }
+                  alt=""
+                  className="w-32 h-32 rounded-full  aspect-square mb-6"
+                />
+                <div>
+                <div>
+                  <p className=" btn mb-3">
+                    <span>{user?.displayName || "user name not found"}</span>
+                  </p>
+                </div>
+                <div>
+                  <span className="btn mb-3">
+                    {user?.email || "email not found"}
+                  </span>
+                </div>
+                </div>
+                </div>
+                
+                
+              </div>
+              <button
+                onClick={handleLogout}
+                className="block px-4 w-full py-2 rounded bg-[#02AA08] hover:bg-[#1b5c1d] text-white mt-2"
+              >
+                Logout
+              </button>
+            </div>
           ) : (
             <NavLink
               to="/login"
