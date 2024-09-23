@@ -5,7 +5,8 @@ import "./SignInPage.css";
 import { AuthContext } from "../providers/AuthProvider";
 
 const SignInPage = () => {
-  const { signIn, setLoading } = useContext(AuthContext) || {};
+  const { signIn, signInWithGoogle, setLoading } =
+    useContext(AuthContext) || {};
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -38,6 +39,27 @@ const SignInPage = () => {
     } finally {
       setLoading(false);
     }
+  };
+  // google Login
+  const handleGoogleSignIn = () => {
+    signInWithGoogle().then((result) => {
+      // const userInfo = {
+      //   name: result.user?.displayName,
+      //   email: result.user?.email,
+      //   photoURL: result.user?.photoURL || result.user?.photourl,
+      // };
+      // // console.log(userInfo);
+      // axiosPublic.put("/users", userInfo);
+      console.log(result.user);
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Welcome to our Global News Platform.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/");
+    });
   };
 
   return (
@@ -111,7 +133,11 @@ const SignInPage = () => {
             <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
           </div>
           <div className="flex justify-center space-x-4 text-gray-300">
-            <button aria-label="Log in with Google" className="p-3 rounded-sm">
+            <button
+              aria-label="Log in with Google"
+              className="p-3 rounded-sm text-red-500"
+              onClick={handleGoogleSignIn}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
