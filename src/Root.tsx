@@ -20,7 +20,6 @@ import Business from "./Pages/Business";
 import Opinion from "./Pages/Opinion";
 import Sport from "./Pages/Sport";
 
-
 const Root = createBrowserRouter([
   {
     path: "/",
@@ -40,14 +39,14 @@ const Root = createBrowserRouter([
         element: <Politics />,
       },
       {
-
         path: "/category/entertainment",
         element: <Entertainment />,
       },
       {
-        path: '/contact',
-        element: <Contact></Contact>
-
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
+      {
         path: "/category/business",
         element: <Business />,
       },
@@ -74,7 +73,6 @@ const Root = createBrowserRouter([
       {
         path: "/category/contact",
         element: <Contact></Contact>,
-
       },
       {
         path: "/login",
