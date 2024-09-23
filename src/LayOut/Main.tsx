@@ -8,9 +8,15 @@ import Footer from "../Components/Footer";
 const Main: React.FC = () => {
   return (
     <div>
-      <NavBar />
-      <Outlet />
-      <Footer></Footer>
+      <div>
+        <NavBar />
+      </div>
+      <div className="py-0 md:py-4">
+        <Outlet />
+      </div>
+      <div>
+        <Footer></Footer>
+      </div>
     </div>
   );
 };

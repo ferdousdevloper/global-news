@@ -80,6 +80,18 @@ const NavBar: React.FC = () => {
             Home
           </NavLink>
           <NavLink
+            to="/latest"
+            className={({ isActive }) =>
+              `px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Latest
+          </NavLink>
+          <NavLink
             to="/all-news"
             className={({ isActive }) =>
               `px-2 py-1 rounded ${
@@ -138,6 +150,18 @@ const NavBar: React.FC = () => {
             }
           >
             Entertainment
+          </NavLink>
+          <NavLink
+            to="/category/contact"
+            className={({ isActive }) =>
+              `px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Contact Us
           </NavLink>
         </div>
 
@@ -187,7 +211,7 @@ const NavBar: React.FC = () => {
 
       {/* Large screen Menu */}
       {isOpenMenu && (
-        <div className="hidden md:block bg-gray-700 max-w-md text-white space-y-2 px-4 py-2">
+        <div className="hidden md:block bg-gray-700 max-w-md text-white space-y-2 px-4 py-2 scroll-m-0">
           <div>
             <div className="text-2xl font-bold">
               <NavLink to="/">
@@ -212,6 +236,18 @@ const NavBar: React.FC = () => {
             Home
           </NavLink>
           <NavLink
+            to="/latest"
+            className={({ isActive }) =>
+              `block px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Latest
+          </NavLink>
+          <NavLink
             to="/all-news"
             className={({ isActive }) =>
               `block px-2 py-1 rounded ${
@@ -222,6 +258,18 @@ const NavBar: React.FC = () => {
             }
           >
             All News
+          </NavLink>
+          <NavLink
+            to="/category/business"
+            className={({ isActive }) =>
+              `block px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Business
           </NavLink>
           <NavLink
             to="/category/politics"
@@ -258,6 +306,30 @@ const NavBar: React.FC = () => {
             }
           >
             Technology
+          </NavLink>
+          <NavLink
+            to="/category/lifestyle"
+            className={({ isActive }) =>
+              `block px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Lifestyle
+          </NavLink>
+          <NavLink
+            to="/category/opinion"
+            className={({ isActive }) =>
+              `block px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Opinion
           </NavLink>
           <NavLink
             to="/category/feature"
@@ -296,6 +368,18 @@ const NavBar: React.FC = () => {
             Photo Gallery
           </NavLink>
           <NavLink
+            to="/category/sports"
+            className={({ isActive }) =>
+              `block px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Sports
+          </NavLink>
+          <NavLink
             to="/category/entertainment"
             className={({ isActive }) =>
               `block px-2 py-1 rounded ${
@@ -307,25 +391,6 @@ const NavBar: React.FC = () => {
           >
             Entertainment
           </NavLink>
-          {user ? (
-            <button
-              onClick={handleLogout}
-              className="block px-4 py-2 rounded bg-[#02AA08] hover:bg-[#1b5c1d] text-white mt-2"
-            >
-              Logout
-            </button>
-          ) : (
-            <NavLink
-              to="/login"
-              className={({ isActive }) =>
-                `block px-4 py-2 rounded ${
-                  isActive ? "bg-[#02AA08]" : "bg-[#02AA08] hover:bg-[#1b5c1d]"
-                } text-white mt-2`
-              }
-            >
-              Login
-            </NavLink>
-          )}
         </div>
       )}
       {/* Mobile Menu */}
@@ -344,6 +409,18 @@ const NavBar: React.FC = () => {
             Home
           </NavLink>
           <NavLink
+            to="/latest"
+            className={({ isActive }) =>
+              `block px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Latest
+          </NavLink>
+          <NavLink
             to="/all-news"
             className={({ isActive }) =>
               `block px-2 py-1 rounded ${
@@ -354,6 +431,18 @@ const NavBar: React.FC = () => {
             }
           >
             All News
+          </NavLink>
+          <NavLink
+            to="/category/business"
+            className={({ isActive }) =>
+              `block px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Business
           </NavLink>
           <NavLink
             to="/category/politics"
@@ -392,7 +481,7 @@ const NavBar: React.FC = () => {
             Technology
           </NavLink>
           <NavLink
-            to="/category/entertainment"
+            to="/category/lifestyle"
             className={({ isActive }) =>
               `block px-2 py-1 rounded ${
                 isActive
@@ -401,8 +490,69 @@ const NavBar: React.FC = () => {
               }`
             }
           >
-            Entertainment
+            Lifestyle
           </NavLink>
+          <NavLink
+            to="/category/opinion"
+            className={({ isActive }) =>
+              `block px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Opinion
+          </NavLink>
+          <NavLink
+            to="/category/feature"
+            className={({ isActive }) =>
+              `block px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Feature
+          </NavLink>
+          <NavLink
+            to="/category/tech"
+            className={({ isActive }) =>
+              `block px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Tech & Startup
+          </NavLink>
+          <NavLink
+            to="/category/gallery"
+            className={({ isActive }) =>
+              `block px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Photo Gallery
+          </NavLink>
+          <NavLink
+            to="/category/sports"
+            className={({ isActive }) =>
+              `block px-2 py-1 rounded ${
+                isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+              }`
+            }
+          >
+            Sports
+          </NavLink>
+
           {user ? (
             <button
               onClick={handleLogout}
