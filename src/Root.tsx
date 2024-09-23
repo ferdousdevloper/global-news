@@ -12,7 +12,10 @@ import Feature from "./Pages/Feature";
 import Tech from "./Pages/Tech";
 
 import Contact from "./Pages/Contact";
-
+import Latest from "./Pages/Latest";
+import Business from "./Pages/Business";
+import Opinion from "./Pages/Opinion";
+import Sport from "./Pages/Sport";
 
 const Root = createBrowserRouter([
   {
@@ -25,11 +28,18 @@ const Root = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/latest",
+        element: <Latest />,
+      },
+      {
         path: "/category/politics",
         element: <Politics />,
       },
       {
-
+        path: "/category/business",
+        element: <Business />,
+      },
+      {
         path: "/category/tech",
         element: <Tech />,
       },
@@ -38,13 +48,20 @@ const Root = createBrowserRouter([
         element: <Feature />,
       },
       {
+        path: "/category/opinion",
+        element: <Opinion />,
+      },
+      {
+        path: "/category/sports",
+        element: <Sport />,
+      },
+      {
         path: "/category/gallery",
         element: <Gallery />,
       },
       {
-        path: '/contact',
+        path: "/category/contact",
         element: <Contact></Contact>,
-
       },
       {
         path: "/login",
