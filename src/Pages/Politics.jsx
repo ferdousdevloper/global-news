@@ -8,7 +8,7 @@ import img8 from "../Images/img8.jpeg";
 
 const Politics = () => {
   return (
-    <div>
+    <div className="bg-gray-800">
       <div className="my-1 md:my-3 lg:my-4 text-center font-bold text-4xl  text-orange-600">
         Politics
       </div>
