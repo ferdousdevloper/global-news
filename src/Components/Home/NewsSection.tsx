@@ -27,7 +27,7 @@ const NewsSection: React.FC = () => {
       <div className="flex flex-col lg:flex-row gap-5">
         {/* Left side: 75% width, all news */}
         <div className="lg:w-9/12 w-full bg-slate-900 p-5 rounded-xl">
-          <h2 className="text-3xl font-bold mb-4">All News</h2>
+          <h2 className="text-3xl font-bold mb-4 text-slate-50">All News</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {allNews.map((item) => (
               <div key={item.id} className="border p-4 rounded-lg shadow-lg">
