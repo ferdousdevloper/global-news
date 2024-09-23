@@ -12,10 +12,14 @@ import Feature from "./Pages/Feature";
 import Tech from "./Pages/Tech";
 
 import Contact from "./Pages/Contact";
+
+import Entertainment from "./Pages/Entertainment";
+
 import Latest from "./Pages/Latest";
 import Business from "./Pages/Business";
 import Opinion from "./Pages/Opinion";
 import Sport from "./Pages/Sport";
+
 
 const Root = createBrowserRouter([
   {
@@ -36,6 +40,14 @@ const Root = createBrowserRouter([
         element: <Politics />,
       },
       {
+
+        path: "/category/entertainment",
+        element: <Entertainment />,
+      },
+      {
+        path: '/contact',
+        element: <Contact></Contact>
+
         path: "/category/business",
         element: <Business />,
       },
@@ -62,6 +74,7 @@ const Root = createBrowserRouter([
       {
         path: "/category/contact",
         element: <Contact></Contact>,
+
       },
       {
         path: "/login",
