@@ -54,7 +54,7 @@ const SignInPage = () => {
       Swal.fire({
         position: "top-center",
         icon: "success",
-        title: "Welcome to our Global News Platform.",
+        title: "Welcome to Global News Platform.",
         showConfirmButton: false,
         timer: 1500,
       });
