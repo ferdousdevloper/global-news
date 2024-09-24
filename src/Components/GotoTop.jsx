@@ -8,7 +8,7 @@ const GotoTop = () => {
   };
   return (
     <div className="top-btn" onClick={goToBtn}>
-      <Link className="text-2xl text-pink-300 font-semibold  bg-green-700 p-3 rounded-3xl outline-none hidden lg:flex hover:bg-pink-300 hover:text-green-700">
+      <Link className="text-2xl  font-semibold  bg-green-700 p-3 rounded-3xl outline-none hidden lg:flex  hover:bg-white hover:text-green-700">
         <FaArrowAltCircleUp />
       </Link>
     </div>
