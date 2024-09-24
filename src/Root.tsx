@@ -85,7 +85,7 @@ const Root = createBrowserRouter([
         element: <RegisterPage></RegisterPage>,
       },
       {
-        path: "/news-detail",
+        path: "/news/:id",
         element: <PrivateRoute><NewsDetails></NewsDetails></PrivateRoute>,
       },
     ],
