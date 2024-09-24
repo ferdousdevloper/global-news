@@ -451,7 +451,7 @@ const NavBar: React.FC = () => {
       )}
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-gray-700 text-white space-y-2 px-4 py-2">
+        <div className="md:hidden bg-gray-700 max-h-screen overflow-y-auto text-white space-y-2 px-4 py-2">
           <NavLink
             to="/"
             className={({ isActive }) =>
