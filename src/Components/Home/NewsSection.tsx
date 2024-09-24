@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 interface NewsItem {
   id: string;
@@ -30,6 +31,7 @@ const NewsSection: React.FC = () => {
           <h2 className="text-3xl font-bold mb-4 text-slate-50">All News</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {allNews.map((item) => (
+              <Link to="/news-detail">
               <div key={item.id} className="border p-4 rounded-lg shadow-lg">
                 <img
                   src={item.image}
@@ -46,6 +48,7 @@ const NewsSection: React.FC = () => {
                   {item.description.slice(0, 100)}...
                 </p>
               </div>
+              </Link>
             ))}
           </div>
           <button className="mt-6 bg-[#02AA08] text-white px-4 py-2 rounded hover:bg-[#028A06]">
