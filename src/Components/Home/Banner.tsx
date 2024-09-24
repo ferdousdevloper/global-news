@@ -7,7 +7,6 @@ import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import './BannerSlider.css'; // Your custom styles
 
-
 interface NewsItem {
   id: string;
   image: string;
@@ -40,8 +39,7 @@ const Banner: React.FC = () => {
   }, []);
 
   return (
-    <div className="banner-container relative">
-      
+    <div className="banner-container">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
