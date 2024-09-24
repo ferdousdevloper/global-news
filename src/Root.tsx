@@ -19,6 +19,8 @@ import Latest from "./Pages/Latest";
 import Business from "./Pages/Business";
 import Opinion from "./Pages/Opinion";
 import Sport from "./Pages/Sport";
+import NewsDetails from "./Pages/NewsDetails";
+import PrivateRoute from "./Routes/PrivateRoute";
 
 const Root = createBrowserRouter([
   {
@@ -81,6 +83,10 @@ const Root = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage></RegisterPage>,
+      },
+      {
+        path: "/news-detail",
+        element: <PrivateRoute><NewsDetails></NewsDetails></PrivateRoute>,
       },
     ],
   },
