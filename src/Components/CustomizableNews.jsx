@@ -23,7 +23,7 @@ const CustomizableNews = ({ openFilter }) => {
 
 
     return (
-        <div className={`${openFilter ? "block md:flex" : "hidden md:hidden"} gap-4 md:gap-8 justify-end mt-[88px] absolute`} >
+        <div className={`${openFilter ? "block md:flex" : "hidden md:hidden"} gap-4 md:gap-8 justify-end mt-[88px] absolute right-0`} >
 
 
             <div className="dropdown dropdown-hover z-50">
