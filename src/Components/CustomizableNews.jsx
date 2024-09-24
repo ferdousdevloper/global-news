@@ -52,10 +52,10 @@ const CustomizableNews = ({ openFilter }) => {
             </div>
 
             <div className='z-50'>
-                <button className='btn btn-outline'>search</button>
+                <button className='btn btn-outline hover:text-green-600'>search</button>
             </div>
             <div className='z-50'>
-                <button className='btn btn-outline'>reset</button>
+                <button className='btn btn-outline hover:text-green-600'>reset</button>
             </div>
 
         </div>
