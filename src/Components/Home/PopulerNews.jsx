@@ -24,7 +24,7 @@ const PopulerNews = () => {
             .catch(error => console.error('Error fetching JSON:', error));
     }, []);
 
-    console.log(populars)
+    // console.log(populars)
 
 
 

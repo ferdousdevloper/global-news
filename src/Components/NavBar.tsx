@@ -27,9 +27,6 @@ const NavBar: React.FC = () => {
   const searchMore = () => {
     setOpenFilter(!openFilter)
   }
-  console.log(openFilter)
-
-
 
 
   return (
@@ -115,7 +112,7 @@ const NavBar: React.FC = () => {
             </NavLink>
 
             <button onClick={searchMore} className="px-2 py-1 rounded hover:bg-[#02AA08] hover:text-white">
-              More
+              Filter News
             </button>
           </div>
 
@@ -231,6 +228,11 @@ const NavBar: React.FC = () => {
             >
               Entertainment
             </NavLink>
+
+            <button onClick={searchMore} className="px-2 py-1 rounded hover:bg-[#02AA08] hover:text-white">
+              Filter News
+            </button>
+
             {user ? (
               <button
                 onClick={handleLogout}

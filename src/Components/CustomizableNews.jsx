@@ -3,7 +3,6 @@ import axios from 'axios';
 import React from 'react';
 
 const CustomizableNews = ({ openFilter }) => {
-    console.log(openFilter)
 
     const { data: news = [] } = useQuery({
         queryKey: ['news'],
@@ -12,19 +11,19 @@ const CustomizableNews = ({ openFilter }) => {
             return data;
         }
     })
-    console.log(news)
+    // console.log(news)
 
     const region = [...new Set(news?.map(region => region.region))]
-    console.log(region)
+
     const category = [...new Set(news?.map(category => category.category))]
-    console.log(category)
+
     const title = [...new Set(news?.map(title => title.title))]
-    console.log(title)
+    // console.log(title)
 
 
 
     return (
-        <div className={`flex gap-8 justify-end -mb-[48px] ${openFilter ? "block" : "hidden"}`}>
+        <div className={`${openFilter ? "block md:flex" : "hidden md:hidden"} gap-4 md:gap-8 justify-end md:-mb-[48px]`}>
 
 
             <div className="dropdown dropdown-hover z-30">
@@ -51,7 +50,7 @@ const CustomizableNews = ({ openFilter }) => {
                     }
                 </select>
             </div>
-           
+
             <div className='z-30'>
                 <button className='btn bg-[#02AA08]'>search</button>
             </div>
