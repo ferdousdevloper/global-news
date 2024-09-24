@@ -25,7 +25,7 @@ const BreakingNews: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white h-12 flex items-center overflow-hidden">
+    <div className="relative w-full bg-gradient-to-r from-red-700 to-red-500 text-white h-12 flex items-center overflow-hidden">
       <div className="bg-red-700 px-4 py-1 text-white font-bold uppercase ">
         Breaking News
       </div>
