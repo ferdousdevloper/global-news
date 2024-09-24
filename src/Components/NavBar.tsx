@@ -29,6 +29,11 @@ const NavBar: React.FC = () => {
     }
   };
 
+  const handleFilter = ()=>{
+    setOpenFilter(!openFilter)
+  }
+  console.log(openFilter)
+
   return (
     <>
     <nav className="bg-gray-800 text-white shadow-md fixed z-50 top-0 w-full">
@@ -168,7 +173,7 @@ const NavBar: React.FC = () => {
           >
             Contact Us
           </NavLink>
-          <button>Filter</button>
+          <button onClick={handleFilter} className="hover:bg-[#02AA08] rounded p-2">Filter</button>
         </div>
 
         {/* Right Side: Login/Logout Button */}

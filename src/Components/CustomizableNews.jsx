@@ -3,6 +3,7 @@ import axios from 'axios';
 import React from 'react';
 
 const CustomizableNews = ({ openFilter }) => {
+    console.log(openFilter)
 
     const { data: news = [] } = useQuery({
         queryKey: ['news'],
@@ -21,12 +22,11 @@ const CustomizableNews = ({ openFilter }) => {
     // console.log(title)
 
 
-
     return (
-        <div className={`${openFilter ? "block md:flex" : "hidden md:hidden"} gap-4 md:gap-8 justify-end md:-mb-[48px]`}>
+        <div className={`${openFilter ? "block md:flex" : "hidden md:hidden"} gap-4 md:gap-8 justify-end mt-[88px] absolute`} >
 
 
-            <div className="dropdown dropdown-hover z-30">
+            <div className="dropdown dropdown-hover z-50">
                 <select className="bg-transparent border-b-2 border-green-700 w-full max-w-xs p-2">
                     <option className='disabled selected text-[#02AA08]' >Region</option>
                     {
@@ -34,7 +34,7 @@ const CustomizableNews = ({ openFilter }) => {
                     }
                 </select>
             </div>
-            <div className="dropdown dropdown-hover z-30">
+            <div className="dropdown dropdown-hover z-50">
                 <select className="bg-transparent border-b-2 border-green-700 w-full max-w-xs p-2">
                     <option className='disabled selected text-[#02AA08]' >Category</option>
                     {
@@ -42,7 +42,7 @@ const CustomizableNews = ({ openFilter }) => {
                     }
                 </select>
             </div>
-            <div className="dropdown dropdown-hover z-30">
+            <div className="dropdown dropdown-hover z-50">
                 <select className="bg-transparent border-b-2 border-green-700 w-full max-w-xs p-2">
                     <option className='disabled selected text-[#02AA08]' >Topic</option>
                     {
@@ -51,11 +51,11 @@ const CustomizableNews = ({ openFilter }) => {
                 </select>
             </div>
 
-            <div className='z-30'>
-                <button className='btn bg-[#02AA08]'>search</button>
+            <div className='z-50'>
+                <button className='btn btn-outline'>search</button>
             </div>
-            <div className='z-30'>
-                <button className='btn bg-[#02AA08]'>reset</button>
+            <div className='z-50'>
+                <button className='btn btn-outline'>reset</button>
             </div>
 
         </div>
