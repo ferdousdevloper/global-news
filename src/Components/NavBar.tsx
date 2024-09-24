@@ -3,11 +3,13 @@ import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
+import CustomizableNews from "./CustomizableNews";
 
 const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
   const { user, logOut } = useContext(AuthContext) || {}; // Assuming user and logout are provided
+  const [openFilter, setOpenFilter] = useState<boolean>(false);
 
   const toggleMenu = (): void => {
     setIsOpen(!isOpen);
@@ -28,6 +30,7 @@ const NavBar: React.FC = () => {
   };
 
   return (
+    <>
     <nav className="bg-gray-800 text-white shadow-md fixed z-50 top-0 w-full">
       <div className="container mx-auto flex justify-between items-center p-4">
         <div className="flex justify-center items-center gap-4">
@@ -165,6 +168,7 @@ const NavBar: React.FC = () => {
           >
             Contact Us
           </NavLink>
+          <button>Filter</button>
         </div>
 
         {/* Right Side: Login/Logout Button */}
@@ -661,6 +665,8 @@ const NavBar: React.FC = () => {
         </div>
       )}
     </nav>
+    <CustomizableNews openFilter={openFilter}></CustomizableNews>
+    </>
   );
 };
 
