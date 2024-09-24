@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const PopularNewsCard = ({ news }) => {
-    // console.log(news)
+    console.log(news)
     const { image, category, title } = news
     return (
 
