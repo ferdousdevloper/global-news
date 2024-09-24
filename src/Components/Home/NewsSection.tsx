@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 interface NewsItem {
-  id: string;
+  _id: string;
   title: string;
   image: string;
   description: string;
@@ -11,14 +12,28 @@ interface NewsItem {
 
 const NewsSection: React.FC = () => {
   const [news, setNews] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Fetch the data from a local or API source
-    fetch("/dammy.json")
-      .then((response) => response.json())
-      .then((data) => setNews(data))
-      .catch((error) => console.error("Error fetching news:", error));
+    // Fetch the data from the backend API
+    const fetchNews = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/news");
+        setNews(response.data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching news:", err);
+        setError("Failed to load news data");
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
   }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   const latestNews = news.slice(0, 7); // Get the top 7 latest news
   const allNews = news.slice(7, 17); // Show 10 more news items
@@ -31,23 +46,23 @@ const NewsSection: React.FC = () => {
           <h2 className="text-3xl font-bold mb-4 text-slate-50">All News</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {allNews.map((item) => (
-              <Link to="/news-detail">
-              <div key={item.id} className="border p-4 rounded-lg shadow-lg">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-40 object-cover mb-4 rounded-md"
-                />
-                <h2 className="text-xl font-bold mb-2 text-slate-50">
-                  {item.title}
-                </h2>
-                <p className="text-sm mb-2 text-slate-100">
-                  {new Date(item.date_time).toLocaleDateString()}
-                </p>
-                <p className="text-slate-100">
-                  {item.description.slice(0, 100)}...
-                </p>
-              </div>
+              <Link to={`/news/${item._id}`} key={item._id}>
+                <div className="border p-4 rounded-lg shadow-lg">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-40 object-cover mb-4 rounded-md"
+                  />
+                  <h2 className="text-xl font-bold mb-2 text-slate-50">
+                    {item.title}
+                  </h2>
+                  <p className="text-sm mb-2 text-slate-100">
+                    {new Date(item.date_time).toLocaleDateString()}
+                  </p>
+                  <p className="text-slate-100">
+                    {item.description.slice(0, 100)}...
+                  </p>
+                </div>
               </Link>
             ))}
           </div>
@@ -63,7 +78,8 @@ const NewsSection: React.FC = () => {
           </h2>
           <div className="space-y-6">
             {latestNews.map((item) => (
-              <div key={item.id} className="border p-4 rounded-lg shadow-lg">
+              <Link to={`/news/${item._id}`} key={item._id}>
+              <div key={item._id} className="border p-4 my-6 rounded-lg shadow-lg">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -76,6 +92,7 @@ const NewsSection: React.FC = () => {
                   {new Date(item.date_time).toLocaleDateString()}
                 </p>
               </div>
+              </Link>
             ))}
           </div>
           <button className="mt-6 bg-[#02AA08] text-white px-4 py-2 rounded hover:bg-[#028A06]">
