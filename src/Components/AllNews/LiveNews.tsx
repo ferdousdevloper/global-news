@@ -56,7 +56,6 @@ const LiveNews: React.FC = () => {
 
   return (
     <div className="flex bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden mt-16">
-    <div className="flex bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden mt-16">
       <div className="w-1/2">
         <img
           src={latestNews.image}

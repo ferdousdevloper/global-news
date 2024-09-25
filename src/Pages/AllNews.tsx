@@ -25,12 +25,9 @@ const AllNews: React.FC = () => {
   const [countries, setCountries] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('All News');
   const [selectedCountry, setSelectedCountry] = useState<string>('All Countries');
-  const [selectedDate, setSelectedDate] = useState<string>('All Dates');
+  const [selectedDateFilter, setSelectedDateFilter] = useState<string>('All Dates');
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [selectedNewsType, setSelectedNewsType] = useState<string>('All News Types');
-
-  const dateOptions = ['All Dates', 'Today', 'Yesterday', 'Last 7 Days', 'Last 30 Days'];
-  const newsTypeOptions = ['All News Types', 'Live News', 'Breaking News', 'Popular News', 'Latest News'];
+  const [selectedFilter, setSelectedFilter] = useState<string>('All News');
 
   const fetchNews = async () => {
     try {
@@ -55,12 +52,12 @@ const AllNews: React.FC = () => {
     let updatedFilteredNews = news;
 
     // Filter by search query
-    if (searchQuery) {
+    if (searchTerm) {
       updatedFilteredNews = updatedFilteredNews.filter(item =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.region.toLowerCase().includes(searchQuery.toLowerCase())
+        item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.region.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -82,22 +79,24 @@ const AllNews: React.FC = () => {
       updatedFilteredNews = updatedFilteredNews.filter(item => item.region === selectedCountry);
     }
 
-    // Optionally filter by date (if you implement date filtering)
+    // Optionally filter by date
     if (selectedDateFilter !== 'All Dates') {
       const today = new Date();
       if (selectedDateFilter === 'Today') {
         updatedFilteredNews = updatedFilteredNews.filter(item => 
           new Date(item.date_time).toDateString() === today.toDateString()
         );
-      } else if (selectedDateFilter === 'This Week') {
-        const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+      } else if (selectedDateFilter === 'Last 7 Days') {
+        const lastWeek = new Date();
+        lastWeek.setDate(today.getDate() - 7);
         updatedFilteredNews = updatedFilteredNews.filter(item => 
-          new Date(item.date_time) >= startOfWeek
+          new Date(item.date_time) >= lastWeek
         );
-      } else if (selectedDateFilter === 'This Month') {
-        const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+      } else if (selectedDateFilter === 'Last 30 Days') {
+        const lastMonth = new Date();
+        lastMonth.setDate(today.getDate() - 30);
         updatedFilteredNews = updatedFilteredNews.filter(item => 
-          new Date(item.date_time) >= startOfMonth
+          new Date(item.date_time) >= lastMonth
         );
       }
     }
@@ -106,15 +105,15 @@ const AllNews: React.FC = () => {
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
+    setSearchTerm(event.target.value);
   };
 
   const resetFilters = () => {
     setSelectedCategory('All News');
     setSelectedCountry('All Countries');
-    setSelectedDate('All Dates');
+    setSelectedDateFilter('All Dates');
     setSearchTerm('');
-    setSelectedNewsType('All News Types');
+    setSelectedFilter('All News');
     setFilteredNews(news);
   };
 
@@ -124,7 +123,7 @@ const AllNews: React.FC = () => {
 
   useEffect(() => {
     filterNews();
-  }, [searchQuery, selectedFilter, selectedCountry, selectedDateFilter, news]);
+  }, [searchTerm, selectedFilter, selectedCountry, selectedDateFilter, news]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -168,13 +167,13 @@ const AllNews: React.FC = () => {
           >
             <option>All Dates</option>
             <option>Today</option>
-            <option>This Week</option>
-            <option>This Month</option>
+            <option>Last 7 Days</option>
+            <option>Last 30 Days</option>
           </select>
 
           <input
             type="text"
-            value={searchQuery}
+            value={searchTerm}
             onChange={handleSearchChange}
             placeholder="Search news..."
             className="px-4 py-2 border rounded-md flex-1"

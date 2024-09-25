@@ -7,7 +7,6 @@ import SignInPage from "./Pages/SignInPage";
 import RegisterPage from "./Pages/RegisterPage";
 import Politics from "./Pages/Politics";
 import AllNews from "./Pages/AllNews";
-import NewsApp from "./Pages/NewsApp";
 import Latest from "./Pages/Latest";
 import Entertainment from "./Pages/Entertainment";
 import Contact from "./Pages/Contact";
@@ -45,10 +44,6 @@ const Root = createBrowserRouter([
       {
         path: "/all-news",
         element: <AllNews/>
-      },
-      {
-        path: '/newsapp',
-        element: <NewsApp/>
       },
       {
         path: "/latest",
