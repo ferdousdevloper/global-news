@@ -2,6 +2,10 @@
 import moment from "moment";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
+import GotoTop from "./GotoTop";
+
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <div className="bg-black text-white">
@@ -64,9 +68,9 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
+                  <Link to="/contact">
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -99,8 +103,14 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="text-sm text-center py-10">
-          © {moment().format("MMM Do YYYY") } Global News. All Rights Reserved (Team GAMMA)
+        <div className="text-sm text-center py-10 flex justify-around items-center">
+          <span className="">
+            © {moment().format("MMM Do YYYY")} Global News. All Rights Reserved
+            (Team GAMMA)
+          </span>
+          <span>
+            <GotoTop></GotoTop>
+          </span>
         </div>
       </footer>
     </div>

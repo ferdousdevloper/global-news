@@ -8,16 +8,16 @@ import img8 from "../Images/img8.jpeg";
 
 const Politics = () => {
   return (
-    <div>
-      <div className="my-2 md:my-4 lg:my-8 text-center font-bold text-4xl  text-orange-600">
+    <div className="bg-gray-800">
+      <div className="my-1 md:my-3 lg:my-4 text-center font-bold text-4xl  text-orange-600">
         Politics
       </div>
       {/* Politics News bar section */}
       <div>
-        <section className="px-5 py-10 dark:bg-gray-100 dark:text-gray-800">
-          <div className="container grid grid-cols-12 mx-auto gap-y-6 md:gap-10">
-            <div className="flex flex-col justify-between col-span-12 py-2 space-y-8 md:space-y-16 md:col-span-3">
-              <div className="flex flex-col space-y-8 md:space-y-12">
+        <section className="px-3 py-3 dark:bg-gray-100 dark:text-gray-800">
+          <div className="container grid grid-cols-12 mx-auto gap-y-6 md:gap-6">
+            <div className="flex flex-col justify-between col-span-12 py-2 space-y-8 md:space-y-16 md:col-span-3 bg-slate-900 text-white rounded-xl">
+              <div className="flex flex-col space-y-8 md:space-y-12 px-4">
                 <div className="flex flex-col space-y-2">
                   <h3 className="flex items-center space-x-2 dark:text-gray-600">
                     <span className="flex-shrink-0 w-2 h-2 uppercase rounded-full dark:bg-violet-600"></span>
@@ -81,7 +81,7 @@ const Politics = () => {
                   href="#"
                   className="flex items-center justify-between w-full"
                 >
-                  <span className="text-xs bg-green-700 text-white btn font-bold tracking-wider uppercase">
+                  <span className="text-xs mx-auto bg-green-700 text-white btn font-bold border-none tracking-wider uppercase">
                     See more exclusives
                   </span>
                   <svg
@@ -98,10 +98,7 @@ const Politics = () => {
                 </Link>
               </div>
             </div>
-            <div
-              className="relative flex col-span-12 dark:bg-gray-500 bg-center bg-no-repeat bg-cover xl:col-span-6 lg:col-span-5 md:col-span-9 min-h-96"
-              //   style="background-image: url('https://source.unsplash.com/random/239x319');"
-            >
+            <div className="relative flex col-span-12 dark:bg-gray-500 bg-center bg-no-repeat bg-cover xl:col-span-6 lg:col-span-5 md:col-span-9 min-h-96">
               <span className="absolute z-20 px-1 pb-2 text-xs text-gray-50 font-bold uppercase border-b-2 left-6 top-6 dark:text-gray-800 dark:border-violet-600">
                 paris, france
               </span>
@@ -123,8 +120,8 @@ const Politics = () => {
                 </h1>
               </Link>
             </div>
-            <div className="hidden py-2 xl:col-span-3 lg:col-span-4 md:hidden lg:block">
-              <div className="mb-8 space-x-5 border-b-2 border-opacity-10 dark:border-violet-600">
+            <div className="hidden py-2 xl:col-span-3 lg:col-span-4 md:hidden lg:block bg-slate-900 text-white rounded-xl">
+              <div className="mb-8 px-2 space-x-5 border-b-2 border-opacity-10 dark:border-violet-600">
                 <button
                   type="button"
                   className="pb-5 text-xs font-bold uppercase border-b-2 dark:border-violet-600"
