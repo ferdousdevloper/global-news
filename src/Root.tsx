@@ -19,6 +19,9 @@ import Sport from "./Pages/Sport";
 import Gallery from "./Pages/Gallery";
 import PrivateRoute from "./Routes/PrivateRoute";
 import NewsDetail from "./Pages/NewsDetails";
+import Dashboard from "./LayOut/Dashboard";
+import Profile from "./Pages/Dashboard/Profile";
+import AllUsers from "./Pages/Dashboard/AllUsers";
 
 const Root = createBrowserRouter([
   {
@@ -91,6 +94,20 @@ const Root = createBrowserRouter([
         element: <PrivateRoute><NewsDetail /></PrivateRoute>,
       },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children:[
+      {
+        path: "/dashboard/profile",
+        element: <Profile></Profile>
+      },
+      {
+        path: "/dashboard/allUsers",
+        element: <AllUsers></AllUsers>
+      }
+    ]
   },
 ]);
 export default Root;

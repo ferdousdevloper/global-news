@@ -157,7 +157,7 @@ const NavBar: React.FC = () => {
               Entertainment
             </NavLink>
             <NavLink
-              to="/category/contact"
+              to="/contact"
               className={({ isActive }) =>
                 `px-2 py-1 rounded ${isActive
                   ? "bg-[#02AA08] text-white"
@@ -167,7 +167,15 @@ const NavBar: React.FC = () => {
             >
               Contact Us
             </NavLink>
-            <button onClick={handleFilter} className="hover:bg-[#02AA08] rounded p-2">Filter</button>
+            <NavLink 
+          to="/dashboard/profile"
+          className={({ isActive }) =>
+           `px-2 py-1 rounded ${isActive
+                  ? "bg-[#02AA08] text-white"
+                  : "hover:bg-[#02AA08] hover:text-white"
+                }`
+          }
+          >DASHBOARD</NavLink>
           </div>
 
           {/* Right Side: Login/Logout Button */}
