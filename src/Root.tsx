@@ -18,6 +18,7 @@ import Sport from "./Pages/Sport";
 import Gallery from "./Pages/Gallery";
 import PrivateRoute from "./Routes/PrivateRoute";
 import NewsDetail from "./Pages/NewsDetails";
+import NewsForm from "./Pages/NewsForm";
 
 const Root = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ const Root = createBrowserRouter([
         path: "/news/:id",
         element: <PrivateRoute><NewsDetail /></PrivateRoute>,
       },
+      {
+        path: '/news-post',
+        element: <NewsForm/>
+      }
     ],
   },
 ]);

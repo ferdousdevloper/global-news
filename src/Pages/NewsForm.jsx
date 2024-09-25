@@ -69,7 +69,7 @@ const NewsComponent = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-gray-100 p-6 mt-16">
       <div className="container mx-auto max-w-4xl">
         <h1 className="text-3xl font-bold text-center mb-8">News Article</h1>
         
