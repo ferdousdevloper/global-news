@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import LiveNews from '../Components/AllNews/LiveNews';
 
-// Define an interface for the news item
 interface NewsItem {
   _id: string;
   title: string;
@@ -22,12 +21,16 @@ const AllNews: React.FC = () => {
   const [filteredNews, setFilteredNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>('');
   const [categories, setCategories] = useState<string[]>([]);
   const [countries, setCountries] = useState<string[]>([]);
-  const [selectedFilter, setSelectedFilter] = useState<string>('All News');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All News');
   const [selectedCountry, setSelectedCountry] = useState<string>('All Countries');
-  const [selectedDateFilter, setSelectedDateFilter] = useState<string>('All Dates');
+  const [selectedDate, setSelectedDate] = useState<string>('All Dates');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [selectedNewsType, setSelectedNewsType] = useState<string>('All News Types');
+
+  const dateOptions = ['All Dates', 'Today', 'Yesterday', 'Last 7 Days', 'Last 30 Days'];
+  const newsTypeOptions = ['All News Types', 'Live News', 'Breaking News', 'Popular News', 'Latest News'];
 
   const fetchNews = async () => {
     try {
@@ -107,15 +110,16 @@ const AllNews: React.FC = () => {
   };
 
   const resetFilters = () => {
-    setSearchQuery('');
-    setSelectedFilter('All News');
+    setSelectedCategory('All News');
     setSelectedCountry('All Countries');
-    setSelectedDateFilter('All Dates');
+    setSelectedDate('All Dates');
+    setSearchTerm('');
+    setSelectedNewsType('All News Types');
     setFilteredNews(news);
   };
 
   useEffect(() => {
-    fetchNews();
+    fetchNews(); // Initial fetch
   }, []);
 
   useEffect(() => {

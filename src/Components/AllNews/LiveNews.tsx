@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-// Define the structure of a news article
 interface NewsArticle {
   title: string;
   description: string;
@@ -47,13 +46,16 @@ const LiveNews: React.FC = () => {
 
   if (!latestNews) {
     return (
-      <div className="p-6 text-gray-700 text-center">Loading latest live news...</div>
+      <div className="flex items-center justify-center h-full p-6 text-gray-700">
+        <div>No live news available.</div>
+      </div>
     );
   }
 
   const formattedDate = new Date(latestNews.timestamp).toLocaleString();
 
   return (
+    <div className="flex bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden mt-16">
     <div className="flex bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden mt-16">
       <div className="w-1/2">
         <img
@@ -70,7 +72,7 @@ const LiveNews: React.FC = () => {
         <div>
           <p className="text-gray-500 text-sm mb-2">{formattedDate}</p>
           {latestNews.isLive && (
-            <span className="px-3 py-1 bg-red-600 text-white text-xs font-semibold uppercase rounded-full">
+            <span className="px-4 py-1 bg-red-600 text-white text-xs font-semibold uppercase rounded-full">
               Live
             </span>
           )}
