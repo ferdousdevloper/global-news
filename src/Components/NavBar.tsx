@@ -72,7 +72,7 @@ const NavBar: React.FC = () => {
             Politics
           </NavLink>
           <NavLink
-            to="/category/sports"
+            to="/"
             className={({ isActive }) =>
               `px-2 py-1 rounded ${
                 isActive
@@ -84,7 +84,7 @@ const NavBar: React.FC = () => {
             Sports
           </NavLink>
           <NavLink
-            to="/category/technology"
+            to="/"
             className={({ isActive }) =>
               `px-2 py-1 rounded ${
                 isActive
