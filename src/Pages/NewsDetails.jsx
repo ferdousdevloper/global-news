@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { GiMicrophone } from "react-icons/gi";
+import { FaLocationDot } from 'react-icons/fa6';
 
 const NewsDetail = () => {
   const { id } = useParams(); // Get the id from the URL
@@ -34,13 +36,14 @@ const NewsDetail = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen ">
-      <div className="max-w-4xl text-stone-50 w-full my-40 p-8 bg-neutral-800 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+      <div className="max-w-6xl w-full my-40 p-8 bg-neutral-950 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out glass">
         {news ? (
           <>
-            <h1 className="text-4xl font-bold mb-4 text-center">
-              {news.title}
-            </h1>
-            <hr className="py-4" />
+          <div className='flex flex-col lg:flex-row items-center text-left gap-2'>
+          <GiMicrophone className='text-3xl text-[#02AA08]' />
+          <h1 className="text-4xl font-bold mb-4 text-center">{news.title}</h1>
+          </div>
+            <hr className='py-4' />
             <img
               src={news.image}
               alt={news.title}
@@ -49,7 +52,11 @@ const NewsDetail = () => {
 
             <div className="flex justify-between text-gray-500 text-sm mb-6">
               <span>Category: {news.category}</span>
+              <div className='flex gap-2 items-center'>
+              <FaLocationDot className='text-red-700' />
               <span>Region: {news.region}</span>
+              </div>
+              
             </div>
             <p className="text-gray-500 text-sm mb-6">
               Published on: {new Date(news.date_time).toLocaleDateString()}
@@ -72,8 +79,8 @@ const NewsDetail = () => {
             </div>
             <hr className="my-2" />
             <div>
-              <h3>News:</h3>
-              <p className="text-lg leading-relaxed mb-6">{news.description}</p>
+                <h3 className='font-bold underline'>News:</h3>
+            <p className="text-lg leading-relaxed mb-6 text-justify">{news.description}</p>
             </div>
           </>
         ) : (
