@@ -19,7 +19,8 @@
       "description": "The much-anticipated Champions League final ends in a nail-biting finish with unexpected twists.",
       "date_time": "2024-09-17 21:45",
       "breaking_news": false,
-      "popular_news": true
+      "popular_news": true,
+      "isLive": true
     },
     {
       "id": "3",
