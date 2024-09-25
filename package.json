@@ -11,6 +11,7 @@
     "@types/node": "^16.18.108",
     "@types/react": "^18.3.7",
     "@types/react-dom": "^18.3.0",
+    "@types/react-query": "^1.2.9",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.7.7",
     "firebase": "^10.13.2",
@@ -23,6 +24,7 @@
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
     "react-swiper": "^0.1.5",
+    "socket.io": "^4.8.0",
     "socket.io-client": "^4.8.0",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.14.0",
@@ -57,6 +59,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/firebase": "^2.4.32",
+    "@types/socket.io-client": "^3.0.0",
     "autoprefixer": "^10.4.20",
     "daisyui": "^4.12.10",
     "postcss": "^8.4.47",
