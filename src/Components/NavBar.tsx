@@ -116,26 +116,28 @@ const NavBar: React.FC = () => {
                 `px-2 py-1 rounded ${isActive
                   ? "bg-[#02AA08] text-white"
                   : "hover:bg-[#02AA08] hover:text-white"
-                }`
-              }
-            >
-              Politics
-            </NavLink>
-            <NavLink
-              to="/category/sports"
-              className={({ isActive }) =>
-                `px-2 py-1 rounded ${isActive
+              }`
+            }
+          >
+            Politics
+          </NavLink>
+          <NavLink
+            to="/category/sports"
+            className={({ isActive }) =>
+              `px-2 py-1 rounded ${
+                isActive
                   ? "bg-[#02AA08] text-white"
                   : "hover:bg-[#02AA08] hover:text-white"
-                }`
-              }
-            >
-              Sports
-            </NavLink>
-            <NavLink
-              to="/category/technology"
-              className={({ isActive }) =>
-                `px-2 py-1 rounded ${isActive
+              }`
+            }
+          >
+            Sports
+          </NavLink>
+          <NavLink
+            to="/category/technology"
+            className={({ isActive }) =>
+              `px-2 py-1 rounded ${
+                isActive
                   ? "bg-[#02AA08] text-white"
                   : "hover:bg-[#02AA08] hover:text-white"
                 }`

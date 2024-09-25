@@ -6,21 +6,19 @@ import ErrorPage from "./Pages/ErrorPage";
 import SignInPage from "./Pages/SignInPage";
 import RegisterPage from "./Pages/RegisterPage";
 import Politics from "./Pages/Politics";
-
-import Gallery from "./Pages/Gallery";
-import Feature from "./Pages/Feature";
-import Tech from "./Pages/Tech";
-
-import Contact from "./Pages/Contact";
-
-import Entertainment from "./Pages/Entertainment";
-
+import AllNews from "./Pages/AllNews";
+import NewsApp from "./Pages/NewsApp";
 import Latest from "./Pages/Latest";
+import Entertainment from "./Pages/Entertainment";
+import Contact from "./Pages/Contact";
 import Business from "./Pages/Business";
+import Tech from "./Pages/Tech";
+import Feature from "./Pages/Feature";
 import Opinion from "./Pages/Opinion";
 import Sport from "./Pages/Sport";
-import NewsDetails from "./Pages/NewsDetails";
+import Gallery from "./Pages/Gallery";
 import PrivateRoute from "./Routes/PrivateRoute";
+import NewsDetail from "./Pages/NewsDetails";
 
 const Root = createBrowserRouter([
   {
@@ -33,12 +31,28 @@ const Root = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/latest",
-        element: <Latest />,
-      },
-      {
         path: "/category/politics",
         element: <Politics />,
+      },
+      {
+        path: "/login",
+        element: <SignInPage></SignInPage>,
+      },
+      {
+        path: "/register",
+        element: <RegisterPage></RegisterPage>,
+      },
+      {
+        path: "/all-news",
+        element: <AllNews/>
+      },
+      {
+        path: '/newsapp',
+        element: <NewsApp/>
+      },
+      {
+        path: "/latest",
+        element: <Latest />,
       },
       {
         path: "/category/entertainment",
@@ -73,20 +87,8 @@ const Root = createBrowserRouter([
         element: <Gallery />,
       },
       {
-        path: "/category/contact",
-        element: <Contact></Contact>,
-      },
-      {
-        path: "/login",
-        element: <SignInPage></SignInPage>,
-      },
-      {
-        path: "/register",
-        element: <RegisterPage></RegisterPage>,
-      },
-      {
         path: "/news/:id",
-        element: <PrivateRoute><NewsDetails></NewsDetails></PrivateRoute>,
+        element: <PrivateRoute><NewsDetail /></PrivateRoute>,
       },
     ],
   },
