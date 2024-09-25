@@ -7,7 +7,7 @@ import SignInPage from "./Pages/SignInPage";
 import RegisterPage from "./Pages/RegisterPage";
 import Politics from "./Pages/Politics";
 import AllNews from "./Pages/AllNews";
-import NewsApp from "./Pages/NewsApp";
+import NewsForm from "./Pages/NewsForm";
 
 const Root = createBrowserRouter([
   {
@@ -36,8 +36,8 @@ const Root = createBrowserRouter([
         element: <AllNews/>
       },
       {
-        path: '/newsapp',
-        element: <NewsApp/>
+        path: '/news-post',
+        element: <NewsForm/>
       }
     ],
   },
