@@ -94,7 +94,7 @@ const NavBar: React.FC = () => {
             Latest
           </NavLink>
           <NavLink
-            to="/all-news"
+            to="/allNews"
             className={({ isActive }) =>
               `px-2 py-1 rounded ${
                 isActive
@@ -304,7 +304,7 @@ const NavBar: React.FC = () => {
             Latest
           </NavLink>
           <NavLink
-            to="/all-news"
+            to="/allNews"
             className={({ isActive }) =>
               `block px-2 py-1 rounded ${
                 isActive
@@ -477,7 +477,7 @@ const NavBar: React.FC = () => {
             Latest
           </NavLink>
           <NavLink
-            to="/all-news"
+            to="/allNews"
             className={({ isActive }) =>
               `block px-2 py-1 rounded ${
                 isActive
@@ -615,29 +615,29 @@ const NavBar: React.FC = () => {
                 <h1 className="text-lg py-2">User Profile</h1>
                 <hr />
                 <div className="flex items-center justify-center gap-4">
-                <img
-                  src={
-                    user?.photoURL ||
-                    "https://i.ibb.co/vY5bFQR/2151033973-min.jpg"
-                  }
-                  alt=""
-                  className="w-32 h-32 rounded-full  aspect-square mb-6"
-                />
-                <div>
-                <div>
-                  <p className=" btn mb-3">
-                    <span>{user?.displayName || "user name not found"}</span>
-                  </p>
+                  <img
+                    src={
+                      user?.photoURL ||
+                      "https://i.ibb.co/vY5bFQR/2151033973-min.jpg"
+                    }
+                    alt=""
+                    className="w-32 h-32 rounded-full  aspect-square mb-6"
+                  />
+                  <div>
+                    <div>
+                      <p className=" btn mb-3">
+                        <span>
+                          {user?.displayName || "user name not found"}
+                        </span>
+                      </p>
+                    </div>
+                    <div>
+                      <span className="btn mb-3">
+                        {user?.email || "email not found"}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <span className="btn mb-3">
-                    {user?.email || "email not found"}
-                  </span>
-                </div>
-                </div>
-                </div>
-                
-                
               </div>
               <button
                 onClick={handleLogout}

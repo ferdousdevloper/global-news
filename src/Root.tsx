@@ -21,6 +21,7 @@ import Opinion from "./Pages/Opinion";
 import Sport from "./Pages/Sport";
 import NewsDetails from "./Pages/NewsDetails";
 import PrivateRoute from "./Routes/PrivateRoute";
+import AllNews from "./Pages/AllNews";
 
 const Root = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const Root = createBrowserRouter([
       {
         path: "/latest",
         element: <Latest />,
+      },
+      {
+        path: "/allNews",
+        element: <AllNews />,
       },
       {
         path: "/category/politics",
@@ -86,7 +91,11 @@ const Root = createBrowserRouter([
       },
       {
         path: "/news/:id",
-        element: <PrivateRoute><NewsDetails></NewsDetails></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <NewsDetails></NewsDetails>
+          </PrivateRoute>
+        ),
       },
     ],
   },
