@@ -18,7 +18,7 @@ const NewsDetail = () => {
         setNews(response.data);
         setLoading(false);
       } catch (err) {
-        setError('Failed to load news details');
+        setError("Failed to load news details");
         setLoading(false);
       }
     };
@@ -49,7 +49,7 @@ const NewsDetail = () => {
               alt={news.title}
               className="w-full  object-cover mb-6 rounded-lg"
             />
-            
+
             <div className="flex justify-between text-gray-500 text-sm mb-6">
               <span>Category: {news.category}</span>
               <div className='flex gap-2 items-center'>
@@ -58,21 +58,30 @@ const NewsDetail = () => {
               </div>
               
             </div>
-            <p className="text-gray-500 text-sm mb-6">Published on: {new Date(news.date_time).toLocaleDateString()}</p>
+            <p className="text-gray-500 text-sm mb-6">
+              Published on: {new Date(news.date_time).toLocaleDateString()}
+            </p>
             <div className="flex justify-between">
-              <span className={`text-sm font-semibold ${news.breaking_news ? 'text-red-500' : 'text-gray-400'}`}>
-                {news.breaking_news ? 'Breaking News' : 'Regular News'}
+              <span
+                className={`text-sm font-semibold ${
+                  news.breaking_news ? "text-red-500" : "text-gray-400"
+                }`}
+              >
+                {news.breaking_news ? "Breaking News" : "Regular News"}
               </span>
-              <span className={`text-sm font-semibold ${news.popular_news ? 'text-yellow-500' : 'text-gray-400'}`}>
-                {news.popular_news ? 'Popular News' : 'Less Popular'}
+              <span
+                className={`text-sm font-semibold ${
+                  news.popular_news ? "text-yellow-500" : "text-gray-400"
+                }`}
+              >
+                {news.popular_news ? "Popular News" : "Less Popular"}
               </span>
             </div>
-            <hr className='my-2' />
+            <hr className="my-2" />
             <div>
                 <h3 className='font-bold underline'>News:</h3>
             <p className="text-lg leading-relaxed mb-6 text-justify">{news.description}</p>
             </div>
-            
           </>
         ) : (
           <p>No news found</p>

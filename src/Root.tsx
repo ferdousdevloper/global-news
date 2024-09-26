@@ -47,11 +47,11 @@ const Root = createBrowserRouter([
       },
       {
         path: "/all-news",
-        element: <AllNews/>
+        element: <AllNews />,
       },
       {
-        path: '/newsapp',
-        element: <NewsApp/>
+        path: "/newsapp",
+        element: <NewsApp />,
       },
       {
         path: "/latest",
@@ -91,7 +91,11 @@ const Root = createBrowserRouter([
       },
       {
         path: "/news/:id",
-        element: <PrivateRoute><NewsDetail /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <NewsDetail />
+          </PrivateRoute>
+        ),
       },
     ],
   },
