@@ -4,12 +4,14 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
 import CustomizableNews from "./CustomizableNews";
+import useAdmin from "../hooks/useAdmin";
 
 const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
   const { user, logOut } = useContext(AuthContext) || {}; // Assuming user and logout are provided
   const [openFilter, setOpenFilter] = useState<boolean>(false);
+  const isAdmin = useAdmin(); // Check if user is an admin
 
   const toggleMenu = (): void => {
     setIsOpen(!isOpen);
@@ -162,7 +164,7 @@ const NavBar: React.FC = () => {
               Entertainment
             </NavLink>
             <NavLink
-              to="/category/contact"
+              to="/contact"
               className={({ isActive }) =>
                 `px-2 py-1 rounded ${
                   isActive
@@ -173,12 +175,21 @@ const NavBar: React.FC = () => {
             >
               Contact Us
             </NavLink>
+<<<<<<
             <button
               onClick={handleFilter}
               className="hover:bg-[#02AA08] rounded p-2"
             >
               Filter
             </button>
+
+            {/* Conditionally render DASHBOARD link based on isAdmin and user authentication */}
+            {user && isAdmin && (
+              <NavLink to="/dashboard/profile" className={({ isActive }) => `px-2 py-1 rounded ${isActive ? "bg-[#02AA08] text-white" : "hover:bg-[#02AA08] hover:text-white"}`}>
+                DASHBOARD
+              </NavLink>
+            )}
+>>>>>>
           </div>
 
           {/* Right Side: Login/Logout Button */}
@@ -630,6 +641,22 @@ const NavBar: React.FC = () => {
             >
               Sports
             </NavLink>
+<<<<<<
+=======
+            <NavLink
+              to="/dashboard/profile"
+              className={({ isActive }) =>
+                `px-2 py-1 rounded ${
+                  isActive
+                    ? "bg-[#02AA08] text-white"
+                    : "hover:bg-[#02AA08] hover:text-white"
+                }`
+              }
+            >
+              DASHBOARD
+            </NavLink>
+            <br />
+>>>>>
             <button
               onClick={handleFilter}
               className="hover:bg-[#02AA08] rounded p-2"
