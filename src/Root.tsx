@@ -47,13 +47,6 @@ const Root = createBrowserRouter([
         element: <AllNews />,
       },
       {
-<<<<<<< HEAD
-        path: "/newsapp",
-        element: <NewsApp />,
-      },
-      {
-=======
->>>>>>> 19fad7f688c29f86fcaf81434346306e2f056d8d
         path: "/latest",
         element: <Latest />,
       },
@@ -98,9 +91,9 @@ const Root = createBrowserRouter([
         ),
       },
       {
-        path: '/news-post',
-        element: <NewsForm/>
-      }
+        path: "/news-post",
+        element: <NewsForm />,
+      },
     ],
   },
 ]);
