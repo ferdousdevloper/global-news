@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import LiveNews from '../Components/AllNews/LiveNews';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import LiveNews from "../Components/AllNews/LiveNews";
 
 interface NewsItem {
   _id: string;
@@ -31,7 +31,9 @@ const AllNews: React.FC = () => {
 
   const fetchNews = async () => {
     try {
-      const response = await axios.get<NewsItem[]>('http://localhost:3001/news');
+      const response = await axios.get<NewsItem[]>(
+        "http://localhost:3001/news"
+      );
       setNews(response.data);
       setFilteredNews(response.data);
 
@@ -41,8 +43,8 @@ const AllNews: React.FC = () => {
       const uniqueCountries = Array.from(new Set<string>(response.data.map(item => item.region)));
       setCountries(uniqueCountries);
     } catch (error) {
-      setError('Error fetching news');
-      console.error('Error fetching news:', error);
+      setError("Error fetching news");
+      console.error("Error fetching news:", error);
     } finally {
       setLoading(false);
     }

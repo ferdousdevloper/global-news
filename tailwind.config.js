@@ -14,6 +14,9 @@ module.exports = {
       animation: {
         marquee: 'marquee 70s linear infinite',
       },
+      colors: {
+        colorPrimary: '#02AA08',
+      }
     },
   },
   plugins: [
