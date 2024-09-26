@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import Swal from 'sweetalert2'; 
-import "./SignInPage.css"; 
+import Swal from "sweetalert2";
+import "./SignInPage.css";
+import axios from "axios";
 
 const RegisterPage = () => {
   const [fullName, setFullName] = useState("");
@@ -10,7 +11,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { createUser, loading } = useContext(AuthContext) || {};
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const validatePassword = (password) => {
     const upperCasePattern = /[A-Z]/;
@@ -29,31 +30,40 @@ const RegisterPage = () => {
     setError(""); // Reset error
 
     if (!validatePassword(password)) {
-      setError("Password must contain at least one uppercase letter, one lowercase letter, and one number.");
+      setError(
+        "Password must contain at least one uppercase letter, one lowercase letter, and one number."
+      );
       return;
     }
 
     if (!createUser) {
       return;
     }
-    
+
     try {
       await createUser(email, password);
+      const userInfo = {
+        name: e.target.name.value,
+        email: e.target.email.value,
+        password: e.target.password.value,
+        role: "user",
+      };
+      axios.post("http://localhost:3001/register", userInfo);
       Swal.fire({
-        icon: 'success',
-        title: 'Registration Successful!',
-        text: 'You have successfully created your account.',
-        confirmButtonColor: '#02AA08',
+        icon: "success",
+        title: "Registration Successful!",
+        text: "You have successfully created your account.",
+        confirmButtonColor: "#02AA08",
       }).then(() => {
-        navigate('/'); 
+        navigate("/");
       });
     } catch (error) {
       setError("Failed to create an account. Please try again.");
       Swal.fire({
-        icon: 'error',
-        title: 'Registration Failed!',
-        text: 'Please check your details and try again.',
-        confirmButtonColor: '#02AA08',
+        icon: "error",
+        title: "Registration Failed!",
+        text: "Please check your details and try again.",
+        confirmButtonColor: "#02AA08",
       });
     }
   };
@@ -95,6 +105,7 @@ const RegisterPage = () => {
                 id="name"
                 type="text"
                 placeholder="Full Name"
+                name="name"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 className="w-full px-4 py-2 mt-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#02AA08]"
@@ -109,6 +120,7 @@ const RegisterPage = () => {
               <input
                 id="email"
                 type="email"
+                name="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -124,6 +136,7 @@ const RegisterPage = () => {
               <input
                 id="password"
                 type="password"
+                name="password"
                 placeholder="*****"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

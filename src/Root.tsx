@@ -7,6 +7,7 @@ import SignInPage from "./Pages/SignInPage";
 import RegisterPage from "./Pages/RegisterPage";
 import Politics from "./Pages/Politics";
 import AllNews from "./Pages/AllNews";
+import NewsApp from "./Pages/NewsApp";
 import Latest from "./Pages/Latest";
 import Entertainment from "./Pages/Entertainment";
 import Contact from "./Pages/Contact";
@@ -18,7 +19,13 @@ import Sport from "./Pages/Sport";
 import Gallery from "./Pages/Gallery";
 import PrivateRoute from "./Routes/PrivateRoute";
 import NewsDetail from "./Pages/NewsDetails";
-import NewsForm from "./Pages/NewsForm";
+import Dashboard from "./LayOut/Dashboard";
+import Profile from "./Pages/Dashboard/Profile";
+import AllUsers from "./Pages/Dashboard/AllUsers";
+import NewsForm from "./Pages/NewsForm"
+
+
+
 
 const Root = createBrowserRouter([
   {
@@ -44,7 +51,11 @@ const Root = createBrowserRouter([
       },
       {
         path: "/all-news",
-        element: <AllNews/>
+        element: <AllNews />,
+      },
+      {
+        path: "/newsapp",
+        element: <NewsApp />,
       },
       {
         path: "/latest",
@@ -84,13 +95,32 @@ const Root = createBrowserRouter([
       },
       {
         path: "/news/:id",
-        element: <PrivateRoute><NewsDetail /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <NewsDetail />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  // DASHBOARD ROUTE START ----------------------------------------
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children:[
+      {
+        path: "/dashboard/profile",
+        element: <Profile></Profile>,
       },
       {
-        path: '/news-post',
-        element: <NewsForm/>
-      }
-    ],
+        path: "/dashboard/allUsers",
+        element: <AllUsers></AllUsers>,
+      },
+      {
+        path: "/dashboard/news-post",
+        element: <NewsForm></NewsForm>,
+      },
+    ]
   },
 ]);
 export default Root;

@@ -69,11 +69,11 @@ const NewsComponent = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 mt-16">
-      <div className="container mx-auto max-w-4xl">
+    <div className="min-h-screen p-6 mt-16 text-white">
+      <div className="container mx-auto max-w-7xl">
         <h1 className="text-3xl font-bold text-center mb-8">News Article</h1>
         
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 mb-8">
+        <form onSubmit={handleSubmit} className="bg-neutral-900 shadow-md rounded-lg p-6 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <input
               type="text"
@@ -118,7 +118,7 @@ const NewsComponent = () => {
             value={formData.description}
             onChange={handleChange}
             required
-            className="w-full p-2 border border-gray-300 rounded mb-4"
+            className="w-full p-2 border border-gray-300 rounded mb-4 h-96"
           />
          
           <div className="flex items-center space-x-4 mb-4">
@@ -155,7 +155,7 @@ const NewsComponent = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
+            className="w-full bg-colorPrimary font-bold py-2 px-4 rounded hover:bg-blue-700"
           >
             Post News
           </button>
@@ -163,7 +163,7 @@ const NewsComponent = () => {
 
         <ul className="space-y-6">
           {liveNews.map((article, index) => (
-            <li key={index} className="bg-white shadow-lg rounded-lg p-6">
+            <li key={index} className=" bg-neutral-800 shadow-lg rounded-lg p-6 glass">
               <h3 className="text-xl font-semibold">{article.title}</h3>
               <img
                 src={article.image}
@@ -171,7 +171,7 @@ const NewsComponent = () => {
                 className="w-full h-48 object-cover mt-4 rounded-lg"
               />
               <p className="mt-4">{article.description}</p>
-              <small className="block mt-2 text-gray-500">
+              <small className="block mt-2 ">
                 {new Date(article.timestamp).toLocaleString()}
               </small>
               <strong className="block mt-1 text-red-600">
