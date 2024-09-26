@@ -175,7 +175,6 @@ const NavBar: React.FC = () => {
             >
               Contact Us
             </NavLink>
-<<<<<<
             <button
               onClick={handleFilter}
               className="hover:bg-[#02AA08] rounded p-2"
@@ -189,7 +188,7 @@ const NavBar: React.FC = () => {
                 DASHBOARD
               </NavLink>
             )}
->>>>>>
+
           </div>
 
           {/* Right Side: Login/Logout Button */}
@@ -641,8 +640,7 @@ const NavBar: React.FC = () => {
             >
               Sports
             </NavLink>
-<<<<<<
-=======
+
             <NavLink
               to="/dashboard/profile"
               className={({ isActive }) =>
@@ -656,7 +654,7 @@ const NavBar: React.FC = () => {
               DASHBOARD
             </NavLink>
             <br />
->>>>>
+
             <button
               onClick={handleFilter}
               className="hover:bg-[#02AA08] rounded p-2"
