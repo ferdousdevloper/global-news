@@ -162,7 +162,7 @@ const NavBar: React.FC = () => {
               Entertainment
             </NavLink>
             <NavLink
-              to="/category/contact"
+              to="/contact"
               className={({ isActive }) =>
                 `px-2 py-1 rounded ${
                   isActive

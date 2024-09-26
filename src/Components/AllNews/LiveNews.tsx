@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import io from 'socket.io-client';
 
-const socket = io('http://localhost:3001'); // Backend server URL
-
-// Define the structure of a news article
 interface NewsArticle {
   title: string;
   description: string;
@@ -14,32 +10,52 @@ interface NewsArticle {
 
 const LiveNews: React.FC = () => {
   const [latestNews, setLatestNews] = useState<NewsArticle | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Listen for live news from the server
-    socket.on('liveNews', (news: NewsArticle[]) => {
-      console.log('Received live news:', news);
-      if (news && news.length > 0) {
-        setLatestNews(news[0]); // Set the latest news
+    // Fetch the latest live news from the server
+    const fetchLatestNews = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/news?isLive=true'); // Adjust your API endpoint if needed
+        if (!response.ok) {
+          throw new Error('Failed to fetch live news');
+        }
+        const news: NewsArticle[] = await response.json();
+        if (news.length > 0) {
+          setLatestNews(news[0]); // Set the latest news
+        } else {
+          setError('No live news available');
+        }
+      } catch (err) {
+        // Check if err is an instance of Error
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('An unknown error occurred');
+        }
+        console.error('Error fetching live news:', err);
       }
-    });
-
-    // Clean up the socket listener on component unmount
-    return () => {
-      socket.off('liveNews');
     };
+
+    fetchLatestNews();
   }, []);
+
+  if (error) {
+    return <div className="p-6 text-red-600 text-center">{error}</div>;
+  }
 
   if (!latestNews) {
     return (
-      <div className="p-6 text-gray-700 text-center">Loading latest live news...</div>
+      <div className="flex items-center justify-center h-full p-6 text-gray-700">
+        <div>No live news available.</div>
+      </div>
     );
   }
 
   const formattedDate = new Date(latestNews.timestamp).toLocaleString();
 
   return (
-    <div className="flex bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
+    <div className="flex bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden mt-16">
       <div className="w-1/2">
         <img
           src={latestNews.image}
@@ -55,7 +71,7 @@ const LiveNews: React.FC = () => {
         <div>
           <p className="text-gray-500 text-sm mb-2">{formattedDate}</p>
           {latestNews.isLive && (
-            <span className="px-3 py-1 bg-red-600 text-white text-xs font-semibold uppercase rounded-full">
+            <span className="px-4 py-1 bg-red-600 text-white text-xs font-semibold uppercase rounded-full">
               Live
             </span>
           )}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LiveNews from "../Components/AllNews/LiveNews";
 
-// Define an interface for the news item
 interface NewsItem {
   _id: string;
   title: string;
@@ -22,14 +21,15 @@ const AllNews: React.FC = () => {
   const [filteredNews, setFilteredNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>("");
   const [categories, setCategories] = useState<string[]>([]);
   const [countries, setCountries] = useState<string[]>([]);
-  const [selectedFilter, setSelectedFilter] = useState<string>("All News");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All News");
   const [selectedCountry, setSelectedCountry] =
     useState<string>("All Countries");
   const [selectedDateFilter, setSelectedDateFilter] =
     useState<string>("All Dates");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedFilter, setSelectedFilter] = useState<string>("All News");
 
   const fetchNews = async () => {
     try {
@@ -38,10 +38,12 @@ const AllNews: React.FC = () => {
       );
       setNews(response.data);
       setFilteredNews(response.data);
+
       const uniqueCategories = Array.from(
         new Set<string>(response.data.map((item) => item.category))
       );
       setCategories(uniqueCategories);
+
       const uniqueCountries = Array.from(
         new Set<string>(response.data.map((item) => item.region))
       );
@@ -54,30 +56,92 @@ const AllNews: React.FC = () => {
     }
   };
 
+  const filterNews = () => {
+    let updatedFilteredNews = news;
+
+    // Filter by search query
+    if (searchTerm) {
+      updatedFilteredNews = updatedFilteredNews.filter(
+        (item) =>
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.region.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Filter by category
+    if (selectedFilter !== "All News") {
+      if (selectedFilter === "Breaking News") {
+        updatedFilteredNews = updatedFilteredNews.filter(
+          (item) => item.breaking_news
+        );
+      } else if (selectedFilter === "Popular News") {
+        updatedFilteredNews = updatedFilteredNews.filter(
+          (item) => item.popular_news
+        );
+      } else if (selectedFilter === "Live News") {
+        updatedFilteredNews = updatedFilteredNews.filter((item) => item.isLive);
+      } else {
+        updatedFilteredNews = updatedFilteredNews.filter(
+          (item) => item.category === selectedFilter
+        );
+      }
+    }
+
+    // Filter by country
+    if (selectedCountry !== "All Countries") {
+      updatedFilteredNews = updatedFilteredNews.filter(
+        (item) => item.region === selectedCountry
+      );
+    }
+
+    // Optionally filter by date
+    if (selectedDateFilter !== "All Dates") {
+      const today = new Date();
+      if (selectedDateFilter === "Today") {
+        updatedFilteredNews = updatedFilteredNews.filter(
+          (item) =>
+            new Date(item.date_time).toDateString() === today.toDateString()
+        );
+      } else if (selectedDateFilter === "Last 7 Days") {
+        const lastWeek = new Date();
+        lastWeek.setDate(today.getDate() - 7);
+        updatedFilteredNews = updatedFilteredNews.filter(
+          (item) => new Date(item.date_time) >= lastWeek
+        );
+      } else if (selectedDateFilter === "Last 30 Days") {
+        const lastMonth = new Date();
+        lastMonth.setDate(today.getDate() - 30);
+        updatedFilteredNews = updatedFilteredNews.filter(
+          (item) => new Date(item.date_time) >= lastMonth
+        );
+      }
+    }
+
+    setFilteredNews(updatedFilteredNews);
+  };
+
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
-    setSearchQuery(query);
-    const searchFilteredNews = news.filter(
-      (item) =>
-        item.title.toLowerCase().includes(query.toLowerCase()) ||
-        item.description.toLowerCase().includes(query.toLowerCase()) ||
-        item.category.toLowerCase().includes(query.toLowerCase()) ||
-        item.region.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredNews(searchFilteredNews);
+    setSearchTerm(event.target.value);
   };
 
   const resetFilters = () => {
-    setSearchQuery("");
-    setSelectedFilter("All News");
+    setSelectedCategory("All News");
     setSelectedCountry("All Countries");
     setSelectedDateFilter("All Dates");
+    setSearchTerm("");
+    setSelectedFilter("All News");
     setFilteredNews(news);
   };
 
   useEffect(() => {
-    fetchNews();
+    fetchNews(); // Initial fetch
   }, []);
+
+  useEffect(() => {
+    filterNews();
+  }, [searchTerm, selectedFilter, selectedCountry, selectedDateFilter, news]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -125,13 +189,13 @@ const AllNews: React.FC = () => {
           >
             <option>All Dates</option>
             <option>Today</option>
-            <option>This Week</option>
-            <option>This Month</option>
+            <option>Last 7 Days</option>
+            <option>Last 30 Days</option>
           </select>
 
           <input
             type="text"
-            value={searchQuery}
+            value={searchTerm}
             onChange={handleSearchChange}
             placeholder="Search news..."
             className="px-4 py-2 border rounded-md flex-1"
