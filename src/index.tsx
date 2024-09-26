@@ -1,15 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { RouterProvider } from 'react-router-dom';
-import Root from './Root';
-import AuthProvider from './providers/AuthProvider';
 import {
   QueryClient,
   QueryClientProvider,
-} from '@tanstack/react-query'
+} from '@tanstack/react-query';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
+import Root from './Root';
+import './index.css';
+import AuthProvider from './providers/AuthProvider';
+import reportWebVitals from './reportWebVitals';
 
 
 // Create a client
@@ -21,7 +20,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={Root} />
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={Root} />
       </QueryClientProvider>
