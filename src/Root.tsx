@@ -22,6 +22,10 @@ import NewsDetail from "./Pages/NewsDetails";
 import Dashboard from "./LayOut/Dashboard";
 import Profile from "./Pages/Dashboard/Profile";
 import AllUsers from "./Pages/Dashboard/AllUsers";
+import NewsForm from "./Pages/NewsForm"
+
+
+
 
 const Root = createBrowserRouter([
   {
@@ -99,18 +103,23 @@ const Root = createBrowserRouter([
       },
     ],
   },
+  // DASHBOARD ROUTE START ----------------------------------------
   {
     path: "/dashboard",
     element: <Dashboard></Dashboard>,
     children:[
       {
         path: "/dashboard/profile",
-        element: <Profile></Profile>
+        element: <Profile></Profile>,
       },
       {
         path: "/dashboard/allUsers",
-        element: <AllUsers></AllUsers>
-      }
+        element: <AllUsers></AllUsers>,
+      },
+      {
+        path: "/dashboard/news-post",
+        element: <NewsForm></NewsForm>,
+      },
     ]
   },
 ]);
