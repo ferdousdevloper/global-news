@@ -7,6 +7,7 @@ import SignInPage from "./Pages/SignInPage";
 import RegisterPage from "./Pages/RegisterPage";
 import Politics from "./Pages/Politics";
 import AllNews from "./Pages/AllNews";
+import NewsApp from "./Pages/NewsApp";
 import Latest from "./Pages/Latest";
 import Entertainment from "./Pages/Entertainment";
 import Contact from "./Pages/Contact";
@@ -21,7 +22,6 @@ import NewsDetail from "./Pages/NewsDetails";
 import Dashboard from "./LayOut/Dashboard";
 import Profile from "./Pages/Dashboard/Profile";
 import AllUsers from "./Pages/Dashboard/AllUsers";
-import NewsForm from "./Pages/NewsForm";
 
 const Root = createBrowserRouter([
   {
@@ -48,6 +48,10 @@ const Root = createBrowserRouter([
       {
         path: "/all-news",
         element: <AllNews/>
+      },
+      {
+        path: '/newsapp',
+        element: <NewsApp/>
       },
       {
         path: "/latest",
@@ -89,10 +93,6 @@ const Root = createBrowserRouter([
         path: "/news/:id",
         element: <PrivateRoute><NewsDetail /></PrivateRoute>,
       },
-      {
-        path: '/news-post',
-        element: <NewsForm/>
-      }
     ],
   },
   {
