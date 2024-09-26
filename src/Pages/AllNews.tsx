@@ -23,6 +23,7 @@ const AllNews: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [categories, setCategories] = useState<string[]>([]);
   const [countries, setCountries] = useState<string[]>([]);
+<<<<<<< HEAD
   const [selectedCategory, setSelectedCategory] = useState<string>("All News");
   const [selectedCountry, setSelectedCountry] =
     useState<string>("All Countries");
@@ -30,6 +31,13 @@ const AllNews: React.FC = () => {
     useState<string>("All Dates");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedFilter, setSelectedFilter] = useState<string>("All News");
+=======
+  const [selectedCategory, setSelectedCategory] = useState<string>('All News');
+  const [selectedCountry, setSelectedCountry] = useState<string>('All Countries');
+  const [selectedDateFilter, setSelectedDateFilter] = useState<string>('All Dates');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [selectedFilter, setSelectedFilter] = useState<string>('All News');
+>>>>>>> cf9a936a05868140622b8d6dd8a4e0e704c9841d
 
   const fetchNews = async () => {
     try {
@@ -39,6 +47,7 @@ const AllNews: React.FC = () => {
       setNews(response.data);
       setFilteredNews(response.data);
 
+<<<<<<< HEAD
       const uniqueCategories = Array.from(
         new Set<string>(response.data.map((item) => item.category))
       );
@@ -47,6 +56,12 @@ const AllNews: React.FC = () => {
       const uniqueCountries = Array.from(
         new Set<string>(response.data.map((item) => item.region))
       );
+=======
+      const uniqueCategories = Array.from(new Set<string>(response.data.map(item => item.category)));
+      setCategories(uniqueCategories);
+      
+      const uniqueCountries = Array.from(new Set<string>(response.data.map(item => item.region)));
+>>>>>>> cf9a936a05868140622b8d6dd8a4e0e704c9841d
       setCountries(uniqueCountries);
     } catch (error) {
       setError("Error fetching news");
@@ -127,11 +142,19 @@ const AllNews: React.FC = () => {
   };
 
   const resetFilters = () => {
+<<<<<<< HEAD
     setSelectedCategory("All News");
     setSelectedCountry("All Countries");
     setSelectedDateFilter("All Dates");
     setSearchTerm("");
     setSelectedFilter("All News");
+=======
+    setSelectedCategory('All News');
+    setSelectedCountry('All Countries');
+    setSelectedDateFilter('All Dates');
+    setSearchTerm('');
+    setSelectedFilter('All News');
+>>>>>>> cf9a936a05868140622b8d6dd8a4e0e704c9841d
     setFilteredNews(news);
   };
 
@@ -162,10 +185,15 @@ const AllNews: React.FC = () => {
             <option>Breaking News</option>
             <option>Popular News</option>
             <option>Live News</option>
+<<<<<<< HEAD
             {categories.map((category) => (
               <option key={category} value={category}>
                 {category}
               </option>
+=======
+            {categories.map(category => (
+              <option key={category} value={category}>{category}</option>
+>>>>>>> cf9a936a05868140622b8d6dd8a4e0e704c9841d
             ))}
           </select>
 
@@ -175,10 +203,15 @@ const AllNews: React.FC = () => {
             className="px-4 py-2 border rounded-md flex-1"
           >
             <option>All Countries</option>
+<<<<<<< HEAD
             {countries.map((country) => (
               <option key={country} value={country}>
                 {country}
               </option>
+=======
+            {countries.map(country => (
+              <option key={country} value={country}>{country}</option>
+>>>>>>> cf9a936a05868140622b8d6dd8a4e0e704c9841d
             ))}
           </select>
 
@@ -210,6 +243,7 @@ const AllNews: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<<<<<<< HEAD
           {filteredNews.map((item) => (
             <div
               key={item._id}
@@ -225,6 +259,14 @@ const AllNews: React.FC = () => {
               <p className="text-sm text-gray-500">
                 {new Date(item.date_time).toLocaleString()}
               </p>
+=======
+          {filteredNews.map(item => (
+            <div key={item._id} className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200">
+              <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-md" />
+              <h2 className="text-xl font-semibold mt-2">{item.title}</h2>
+              <p className="text-gray-700 mt-1">{item.description}</p>
+              <p className="text-sm text-gray-500">{new Date(item.date_time).toLocaleString()}</p>
+>>>>>>> cf9a936a05868140622b8d6dd8a4e0e704c9841d
             </div>
           ))}
         </div>
