@@ -1,7 +1,7 @@
 import { FaChartPie, FaHome, FaList, FaUser, FaUsers } from "react-icons/fa";
 import { GiHamburgerMenu, GiKnightBanner } from "react-icons/gi";
 import { GrDocumentTest, GrTest } from "react-icons/gr";
-import { IoBookmarks } from "react-icons/io5";
+import { IoBookmarks, IoNewspaperOutline } from "react-icons/io5";
 import { RiAddLargeFill } from "react-icons/ri";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
@@ -67,10 +67,23 @@ const Dashboard = () => {
                     All Users
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink to="/dashboard/news-post"
+                  className={({ isActive }) =>
+                    `px-2 py-1 rounded ${isActive
+                           ? "bg-[#02AA08] text-white"
+                           : "hover:bg-[#02AA08] hover:text-white"
+                         }`
+                   }
+                  >
+                    <IoNewspaperOutline />
+                    News Post
+                  </NavLink>
+                </li>
                 {/* Add other admin routes here */}
               </>
             ) : (
-              <h1>test</h1>
+              <h1>Normal user dashboard</h1>
             )}
             {/* shared nav links */}
             <div className="divider"></div>
