@@ -57,15 +57,15 @@ const LiveNews: React.FC = () => {
   return (
     <>
     <h1 className="text-4xl mt-16 font-black btn cursor-auto glass text-red-600">LIVE ...</h1>
-    <div className="flex border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden  glass">
-      <div className="w-1/2">
+    <div className="flex flex-col md:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden  glass">
+      <div className="md:w-1/2 w-full">
         <img
           src={latestNews.image}
           alt={latestNews.title}
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="w-1/2 p-6 flex flex-col justify-between">
+      <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
         <div>
           <h3 className="text-2xl font-bold mb-2">{latestNews.title}</h3>
           <hr  className='my-4'/> 
