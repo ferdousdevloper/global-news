@@ -24,11 +24,10 @@ const AllNews: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [categories, setCategories] = useState<string[]>([]);
   const [countries, setCountries] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>('All News');
+  const [selectedFilter, setSelectedFilter] = useState<string>('All News');
   const [selectedCountry, setSelectedCountry] = useState<string>('All Countries');
   const [selectedDateFilter, setSelectedDateFilter] = useState<string>('All Dates');
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [selectedFilter, setSelectedFilter] = useState<string>('All News');
 
   const fetchNews = async () => {
     try {
@@ -112,11 +111,10 @@ const AllNews: React.FC = () => {
   };
 
   const resetFilters = () => {
-    setSelectedCategory('All News');
+    setSelectedFilter('All News');
     setSelectedCountry('All Countries');
     setSelectedDateFilter('All Dates');
     setSearchTerm('');
-    setSelectedFilter('All News');
     setFilteredNews(news);
   };
 
@@ -132,16 +130,17 @@ const AllNews: React.FC = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="pt-10 container mx-auto">
+    <div className="pt-10 container mx-auto px-4">
       <LiveNews />
-      <div className=" p-6 text-white">
-        <h1 className="text-3xl font-bold mb-4">All News</h1>
-        <div className="flex items-center mb-4 gap-4">
-          {/* Dropdowns and Search Bar */}
+      <div className="p-6 text-white">
+        <h1 className="text-2xl md:text-3xl font-bold mb-4">All News</h1>
+
+        {/* Filters Section */}
+        <div className="flex flex-wrap gap-4 mb-4">
           <select
             value={selectedFilter}
             onChange={(e) => setSelectedFilter(e.target.value)}
-            className="px-4 py-2 border rounded-md flex-1 bg-transparent glass text-gray-700"
+            className="px-4 py-2 border rounded-md w-full md:flex-1 bg-transparent glass text-gray-700"
           >
             <option>All News</option>
             <option>Breaking News</option>
@@ -155,7 +154,7 @@ const AllNews: React.FC = () => {
           <select
             value={selectedCountry}
             onChange={(e) => setSelectedCountry(e.target.value)}
-            className="px-4 py-2 border rounded-md flex-1 bg-transparent glass text-gray-700"
+            className="px-4 py-2 border rounded-md w-full md:flex-1 bg-transparent glass text-gray-700"
           >
             <option>All Countries</option>
             {countries.map(country => (
@@ -166,7 +165,7 @@ const AllNews: React.FC = () => {
           <select
             value={selectedDateFilter}
             onChange={(e) => setSelectedDateFilter(e.target.value)}
-            className="px-4 py-2 border rounded-md flex-1 bg-transparent glass text-gray-700"
+            className="px-4 py-2 border rounded-md w-full md:flex-1 bg-transparent glass text-gray-700"
           >
             <option>All Dates</option>
             <option>Today</option>
@@ -179,32 +178,31 @@ const AllNews: React.FC = () => {
             value={searchTerm}
             onChange={handleSearchChange}
             placeholder="Search news..."
-            className="px-4  py-2 border rounded-md flex-1 bg-transparent glass text-gray-700"
+            className="px-4 py-2 border rounded-md w-full md:flex-1 bg-transparent glass text-gray-700"
           />
 
           <button
             onClick={resetFilters}
-            className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 glass"
+            className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 w-full md:w-auto"
           >
             Reset Filters
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* News Grid Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredNews.map(item => (
             <Link to={`/news/${item._id}`} key={item._id}>
-            <div key={item._id} className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 glass">
-              <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-md" />
-              <div className="flex justify-between items-center my-3">
-              <p className="text-sm text-gray-500 badge">{item.category}</p>
-              <p className="text-sm text-gray-300">{new Date(item.date_time).toLocaleString()}</p>
+              <div className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 glass">
+                <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-md" />
+                <div className="flex justify-between items-center my-3">
+                  <p className="text-sm text-gray-500 badge">{item.category}</p>
+                  <p className="text-sm text-gray-300">{new Date(item.date_time).toLocaleString()}</p>
+                </div>
+                <h2 className="text-xl font-semibold mt-2">{item.title}</h2>
+                <hr className="my-4" />
+                <p className="text-gray-300 mt-1">{item.description.slice(0, 300)}...</p>
               </div>
-              <h2 className="text-xl font-semibold mt-2">{item.title}</h2>
-              <hr className="my-4" />
-              <p className="text-gray-300 mt-1">{item.description.slice(0, 300)}...</p>
-
-              
-            </div>
             </Link>
           ))}
         </div>
