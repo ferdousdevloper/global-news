@@ -55,7 +55,9 @@ const LiveNews: React.FC = () => {
   const formattedDate = new Date(latestNews.timestamp).toLocaleString();
 
   return (
-    <div className="flex bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden mt-16">
+    <>
+    <h1 className="text-4xl mt-16 font-black btn cursor-auto glass text-red-600">LIVE ...</h1>
+    <div className="flex border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden  glass">
       <div className="w-1/2">
         <img
           src={latestNews.image}
@@ -65,8 +67,9 @@ const LiveNews: React.FC = () => {
       </div>
       <div className="w-1/2 p-6 flex flex-col justify-between">
         <div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-2">{latestNews.title}</h3>
-          <p className="text-gray-600 mb-4">{latestNews.description}</p>
+          <h3 className="text-2xl font-bold mb-2">{latestNews.title}</h3>
+          <hr  className='my-4'/> 
+          <p className="text-gray-300 mb-4">{latestNews.description.slice(0, 1000)}...</p>
         </div>
         <div>
           <p className="text-gray-500 text-sm mb-2">{formattedDate}</p>
@@ -78,6 +81,7 @@ const LiveNews: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -23,6 +23,8 @@ import Dashboard from "./LayOut/Dashboard";
 import Profile from "./Pages/Dashboard/Profile";
 import AllUsers from "./Pages/Dashboard/AllUsers";
 import NewsForm from "./Pages/NewsForm"
+import ManageNews from "./Pages/Dashboard/ManageNews";
+import UpdateNews from "./Pages/Dashboard/UpdateNews";
 
 
 
@@ -119,6 +121,14 @@ const Root = createBrowserRouter([
       {
         path: "/dashboard/news-post",
         element: <NewsForm></NewsForm>,
+      },
+      {
+        path: "/dashboard/manage-news",
+        element: <ManageNews></ManageNews>,
+      },
+      {
+        path: "/dashboard/update/:id",
+        element: <UpdateNews></UpdateNews>,
       },
     ]
   },
