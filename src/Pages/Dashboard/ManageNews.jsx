@@ -9,7 +9,7 @@ const ManageNews = () => {
   const { data: news = [], refetch, isLoading, error } = useQuery({
     queryKey: ["ManageNews"],
     queryFn: async () => {
-      const { data } = await axios.get("http://localhost:3001/news"); // Update the URL if necessary
+      const { data } = await axios.get("https://global-news-server-phi.vercel.app/news"); // Update the URL if necessary
       return data;
     }
   });
@@ -31,7 +31,7 @@ const ManageNews = () => {
       if (result.isConfirmed) {
         // Call delete endpoint
         axios
-          .delete(`http://localhost:3001/news/${newsItem._id}`)
+          .delete(`https://global-news-server-phi.vercel.app/news/${newsItem._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               refetch(); // Refetch the news data after deletion
