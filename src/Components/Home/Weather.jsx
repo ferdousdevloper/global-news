@@ -53,8 +53,8 @@ const Weather = () => {
     }, [])
 
     return (
-        <div className="container mx-auto my-10" style={{ width: '85%' }}>
-            <div style={{ backgroundImage: "linear-gradient(45deg, #0f172a, #788ec1)" }} className="flex flex-col md:flex-row items-center justify-between p-6  rounded-xl text-base-300 space-y-6 lg:space-y-0">
+        <div className="container mx-auto my-10 " style={{ width: '85%' }}>
+            <div style={{ backgroundImage: "linear-gradient(45deg, #0f172a, #788ec1)" }} className="flex flex-col md:flex-row items-center  justify-between p-6  rounded-xl text-base-300 space-y-6 lg:space-y-0">
                 {/* Left side - date */}
                 <div className="text-center md:text-left">
                     <h2 className="text-3xl font-medium mb-3">Weather Update</h2>

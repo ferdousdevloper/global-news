@@ -105,12 +105,12 @@ const AllUsers = () => {
         ALL USERS
       </h1>
       <hr className="my-10 border-2" />
-      <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
+      <div className="overflow-x-auto border glass rounded-3xl">
+        <table className="table  max-w-7xl mx-auto">
           {/* head */}
           <thead>
-            <tr>
-              <th></th>
+            <tr className="text-white">
+              <th>#</th>
               <th>Name</th>
               <th>Email</th>
               <th>Status</th>

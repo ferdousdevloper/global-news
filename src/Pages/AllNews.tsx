@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LiveNews from "../Components/AllNews/LiveNews";
+import { Link } from "react-router-dom";
 
 interface NewsItem {
   _id: string;
@@ -131,16 +132,16 @@ const AllNews: React.FC = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
+    <div className="pt-10 container mx-auto">
       <LiveNews />
-      <div className="container mx-auto p-6">
+      <div className=" p-6 text-white">
         <h1 className="text-3xl font-bold mb-4">All News</h1>
         <div className="flex items-center mb-4 gap-4">
           {/* Dropdowns and Search Bar */}
           <select
             value={selectedFilter}
             onChange={(e) => setSelectedFilter(e.target.value)}
-            className="px-4 py-2 border rounded-md flex-1"
+            className="px-4 py-2 border rounded-md flex-1 bg-transparent glass text-gray-700"
           >
             <option>All News</option>
             <option>Breaking News</option>
@@ -154,7 +155,7 @@ const AllNews: React.FC = () => {
           <select
             value={selectedCountry}
             onChange={(e) => setSelectedCountry(e.target.value)}
-            className="px-4 py-2 border rounded-md flex-1"
+            className="px-4 py-2 border rounded-md flex-1 bg-transparent glass text-gray-700"
           >
             <option>All Countries</option>
             {countries.map(country => (
@@ -165,7 +166,7 @@ const AllNews: React.FC = () => {
           <select
             value={selectedDateFilter}
             onChange={(e) => setSelectedDateFilter(e.target.value)}
-            className="px-4 py-2 border rounded-md flex-1"
+            className="px-4 py-2 border rounded-md flex-1 bg-transparent glass text-gray-700"
           >
             <option>All Dates</option>
             <option>Today</option>
@@ -178,12 +179,12 @@ const AllNews: React.FC = () => {
             value={searchTerm}
             onChange={handleSearchChange}
             placeholder="Search news..."
-            className="px-4 py-2 border rounded-md flex-1"
+            className="px-4  py-2 border rounded-md flex-1 bg-transparent glass text-gray-700"
           />
 
           <button
             onClick={resetFilters}
-            className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700"
+            className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 glass"
           >
             Reset Filters
           </button>
@@ -191,12 +192,20 @@ const AllNews: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredNews.map(item => (
-            <div key={item._id} className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200">
+            <Link to={`/news/${item._id}`} key={item._id}>
+            <div key={item._id} className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 glass">
               <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-md" />
+              <div className="flex justify-between items-center my-3">
+              <p className="text-sm text-gray-500 badge">{item.category}</p>
+              <p className="text-sm text-gray-300">{new Date(item.date_time).toLocaleString()}</p>
+              </div>
               <h2 className="text-xl font-semibold mt-2">{item.title}</h2>
-              <p className="text-gray-700 mt-1">{item.description}</p>
-              <p className="text-sm text-gray-500">{new Date(item.date_time).toLocaleString()}</p>
+              <hr className="my-4" />
+              <p className="text-gray-300 mt-1">{item.description.slice(0, 300)}...</p>
+
+              
             </div>
+            </Link>
           ))}
         </div>
       </div>

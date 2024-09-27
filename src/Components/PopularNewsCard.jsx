@@ -6,7 +6,7 @@ const PopularNewsCard = ({ news }) => {
     const { image, category, title } = news
     return (
 
-        <Link className="card card-compact bg-base-100 w-52 h-64 shadow-xl">
+        <Link className="card card-compact  w-52 h-64 shadow-xl glass">
             <figure className='h-52'>
                 <img
                     className='w-full h-52'
