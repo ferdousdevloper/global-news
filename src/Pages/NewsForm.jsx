@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-const socket = io('https://global-news-server-five.vercel.app'); // Your server URL here
+const socket = io('https://global-news-server-phi.vercel.app'); // Your server URL here
 
 const NewsComponent = () => {
   const [liveNews, setLiveNews] = useState([]);
@@ -50,7 +51,7 @@ const NewsComponent = () => {
     };
 
     try {
-      await axios.post('https://global-news-server-five.vercel.app/news', newsArticle);
+      await axios.post('https://global-news-server-phi.vercel.app/news', newsArticle);
       setFormData({
         title: '',
         image: '',
@@ -71,9 +72,11 @@ const NewsComponent = () => {
   return (
     <div className="min-h-screen p-6 mt-16 text-white">
       <div className="container mx-auto max-w-7xl">
-        <h1 className="text-3xl font-bold text-center mb-8">News Article</h1>
-        
-        <form onSubmit={handleSubmit} className="bg-neutral-900 shadow-md rounded-lg p-6 mb-8">
+      <h1 className="text-xl md:text-6xl fontBebas font-extrabold text-center mb-10">
+        POST ARTICLE
+      </h1>
+      <hr className="my-10 border-2" />
+        <form onSubmit={handleSubmit} className="bg-neutral-900 glass shadow-md rounded-lg p-6 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <input
               type="text"
@@ -82,7 +85,7 @@ const NewsComponent = () => {
               value={formData.title}
               onChange={handleChange}
               required
-              className="p-2 border border-gray-300 rounded"
+              className="p-2 border border-gray-300 rounded bg-transparent"
             />
             <input
               type="text"
@@ -91,7 +94,7 @@ const NewsComponent = () => {
               value={formData.image}
               onChange={handleChange}
               required
-              className="p-2 border border-gray-300 rounded"
+              className="p-2 border border-gray-300 rounded bg-transparent"
             />
             <input
               type="text"
@@ -100,7 +103,7 @@ const NewsComponent = () => {
               value={formData.category}
               onChange={handleChange}
               required
-              className="p-2 border border-gray-300 rounded"
+              className="p-2 border border-gray-300 rounded bg-transparent"
             />
             <input
               type="text"
@@ -109,7 +112,7 @@ const NewsComponent = () => {
               value={formData.region}
               onChange={handleChange}
               required
-              className="p-2 border border-gray-300 rounded"
+              className="p-2 border border-gray-300 rounded bg-transparent"
             />
           </div>
           <textarea
@@ -118,7 +121,7 @@ const NewsComponent = () => {
             value={formData.description}
             onChange={handleChange}
             required
-            className="w-full p-2 border border-gray-300 rounded mb-4 h-96"
+            className="w-full p-2 border border-gray-300 rounded mb-4 h-96 bg-transparent"
           />
          
           <div className="flex items-center space-x-4 mb-4">
@@ -155,7 +158,7 @@ const NewsComponent = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-colorPrimary font-bold py-2 px-4 rounded hover:bg-blue-700"
+            className="w-full bg-colorPrimary font-bold py-2 px-4 rounded hover:bg-green-700"
           >
             Post News
           </button>
@@ -163,6 +166,8 @@ const NewsComponent = () => {
 
         <ul className="space-y-6">
           {liveNews.map((article, index) => (
+            <div>
+            <Link to={`/news/${article._id}`} key={article._id}>
             <li key={index} className=" bg-neutral-800 shadow-lg rounded-lg p-6 glass">
               <h3 className="text-xl font-semibold">{article.title}</h3>
               <img
@@ -178,6 +183,8 @@ const NewsComponent = () => {
                 {article.isLive ? ' (Live)' : ' (Normal)'}
               </strong>
             </li>
+            </Link>
+            </div>
           ))}
         </ul>
       </div>

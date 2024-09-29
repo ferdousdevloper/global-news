@@ -14,7 +14,7 @@ const NewsDetail = () => {
     // Fetch the news details based on the id
     const fetchNewsDetail = async () => {
       try {
-        const response = await axios.get(`https://global-news-server-five.vercel.app/news/${id}`); // Fixing the URL
+        const response = await axios.get(`https://global-news-server-phi.vercel.app/news/${id}`); // Fixing the URL
         setNews(response.data);
         setLoading(false);
       } catch (err) {
@@ -41,7 +41,7 @@ const NewsDetail = () => {
           <>
           <div className='flex flex-col lg:flex-row items-center text-left gap-2'>
           <GiMicrophone className='text-3xl text-[#02AA08]' />
-          <h1 className="text-4xl font-bold mb-4 text-center">{news.title}</h1>
+          <h1 className="text-4xl font-bold mb-4 text-center text-white">{news.title}</h1>
           </div>
             <hr className='py-4' />
             <img
@@ -50,7 +50,7 @@ const NewsDetail = () => {
               className="w-full  object-cover mb-6 rounded-lg"
             />
 
-            <div className="flex justify-between text-gray-500 text-sm mb-6">
+            <div className="flex justify-between text-gray-200  text-sm mb-6">
               <span>Category: {news.category}</span>
               <div className='flex gap-2 items-center'>
               <FaLocationDot className='text-red-700' />
@@ -58,28 +58,28 @@ const NewsDetail = () => {
               </div>
               
             </div>
-            <p className="text-gray-500 text-sm mb-6">
+            <p className="text-gray-200 text-sm mb-6">
               Published on: {new Date(news.date_time).toLocaleDateString()}
             </p>
             <div className="flex justify-between">
               <span
                 className={`text-sm font-semibold ${
-                  news.breaking_news ? "text-red-500" : "text-gray-400"
-                }`}
+                  news.breaking_news ? "text-red-500" : "text-gray-700"
+                } badge`}
               >
                 {news.breaking_news ? "Breaking News" : "Regular News"}
               </span>
               <span
                 className={`text-sm font-semibold ${
-                  news.popular_news ? "text-yellow-500" : "text-gray-400"
-                }`}
+                  news.popular_news ? "text-colorPrimary" : "text-gray-400"
+                } badge`}
               >
                 {news.popular_news ? "Popular News" : "Less Popular"}
               </span>
             </div>
             <hr className="my-2" />
-            <div>
-                <h3 className='font-bold underline'>News:</h3>
+            <div className='text-gray-300'>
+                <h3 className='font-bold underline mb-4'>News:</h3>
             <p className="text-lg leading-relaxed mb-6 text-justify">{news.description}</p>
             </div>
           </>

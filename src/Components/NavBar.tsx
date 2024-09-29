@@ -38,7 +38,7 @@ const NavBar: React.FC = () => {
 
   return (
     <>
-      <nav className="bg-gray-800 text-white shadow-md fixed z-50 top-0 w-full">
+      <nav className="bg-gray-800 glass text-white shadow-md fixed z-50 top-0 w-full">
         <div className="container mx-auto flex justify-between items-center p-4">
           <div className="flex justify-center items-center gap-4">
             {/* Hamburger Menu for exploring all news features */}
@@ -175,12 +175,12 @@ const NavBar: React.FC = () => {
             >
               Contact Us
             </NavLink>
-            <button
+            {/* <button
               onClick={handleFilter}
               className="hover:bg-[#02AA08] rounded p-2"
             >
               Filter
-            </button>
+            </button> */}
 
             {/* Conditionally render DASHBOARD link based on isAdmin and user authentication */}
             {user && isAdmin && (

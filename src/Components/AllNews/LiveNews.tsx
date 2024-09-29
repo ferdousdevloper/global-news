@@ -16,7 +16,7 @@ const LiveNews: React.FC = () => {
     // Fetch the latest live news from the server
     const fetchLatestNews = async () => {
       try {
-        const response = await fetch('https://global-news-server-five.vercel.app/news?isLive=true'); // Adjust your API endpoint if needed
+        const response = await fetch('https://global-news-server-phi.vercel.app/news?isLive=true'); // Adjust your API endpoint if needed
         if (!response.ok) {
           throw new Error('Failed to fetch live news');
         }
@@ -55,18 +55,21 @@ const LiveNews: React.FC = () => {
   const formattedDate = new Date(latestNews.timestamp).toLocaleString();
 
   return (
-    <div className="flex bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden mt-16">
-      <div className="w-1/2">
+    <>
+    <h1 className="text-4xl mt-16 font-black btn cursor-auto glass text-red-600">LIVE ...</h1>
+    <div className="flex flex-col md:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden  glass">
+      <div className="md:w-1/2 w-full">
         <img
           src={latestNews.image}
           alt={latestNews.title}
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="w-1/2 p-6 flex flex-col justify-between">
+      <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
         <div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-2">{latestNews.title}</h3>
-          <p className="text-gray-600 mb-4">{latestNews.description}</p>
+          <h3 className="text-2xl font-bold mb-2">{latestNews.title}</h3>
+          <hr  className='my-4'/> 
+          <p className="text-gray-300 mb-4">{latestNews.description.slice(0, 1000)}...</p>
         </div>
         <div>
           <p className="text-gray-500 text-sm mb-2">{formattedDate}</p>
@@ -78,6 +81,7 @@ const LiveNews: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

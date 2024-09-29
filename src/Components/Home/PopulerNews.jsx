@@ -29,7 +29,7 @@ const PopulerNews = () => {
 
 
     return (
-        <div className="md:container mx-auto my-10 border-t-2 border-[#02AA08] pt-8" style={{ width: '85%' }}>
+        <div className="md:container glass p-10 rounded-xl mx-auto my-10 border-t-2 border-[#02AA08] pt-8" style={{ width: '85%' }}>
             <h2 className='-mt-8 text-2xl text-[#02AA08] font-bold mb-4'>Populars News</h2>
             <Swiper
 
@@ -67,7 +67,7 @@ const PopulerNews = () => {
                         key={news.id}
                         style={{ width: "208px" }}
                     >
-                        <PopularNewsCard news={news}></PopularNewsCard>
+                        <PopularNewsCard news={news} ></PopularNewsCard>
                     </SwiperSlide> : "")
                 }
 

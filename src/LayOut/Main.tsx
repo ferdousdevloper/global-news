@@ -9,7 +9,7 @@ import { Toaster } from "react-hot-toast";
 
 const Main: React.FC = () => {
   return (
-    <div>
+    <div className="bg-neutral-800 glass">
       <div>
         
         <NavBar />
