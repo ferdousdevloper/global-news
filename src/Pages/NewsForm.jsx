@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
 
-const socket = io('http://localhost:3001'); // Your server URL here
+const socket = io('https://global-news-server-five.vercel.app'); // Your server URL here
 
 const NewsComponent = () => {
   const [liveNews, setLiveNews] = useState([]);
@@ -50,7 +50,7 @@ const NewsComponent = () => {
     };
 
     try {
-      await axios.post('http://localhost:3001/news', newsArticle);
+      await axios.post('https://global-news-server-five.vercel.app/news', newsArticle);
       setFormData({
         title: '',
         image: '',

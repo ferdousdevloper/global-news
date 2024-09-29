@@ -23,6 +23,15 @@ import Dashboard from "./LayOut/Dashboard";
 import Profile from "./Pages/Dashboard/Profile";
 import AllUsers from "./Pages/Dashboard/AllUsers";
 import NewsForm from "./Pages/NewsForm"
+import DashboardLayout from "./LayOut/DashboardLayout";
+import ReporterRequestManagement from "./Pages/Dashboard/AdminPages/ReporterRequestManagement";
+import BanSuspendUsers from "./Pages/Dashboard/AdminPages/BanSuspendUsers";
+import ManageNewsArticles from "./Pages/Dashboard/AdminPages/ManageNewsArticles";
+import SubmittedArticles from "./Pages/Dashboard/ReporterPages/SubmittedArticles";
+import EditArticles from "./Pages/Dashboard/ReporterPages/EditArticles";
+import DeleteArticles from "./Pages/Dashboard/ReporterPages/DeleteArticles";
+import SavedArticles from "./Pages/Dashboard/NormalUser/SavedArticles";
+import ManageBookmarks from "./Pages/Dashboard/NormalUser/ManageBookmarks";
 
 
 
@@ -106,7 +115,7 @@ const Root = createBrowserRouter([
   // DASHBOARD ROUTE START ----------------------------------------
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: <DashboardLayout/>,
     children:[
       {
         path: "/dashboard/profile",
@@ -120,6 +129,42 @@ const Root = createBrowserRouter([
         path: "/dashboard/news-post",
         element: <NewsForm></NewsForm>,
       },
+
+      //For Admin
+      {
+        path: '/dashboard/reporter-request',
+        element: <ReporterRequestManagement/>
+      },
+      {
+        path: '/dashboard/ban-suspend-users',
+        element: <BanSuspendUsers/>
+      },
+      {
+        path: '/dashboard/manage-news-articles',
+        element: <ManageNewsArticles/>
+      },
+      //Reporter Dashboard
+      {
+        path: '/dashboard/submitted-articles',
+        element: <SubmittedArticles/>
+      },
+      {
+        path: '/dashboard/edit-articles',
+        element: <EditArticles/>
+      },
+      {
+        path: '/dashboard/delete-articles',
+        element: <DeleteArticles/>
+      },
+      //Normal User Dashboard
+      {
+        path: '/dashboard/saved-articles',
+        element: <SavedArticles/>
+      },
+      {
+        path: '/dashboard/manage-bookmarks',
+        element: <ManageBookmarks/>
+      }
     ]
   },
 ]);

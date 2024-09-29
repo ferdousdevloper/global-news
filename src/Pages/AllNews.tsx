@@ -32,7 +32,7 @@ const AllNews: React.FC = () => {
   const fetchNews = async () => {
     try {
       const response = await axios.get<NewsItem[]>(
-        "http://localhost:3001/news"
+        "https://global-news-server-five.vercel.app/news"
       );
       setNews(response.data);
       setFilteredNews(response.data);
