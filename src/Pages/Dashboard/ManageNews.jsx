@@ -8,7 +8,7 @@ const ManageNews = () => {
   const { data: news = [], refetch, isLoading, error } = useQuery({
     queryKey: ["ManageNews"],
     queryFn: async () => {
-      const { data } = await axios.get("http://localhost:3001p/news");
+      const { data } = await axios.get("http://localhost:3001/news");
       return data;
     },
   });
@@ -28,7 +28,7 @@ const ManageNews = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3001p/news/${newsItem._id}`)
+          .delete(`http://localhost:3001/news/${newsItem._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               refetch();

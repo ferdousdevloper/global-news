@@ -20,7 +20,7 @@ const UpdateNews = () => {
   useEffect(() => {
     const fetchNewsData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001p/news/${id}`);
+        const response = await axios.get(`http://localhost:3001/news/${id}`);
         setNewsData(response.data); // Set the fetched data as default values
       } catch (error) {
         console.error('Error fetching news data:', error);

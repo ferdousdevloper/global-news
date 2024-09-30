@@ -16,7 +16,7 @@ const LiveNews: React.FC = () => {
     // Fetch the latest live news from the server
     const fetchLatestNews = async () => {
       try {
-        const response = await fetch('https://global-news-server-five.vercel.app/news?isLive=true'); // Adjust your API endpoint if needed
+        const response = await fetch('http://localhost:3001/news?isLive=true'); // Adjust your API endpoint if needed
         if (!response.ok) {
           throw new Error('Failed to fetch live news');
         }
