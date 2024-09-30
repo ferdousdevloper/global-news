@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
 
-const socket = io('https://global-news-server-five.vercel.app'); // Your server URL
+const socket = io('http://localhost:3001p'); // Your server URL
 
 const NewsApp = () => {
   const [liveNews, setLiveNews] = useState([]);
@@ -11,7 +11,7 @@ const NewsApp = () => {
   // Fetch all news articles from the backend
   const fetchAllNews = async () => {
     try {
-      const response = await axios.get('https://global-news-server-five.vercel.app/news'); // Your server URL
+      const response = await axios.get('http://localhost:3001p/news'); // Your server URL
       setAllNews(response.data);
     } catch (error) {
       console.error('Error fetching all news:', error);
