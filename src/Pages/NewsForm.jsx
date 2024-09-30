@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const socket = io('https://global-news-server-phi.vercel.app'); // Your server URL here
+const socket = io('https://global-news-server-five.vercel.app'); // Your server URL here
 
 const NewsComponent = () => {
   const [liveNews, setLiveNews] = useState([]);
@@ -51,7 +51,7 @@ const NewsComponent = () => {
     };
 
     try {
-      await axios.post('https://global-news-server-phi.vercel.app/news', newsArticle);
+      await axios.post('https://global-news-server-five.vercel.app/news', newsArticle);
       setFormData({
         title: '',
         image: '',

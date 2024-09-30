@@ -32,6 +32,7 @@ import EditArticles from "./Pages/Dashboard/ReporterPages/EditArticles";
 import DeleteArticles from "./Pages/Dashboard/ReporterPages/DeleteArticles";
 import SavedArticles from "./Pages/Dashboard/NormalUser/SavedArticles";
 import ManageBookmarks from "./Pages/Dashboard/NormalUser/ManageBookmarks";
+import ManageNews from "./Pages/Dashboard/ManageNews";
 
 
 
@@ -122,15 +123,15 @@ const Root = createBrowserRouter([
         element: <Profile></Profile>,
       },
       {
-        path: "/dashboard/allUsers",
-        element: <AllUsers></AllUsers>,
-      },
-      {
         path: "/dashboard/news-post",
         element: <NewsForm></NewsForm>,
       },
 
       //For Admin
+      {
+        path: "/dashboard/allUsers",
+        element: <AllUsers></AllUsers>,
+      },
       {
         path: '/dashboard/reporter-request',
         element: <ReporterRequestManagement/>
@@ -140,8 +141,8 @@ const Root = createBrowserRouter([
         element: <BanSuspendUsers/>
       },
       {
-        path: '/dashboard/manage-news-articles',
-        element: <ManageNewsArticles/>
+        path: '/dashboard/manage-news',
+        element: <ManageNews/>
       },
       //Reporter Dashboard
       {

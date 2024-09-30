@@ -1,80 +1,68 @@
-import { useState } from "react"
-import { AiOutlineBars } from 'react-icons/ai'
-import MenuItem from "./Menu/MenuItem"
-import { FcSettings } from "react-icons/fc"
-import { GrLogout } from "react-icons/gr"
-import useRole from "../../../hooks/useRole"
-import useAuth from "../../../hooks/useAuth"
-import NormalUser from "./Menu/NormalUser"
-import AdminMenu from "./Menu/AdminMenu"
-import ReporterMenu from "./Menu/ReporterMenu"
-
+import { useState } from "react";
+import { AiOutlineBars } from 'react-icons/ai';
+import MenuItem from "./Menu/MenuItem";
+import { FcSettings } from "react-icons/fc";
+import { GrLogout } from "react-icons/gr";
+import useRole from "../../../hooks/useRole";
+import useAuth from "../../../hooks/useAuth";
+import NormalUser from "./Menu/NormalUser";
+import AdminMenu from "./Menu/AdminMenu";
+import ReporterMenu from "./Menu/ReporterMenu";
 
 const Sidebar = () => {
-  const { logOut } = useAuth()
+  const { logOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [role, isLoading] = useRole()
-  console.log(role, isLoading)
+  const [role, isLoading] = useRole();
+
   // Sidebar Responsive Handler
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+
   return (
     <>
       {/* Small Screen Navbar */}
-      <div className='w-64 min-h-screen bg-[#1A1A1A] text-white flex justify-between md:hidden'>
-        <div>
-        <div>
-          <img
-            src="https://i.postimg.cc/ZK91WD3k/Green-and-Blue-3-D-Global-News-Logo-removebg-preview.png"
-            className="my-5 px-4"
-            alt=""
-          />
-          <hr className="my-4" />
-        </div>
-        </div>
-
+      <div className='md:hidden bg-[#1A1A1A] text-white flex justify-between items-center p-4'>
+        <img
+          src="https://i.postimg.cc/ZK91WD3k/Green-and-Blue-3-D-Global-News-Logo-removebg-preview.png"
+          className="w-32"
+          alt="Logo"
+        />
         <button
           onClick={toggleSidebar}
-          className='mobile-menu-button p-4 focus:outline-none focus:bg-gray-200'
+          className='focus:outline-none'
         >
-          <AiOutlineBars className='h-5 w-5' />
+          <AiOutlineBars className='h-6 w-6 text-white' />
         </button>
       </div>
 
       {/* Sidebar */}
       <div
-        className={`w-64 min-h-screen bg-[#1A1A1A] text-white ${
-            sidebarOpen ? "block transition-all duration-300" : "hidden transition-all duration-300"
-          } lg:block`}
+        className={`w-64 min-h-screen bg-[#1A1A1A] text-white transition-all duration-300 fixed z-40 top-0 ${
+          sidebarOpen ? "left-0" : "-left-64"
+        } md:relative md:left-0 md:block`}
       >
         <div>
-          <div>
-          <div>
           <img
             src="https://i.postimg.cc/ZK91WD3k/Green-and-Blue-3-D-Global-News-Logo-removebg-preview.png"
             className="my-5 px-4"
-            alt=""
+            alt="Logo"
           />
           <hr className="my-4" />
         </div>
-          </div>
 
-          {/* Nav Items */}
-          <div className='flex flex-col justify-between flex-1 mt-6'>
-            {/*  Menu Items */}
-            <nav>
-              {role === 'Normal User' && <NormalUser/>}
-              {role === 'Reporter' && <ReporterMenu/>}
-              {role === 'admin' && <AdminMenu />}
-            </nav>
-          </div>
+        {/* Navigation Items */}
+        <div className='flex flex-col justify-between flex-1 mt-6'>
+          <nav>
+            {role === 'Normal User' && <NormalUser />}
+            {role === 'Reporter' && <ReporterMenu />}
+            {role === 'admin' && <AdminMenu />}
+          </nav>
         </div>
 
+        {/* Profile Menu */}
         <div>
-          <hr />
-
-          {/* Profile Menu */}
+          <hr className="my-4" />
           <MenuItem
             label='Profile'
             address='/dashboard'
@@ -83,16 +71,23 @@ const Sidebar = () => {
 
           <button
             onClick={logOut}
-            className='flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'
+            className='flex w-full items-center px-4 py-2 mt-5 text-[#02AA08] hover:bg-[#02AA08] hover:text-white border border-[#02AA08] transition-all duration-300'
           >
             <GrLogout className='w-5 h-5' />
-
             <span className='mx-4 font-medium'>Logout</span>
           </button>
         </div>
       </div>
-    </>
-  )
-}
 
-export default Sidebar
+      {/* Overlay for Small Screens */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black opacity-50 z-30 md:hidden"
+          onClick={toggleSidebar}
+        ></div>
+      )}
+    </>
+  );
+};
+
+export default Sidebar;
