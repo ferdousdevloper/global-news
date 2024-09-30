@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LiveNews from "../Components/AllNews/LiveNews";
 import { Link } from "react-router-dom";
+import { CiBookmark } from "react-icons/ci";
+import { MdFavoriteBorder } from "react-icons/md";
+import { IoShareSocialOutline } from "react-icons/io5";
 
 interface NewsItem {
   _id: string;
@@ -32,7 +35,7 @@ const AllNews: React.FC = () => {
   const fetchNews = async () => {
     try {
       const response = await axios.get<NewsItem[]>(
-        "https://global-news-server-five.vercel.app/news"
+        "http://localhost:3001/news"
       );
       setNews(response.data);
       setFilteredNews(response.data);
@@ -202,6 +205,11 @@ const AllNews: React.FC = () => {
                 <h2 className="text-xl font-semibold mt-2">{item.title}</h2>
                 <hr className="my-4" />
                 <p className="text-gray-300 mt-1">{item.description.slice(0, 300)}...</p>
+                <div className="flex justify-between items-center text-xl md:text-2xl my-3">
+                <MdFavoriteBorder />
+                <CiBookmark />
+                <IoShareSocialOutline />
+                </div>
               </div>
             </Link>
           ))}

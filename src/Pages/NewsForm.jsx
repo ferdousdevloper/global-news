@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
-const socket = io('https://global-news-server-five.vercel.app'); // Your server URL here
+const socket = io('http://localhost:3001'); // Your server URL here
 
 const NewsComponent = () => {
+  const { user } = useAuth();
+  
   const [liveNews, setLiveNews] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
@@ -17,6 +20,8 @@ const NewsComponent = () => {
     breaking_news: false,
     popular_news: false,
     isLive: false,
+    author: user?.email || '', // Author's email from `useAuth()`
+    authorName: user?.displayName || '', // Author's name from `useAuth()`
   });
 
   useEffect(() => {
@@ -34,7 +39,7 @@ const NewsComponent = () => {
     };
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -42,7 +47,7 @@ const NewsComponent = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const newsArticle = {
@@ -51,7 +56,7 @@ const NewsComponent = () => {
     };
 
     try {
-      await axios.post('https://global-news-server-five.vercel.app/news', newsArticle);
+      await axios.post('http://localhost:3001/news', newsArticle);
       setFormData({
         title: '',
         image: '',
@@ -62,6 +67,8 @@ const NewsComponent = () => {
         breaking_news: false,
         popular_news: false,
         isLive: false,
+        author: user?.email || '', // Reset author info from `useAuth()`
+        authorName: user?.displayName || '',
       });
     } catch (error) {
       console.error('Error posting news:', error);
@@ -70,12 +77,12 @@ const NewsComponent = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 mt-16 text-white">
+    <div className="min-h-screen p-6 mt-16">
       <div className="container mx-auto max-w-7xl">
-      <h1 className="text-xl md:text-6xl fontBebas font-extrabold text-center mb-10">
-        POST ARTICLE
-      </h1>
-      <hr className="my-10 border-2" />
+        <h1 className="text-xl md:text-6xl fontBebas font-extrabold text-center mb-10">
+          POST ARTICLE
+        </h1>
+        <hr className="my-10 border-2" />
         <form onSubmit={handleSubmit} className="bg-neutral-900 glass shadow-md rounded-lg p-6 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <input
@@ -123,7 +130,6 @@ const NewsComponent = () => {
             required
             className="w-full p-2 border border-gray-300 rounded mb-4 h-96 bg-transparent"
           />
-         
           <div className="flex items-center space-x-4 mb-4">
             <label className="flex items-center space-x-2">
               <input
@@ -165,26 +171,24 @@ const NewsComponent = () => {
         </form>
 
         <ul className="space-y-6">
-          {liveNews.map((article, index) => (
-            <div>
+          {liveNews.map((article) => (
             <Link to={`/news/${article._id}`} key={article._id}>
-            <li key={index} className=" bg-neutral-800 shadow-lg rounded-lg p-6 glass">
-              <h3 className="text-xl font-semibold">{article.title}</h3>
-              <img
-                src={article.image}
-                alt={article.title}
-                className="w-full h-48 object-cover mt-4 rounded-lg"
-              />
-              <p className="mt-4">{article.description}</p>
-              <small className="block mt-2 ">
-                {new Date(article.timestamp).toLocaleString()}
-              </small>
-              <strong className="block mt-1 text-red-600">
-                {article.isLive ? ' (Live)' : ' (Normal)'}
-              </strong>
-            </li>
+              <li className="bg-neutral-800 shadow-lg rounded-lg p-6 glass">
+                <h3 className="text-xl font-semibold">{article.title}</h3>
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  className="w-full h-48 object-cover mt-4 rounded-lg"
+                />
+                <p className="mt-4">{article.description}</p>
+                <small className="block mt-2">
+                  {new Date(article.timestamp).toLocaleString()}
+                </small>
+                <strong className="block mt-1 text-red-600">
+                  {article.isLive ? ' (Live)' : ' (Normal)'}
+                </strong>
+              </li>
             </Link>
-            </div>
           ))}
         </ul>
       </div>

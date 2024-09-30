@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { MdFavoriteBorder } from "react-icons/md";
+import { CiBookmark } from "react-icons/ci";
+import { IoShareSocialOutline } from "react-icons/io5";
 
 interface NewsItem {
   category: string;
@@ -20,7 +23,7 @@ const NewsSection: React.FC = () => {
     // Fetch the data from the backend API
     const fetchNews = async () => {
       try {
-        const response = await axios.get("https://global-news-server-five.vercel.app/news");
+        const response = await axios.get("http://localhost:3001/news");
         setNews(response.data);
         setLoading(false);
       } catch (err) {
@@ -68,6 +71,11 @@ const NewsSection: React.FC = () => {
                   <p className="text-slate-100">
                     {item.description.slice(0, 100)}...
                   </p>
+                  <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
+                <MdFavoriteBorder />
+                <CiBookmark />
+                <IoShareSocialOutline />
+                </div>
                 </div>
               </Link>
             ))}
@@ -100,6 +108,11 @@ const NewsSection: React.FC = () => {
                 <p className="text-sm text-slate-100">
                   {new Date(item.date_time).toLocaleDateString()}
                 </p>
+                <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
+                <MdFavoriteBorder />
+                <CiBookmark />
+                <IoShareSocialOutline />
+                </div>
               </div>
               </Link>
             ))}
