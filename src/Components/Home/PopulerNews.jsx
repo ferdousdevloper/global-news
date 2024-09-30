@@ -18,7 +18,7 @@ const PopulerNews = () => {
     const [populars, setPopulars] = useState(null);
 
     useEffect(() => {
-        fetch('./dammy.json')
+        fetch('https://global-news-server-five.vercel.app')
             .then(response => response.json())
             .then(data => setPopulars(data))
             .catch(error => console.error('Error fetching JSON:', error));

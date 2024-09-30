@@ -20,7 +20,7 @@ const NewsSection: React.FC = () => {
     // Fetch the data from the backend API
     const fetchNews = async () => {
       try {
-        const response = await axios.get("https://global-news-server-phi.vercel.app/news");
+        const response = await axios.get("https://global-news-server-five.vercel.app/news");
         setNews(response.data);
         setLoading(false);
       } catch (err) {

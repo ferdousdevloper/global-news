@@ -20,7 +20,7 @@ const Banner: React.FC = () => {
 
   useEffect(() => {
     // Fetch the data from the dummy JSON file
-    fetch('/dammy.json')
+    fetch('https://global-news-server-five.vercel.app')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
