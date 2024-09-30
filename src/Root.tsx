@@ -19,7 +19,7 @@ import Sport from "./Pages/Sport";
 import Gallery from "./Pages/Gallery";
 import PrivateRoute from "./Routes/PrivateRoute";
 import NewsDetail from "./Pages/NewsDetails";
-import Dashboard from "./LayOut/Dashboard";
+//import Dashboard from "./LayOut/Dashboard";
 import Profile from "./Pages/Dashboard/Profile";
 import AllUsers from "./Pages/Dashboard/AllUsers";
 import NewsForm from "./Pages/NewsForm"
@@ -141,7 +141,7 @@ const Root = createBrowserRouter([
         element: <BanSuspendUsers/>
       },
       {
-        path: '/dashboard/manage-news',
+        path: '/dashboard/manage-news-articles',
         element: <ManageNews/>
       },
       //Reporter Dashboard

@@ -8,11 +8,13 @@ import useAuth from "../../../hooks/useAuth";
 import NormalUser from "./Menu/NormalUser";
 import AdminMenu from "./Menu/AdminMenu";
 import ReporterMenu from "./Menu/ReporterMenu";
+import { Navigate } from 'react-router-dom';
 
 const Sidebar = () => {
   const { logOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [role, isLoading] = useRole();
+  
 
   // Sidebar Responsive Handler
   const toggleSidebar = () => {
