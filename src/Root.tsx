@@ -154,10 +154,7 @@ const Root = createBrowserRouter([
         path: '/dashboard/edit-articles/:articleId',
         element: <EditArticles/>
       },
-      {
-        path: '/dashboard/delete-articles',
-        element: <DeleteArticles/>
-      },
+      
       //Normal User Dashboard
       {
         path: '/dashboard/saved-articles',

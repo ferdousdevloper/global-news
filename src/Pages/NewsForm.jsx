@@ -77,7 +77,7 @@ const NewsComponent = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 mt-16 text-white">
+    <div className="min-h-screen p-6 mt-16">
       <div className="container mx-auto max-w-7xl">
         <h1 className="text-xl md:text-6xl fontBebas font-extrabold text-center mb-10">
           POST ARTICLE

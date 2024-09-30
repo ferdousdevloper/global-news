@@ -71,6 +71,7 @@ const SubmittedArticles: React.FC = () => {
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Submitted Articles</h1>
+      <hr className="my-10 border-2" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {articles.length > 0 ? (
           articles.map((article) => (
