@@ -37,6 +37,7 @@ import ManageNews from "./Pages/Dashboard/ManageNews";
 
 
 
+
 const Root = createBrowserRouter([
   {
     path: "/",
@@ -150,7 +151,7 @@ const Root = createBrowserRouter([
         element: <SubmittedArticles/>
       },
       {
-        path: '/dashboard/edit-articles',
+        path: '/dashboard/edit-articles/:articleId',
         element: <EditArticles/>
       },
       {

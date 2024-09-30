@@ -1,30 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import axios, { AxiosResponse } from 'axios';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAuth from '../../../hooks/useAuth';
+import { FaEdit, FaTrash } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-interface User {
-  email: string;
+interface Article {
+  _id: string;
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+  region: string;
+  timestamp: string;
+  breaking_news: boolean;
+  popular_news: boolean;
+  isLive: boolean;
 }
 
 const SubmittedArticles: React.FC = () => {
-  const [articles, setArticles] = useState<any[]>([]);
-  const { user, loading } = useAuth() || {}; // Provide a fallback to avoid null errors
+  const { user, loading } = useAuth() || {};
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const fetchArticles = async () => {
+  // Fetch articles using TanStack Query
+  const { data: articles = [], refetch } = useQuery<Article[]>({
+    queryKey: ['articles', user?.email],
+    queryFn: async () => {
       if (user?.email) {
-        try {
-          const response = await axios.get(`http://localhost:3001/news/my-articles/${user.email}`);
-          setArticles(Array.isArray(response.data) ? response.data : []);
-        } catch (error) {
-          console.error('Error fetching articles:', error);
-        }
+        const response = await axios.get(`http://localhost:3001/news/my-articles/${user.email}`);
+        return response.data;
       }
-    };
-    if (!loading) {
-      fetchArticles();
+      return [];
+    },
+    enabled: !!user?.email, // Only fetch when user email is available
+  });
+
+  // Mutation to delete an article
+  const deleteArticleMutation = useMutation<void, Error, string>({
+    mutationFn: (articleId: string) => {
+      return axios.delete(`http://localhost:3001/news/delete-article/${articleId}`);
+    },
+    onSuccess: () => {
+      // Refetch articles after successful deletion only if the user email is defined
+      if (user?.email) {
+        queryClient.invalidateQueries({
+          queryKey: ['articles', user.email],
+        });
+      }
+    },
+    onError: (error) => {
+      console.error('Error deleting article:', error);
+    },
+  });
+
+  // Handle delete article
+  const handleDelete = (articleId: string) => {
+    if (window.confirm('Are you sure you want to delete this article?')) {
+      deleteArticleMutation.mutate(articleId);
     }
-  }, [user?.email, loading]);
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -61,7 +95,6 @@ const SubmittedArticles: React.FC = () => {
                   <p className="text-xs text-gray-500">
                     <strong>Date:</strong> {new Date(article.timestamp).toLocaleString()}
                   </p>
-                  {/* Conditionally render breaking and popular news */}
                   {article.breaking_news && (
                     <p className="text-xs text-red-500">
                       <strong>Breaking News</strong>
@@ -75,6 +108,23 @@ const SubmittedArticles: React.FC = () => {
                   <p className="text-xs text-gray-500">
                     <strong>Status:</strong> {article.isLive ? 'Live' : 'Normal'}
                   </p>
+                </div>
+                <div className="flex justify-evenly mt-4">
+                  {/* Edit button */}
+                  <Link to={`/dashboard/edit-articles/${article._id}`}>
+                  <button className=" text-gray-100 rounded-lg hover:text-blue-700 bg-blue-500 px-3 py-2 glass">
+                    <FaEdit className="inline-block mr-2" />
+                    Edit
+                  </button>
+                  </Link>
+                  {/* Delete button */}
+                  <button
+                    onClick={() => handleDelete(article._id)}
+                    className="text-gray-100 hover:text-red-700 bg-red-500 px-3 py-2 glass rounded-lg"
+                  >
+                    <FaTrash className="inline-block mr-2" />
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
