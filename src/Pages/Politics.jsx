@@ -149,7 +149,7 @@ const Politics = () => {
           </button>
         </p>
         <label htmlFor="" className="ml-2 ">
-          <span className="text-white px-3"> News Per Page:</span>
+          <span className="text-white px-2"> News Per Page:</span>
 
           <select
             name=""
