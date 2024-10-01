@@ -35,7 +35,7 @@ const Sport = () => {
     };
 
     fetchSportsNews();
-  }, []);
+  }, [popularSportsNews]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -104,7 +104,7 @@ const Sport = () => {
         {/* Latest Sports News */}
         <div className="lg:w-3/12 w-full bg-neutral-950 glass p-5 rounded-xl">
           <h2 className="text-2xl font-extrabold mb-4 text-slate-50">
-            Latest News
+            Popular News
           </h2>
           <div className='flex flex-col gap-5'>
             {sportsNews.map((news) => (
