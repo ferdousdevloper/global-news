@@ -4,6 +4,7 @@ import SportCard from './SportCard';
 
 const Sport = () => {
   const [sportsNews, setSportsNews] = useState([]);
+  const [popularSportsNews, setPopularSportsNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -16,8 +17,10 @@ const Sport = () => {
         console.log(newsData);
         // Assuming the API returns an array of news, filter for sports news
         const filteredSportsNews = newsData.filter(news => news.category === 'Sports');
-        console.log(filteredSportsNews);
+        const filteredPopularSportsNews = filteredSportsNews.filter(news => news.popular_news === true);
+        console.log(filteredPopularSportsNews);
         setSportsNews(filteredSportsNews);
+        setPopularSportsNews(filteredPopularSportsNews);
         setLoading(false);
       } catch (err) {
         setError('Failed to fetch news');
@@ -37,16 +40,36 @@ const Sport = () => {
   }
 
   return (
-    <div className="min-h-screen py-20 px-3">
-      <div className="my-3 lg:my-4 text-center font-bold text-2xl lg:text-4xl text-orange-600">
-        Sports News
-      </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* All Sports News */}
-        {sportsNews.map((news) => (
-          <SportCard key={news._id} news={news} />
-        ))}
+    <div className="min-h-screen py-20 px-3">
+      <h2 className="my-3 lg:my-4 text-center font-bold text-2xl lg:text-4xl text-orange-600">
+        Sports
+      </h2>
+
+      <div className='flex flex-col lg:flex-row gap-5'>
+        <div className="lg:w-9/12 w-full bg-neutral-950 glass p-5 rounded-xl">
+          <h2 className="text-2xl font-extrabold mb-4 text-slate-50">
+            Sports News
+          </h2>
+          {/* All Sports News */}
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
+            {sportsNews.map((news) => (
+              <SportCard key={news._id} news={news} />
+            ))}
+          </div>
+        </div>
+
+        {/* Latest Sports News */}
+        <div className="lg:w-3/12 w-full bg-neutral-950 glass p-5 rounded-xl">
+          <h2 className="text-2xl font-extrabold mb-4 text-slate-50">
+            Latest News
+          </h2>
+          <div className='flex flex-col gap-6'>
+            {sportsNews.map((news) => (
+              <SportCard key={news._id} news={news} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
