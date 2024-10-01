@@ -8,17 +8,25 @@ import useAuth from "../../../hooks/useAuth";
 import NormalUser from "./Menu/NormalUser";
 import AdminMenu from "./Menu/AdminMenu";
 import ReporterMenu from "./Menu/ReporterMenu";
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { IoIosHome } from "react-icons/io";
+import { FaListAlt } from "react-icons/fa";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [role, isLoading] = useRole();
-  
+  const navigate = useNavigate(); // Initialize useNavigate
 
   // Sidebar Responsive Handler
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  // Handle Logout
+  const handleLogout = async () => {
+    await logOut();
+    navigate("/"); // Navigate to home page after logout
   };
 
   return (
@@ -67,12 +75,23 @@ const Sidebar = () => {
           <hr className="my-4" />
           <MenuItem
             label='Profile'
-            address='/dashboard'
+            address='/dashboard/profile'
             icon={FcSettings}
           />
+          <MenuItem
+            label='Home'
+            address='/'
+            icon={IoIosHome}
+          />
+          <MenuItem
+            label='All News'
+            address='/all-news'
+            icon={FaListAlt}
+          />
+          
 
           <button
-            onClick={logOut}
+            onClick={handleLogout} // Use the handleLogout function
             className='flex w-full items-center px-4 py-2 mt-5 text-[#02AA08] hover:bg-[#02AA08] hover:text-white border border-[#02AA08] transition-all duration-300'
           >
             <GrLogout className='w-5 h-5' />

@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { GiMicrophone } from "react-icons/gi";
 import { FaLocationDot } from 'react-icons/fa6';
+import { MdFavoriteBorder } from 'react-icons/md';
+import { CiBookmark } from 'react-icons/ci';
+import { IoShareSocialOutline } from 'react-icons/io5';
 
 const NewsDetail = () => {
   const { id } = useParams(); // Get the id from the URL
@@ -81,6 +84,11 @@ const NewsDetail = () => {
             <div className='text-gray-300'>
                 <h3 className='font-bold underline mb-4'>News:</h3>
             <p className="text-lg leading-relaxed mb-6 text-justify">{news.description}</p>
+            <div className="flex justify-between items-center text-xl md:text-2xl my-3">
+                <MdFavoriteBorder />
+                <CiBookmark />
+                <IoShareSocialOutline />
+                </div>
             </div>
           </>
         ) : (

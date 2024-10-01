@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { MdFavoriteBorder } from "react-icons/md";
+import { CiBookmark } from "react-icons/ci";
+import { IoShareSocialOutline } from "react-icons/io5";
 
 interface NewsItem {
   category: string;
@@ -68,6 +71,11 @@ const NewsSection: React.FC = () => {
                   <p className="text-slate-100">
                     {item.description.slice(0, 100)}...
                   </p>
+                  <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
+                <MdFavoriteBorder />
+                <CiBookmark />
+                <IoShareSocialOutline />
+                </div>
                 </div>
               </Link>
             ))}
@@ -100,6 +108,11 @@ const NewsSection: React.FC = () => {
                 <p className="text-sm text-slate-100">
                   {new Date(item.date_time).toLocaleDateString()}
                 </p>
+                <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
+                <MdFavoriteBorder />
+                <CiBookmark />
+                <IoShareSocialOutline />
+                </div>
               </div>
               </Link>
             ))}
