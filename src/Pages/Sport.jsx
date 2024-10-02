@@ -46,10 +46,13 @@ const Sport = () => {
   }
 
   return (
-    <div className="min-h-screen py-20 px-3">
-      <h2 className="my-3 lg:my-4 text-center font-bold text-2xl lg:text-4xl text-gray-100">
-        Sports
-      </h2>
+    <div className="container mx-auto min-h-screen py-20">
+      <div className='lg:w-1/2 mx-auto my-3 lg:my-4 text-center text-gray-100'>
+        <h2 className="font-bold text-2xl lg:text-4xl">
+          Sports
+        </h2>
+        <p className='mt-3'>Sports bring people together and show the power of teamwork and hard work. It's a way to enjoy skills, strength, and the excitement that connects fans and players everywhere.</p>
+      </div>
 
       {/* Live Sports News */}
       {
@@ -85,7 +88,7 @@ const Sport = () => {
       }
 
       {/* All Sports News */}
-      <div className='flex flex-col lg:flex-row gap-5'>
+      <div className='flex flex-col lg:flex-row gap-5 px-4'>
         <div className="lg:w-9/12 w-full bg-neutral-950 glass p-5 rounded-xl">
           <h2 className="text-2xl font-extrabold mb-4 text-slate-50">
             Sports News
