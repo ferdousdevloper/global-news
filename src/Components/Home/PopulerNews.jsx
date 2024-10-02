@@ -18,7 +18,7 @@ const PopulerNews = () => {
     const [populars, setPopulars] = useState(null);
 
     useEffect(() => {
-        fetch('./dammy.json')
+        fetch('http://localhost:3001')
             .then(response => response.json())
             .then(data => setPopulars(data))
             .catch(error => console.error('Error fetching JSON:', error));

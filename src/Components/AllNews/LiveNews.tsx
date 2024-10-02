@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { CiBookmark } from 'react-icons/ci';
+import { IoShareSocialOutline } from 'react-icons/io5';
+import { MdFavoriteBorder } from 'react-icons/md';
 
 interface NewsArticle {
   title: string;
@@ -16,7 +19,7 @@ const LiveNews: React.FC = () => {
     // Fetch the latest live news from the server
     const fetchLatestNews = async () => {
       try {
-        const response = await fetch('https://global-news-server-phi.vercel.app/news?isLive=true'); // Adjust your API endpoint if needed
+        const response = await fetch('http://localhost:3001/news?isLive=true'); // Adjust your API endpoint if needed
         if (!response.ok) {
           throw new Error('Failed to fetch live news');
         }
@@ -72,12 +75,17 @@ const LiveNews: React.FC = () => {
           <p className="text-gray-300 mb-4">{latestNews.description.slice(0, 1000)}...</p>
         </div>
         <div>
-          <p className="text-gray-500 text-sm mb-2">{formattedDate}</p>
+          <p className="text-gray-100 text-sm mb-2">{formattedDate}</p>
           {latestNews.isLive && (
             <span className="px-4 py-1 bg-red-600 text-white text-xs font-semibold uppercase rounded-full">
               Live
             </span>
           )}
+          <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
+                <MdFavoriteBorder />
+                <CiBookmark />
+                <IoShareSocialOutline />
+                </div>
         </div>
       </div>
     </div>
