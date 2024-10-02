@@ -12,7 +12,7 @@ const BreakingNews: React.FC = () => {
 
   useEffect(() => {
     // Fetch the breaking news from dammy.json
-    fetch("https://global-news-server-five.vercel.app")
+    fetch("http://localhost:3000")
       .then((response) => response.json())
       .then((data) => {
         // Filter the breaking news
