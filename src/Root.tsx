@@ -33,6 +33,7 @@ import DeleteArticles from "./Pages/Dashboard/ReporterPages/DeleteArticles";
 import SavedArticles from "./Pages/Dashboard/NormalUser/SavedArticles";
 import ManageBookmarks from "./Pages/Dashboard/NormalUser/ManageBookmarks";
 import ManageNews from "./Pages/Dashboard/ManageNews";
+import PopularDetails from "./Pages/PopularDetails";
 
 
 
@@ -46,6 +47,11 @@ const Root = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/category/:popularId",
+        element: <PopularDetails></PopularDetails>,
+        loader: ({ params }) => fetch(`http://localhost:3001/news/${params.popularId}`)
       },
       {
         path: "/category/politics",
@@ -110,14 +116,14 @@ const Root = createBrowserRouter([
             <NewsDetail />
           </PrivateRoute>
         ),
-      },
+      }
     ],
   },
   // DASHBOARD ROUTE START ----------------------------------------
   {
     path: "/dashboard",
-    element: <DashboardLayout/>,
-    children:[
+    element: <DashboardLayout />,
+    children: [
       {
         path: "/dashboard/profile",
         element: <Profile></Profile>,
@@ -134,37 +140,37 @@ const Root = createBrowserRouter([
       },
       {
         path: '/dashboard/reporter-request',
-        element: <ReporterRequestManagement/>
+        element: <ReporterRequestManagement />
       },
       {
         path: '/dashboard/ban-suspend-users',
-        element: <BanSuspendUsers/>
+        element: <BanSuspendUsers />
       },
       {
         path: '/dashboard/manage-news',
-        element: <ManageNews/>
+        element: <ManageNews />
       },
       //Reporter Dashboard
       {
         path: '/dashboard/submitted-articles',
-        element: <SubmittedArticles/>
+        element: <SubmittedArticles />
       },
       {
         path: '/dashboard/edit-articles',
-        element: <EditArticles/>
+        element: <EditArticles />
       },
       {
         path: '/dashboard/delete-articles',
-        element: <DeleteArticles/>
+        element: <DeleteArticles />
       },
       //Normal User Dashboard
       {
         path: '/dashboard/saved-articles',
-        element: <SavedArticles/>
+        element: <SavedArticles />
       },
       {
         path: '/dashboard/manage-bookmarks',
-        element: <ManageBookmarks/>
+        element: <ManageBookmarks />
       }
     ]
   },
