@@ -1,3 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 
@@ -6,6 +8,17 @@ const PopularDetails = () => {
     console.log(popularData)
     const { title, image, description, category, author, authorName, region, timestamp } = popularData;
 
+    // get latest news
+    const { data: latest = [] } = useQuery({
+        queryKey: ['latestNews'],
+        queryFn: async () => {
+            const { data } = await axios.get('http://localhost:3001/newss/latestNews')
+            return data;
+        }
+    })
+
+    console.log(latest)
+
     return (
         <div className='mt-28 md:grid grid-cols-9'>
 
@@ -13,7 +26,7 @@ const PopularDetails = () => {
                 <h2 className='text-2xl font-bold py-6 text-white'>{title}</h2>
                 <img src={image} alt="" />
                 <div className='flex gap-3 text-center text-gray-400 italic'>
-                    <h2>Author:{authorName}</h2>
+                    <h2>Author:{authorName ? authorName : 'admin'}</h2>
                     <h2>Category:{category}</h2>
                     <h2>Date:{new Date(timestamp).toLocaleDateString()}</h2>
                     <h2>Post on:{new Date(timestamp).toLocaleTimeString()}</h2>
@@ -24,7 +37,31 @@ const PopularDetails = () => {
             </div>
 
             <div className='col-span-3'>
-                sideber
+                
+                <section className="">
+
+                    <div className="container mx-auto flex flex-col p-6">
+                        <h2 className="py-4 text-3xl font-bold text-center text-white">Latest News</h2>
+                        <div className="divide-y  dark:divide-[#02AA08] mb-4">
+
+
+                            {
+                                latest?.map(ltNews => <div className="grid justify-center grid-cols-4 mx-auto space-y-8 lg:space-y-0 md:pt-5">
+                                    <div className="flex items-center justify-center lg:col-span-1 col-span-full">
+                                        <img className='md:h-full md:py-2' src={ltNews.image} alt="" />
+                                    </div>
+                                    <div className="flex flex-col justify-center max-w-3xl text-center col-span-full lg:col-span-3 lg:text-left">
+                                        <span className="text-xs tracking-wider uppercase text-[#02AA08]">{new Date(ltNews.timestamp).toLocaleTimeString()} ,  {new Date(ltNews.timestamp).toLocaleDateString()} </span>
+                                        <span className="text-sm font-bold md:text-sm text-[#d8cece]">{ltNews.title}</span>
+                                        <span className="mt-4 text-gray-400">{ltNews.description.slice(0, 50)}.... </span>
+                                    </div>
+                                </div>)
+                            }
+
+                        </div>
+                    </div>
+                </section>
+                
             </div>
 
         </div>
