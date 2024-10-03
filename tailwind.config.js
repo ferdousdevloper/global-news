@@ -12,7 +12,7 @@ module.exports = {
         },
       },
       animation: {
-        marquee: 'marquee 70s linear infinite',
+        marquee: 'marquee 50s linear infinite',
       },
       colors: {
         colorPrimary: '#02AA08',
