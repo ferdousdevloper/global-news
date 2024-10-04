@@ -20,7 +20,7 @@ const UpdateNews = () => {
   useEffect(() => {
     const fetchNewsData = async () => {
       try {
-        const response = await axios.get(`global-news-server-phi.vercel.app/news/${id}`);
+        const response = await axios.get(`http://localhost:3001/news/${id}`);
         setNewsData(response.data); // Set the fetched data as default values
       } catch (error) {
         console.error('Error fetching news data:', error);

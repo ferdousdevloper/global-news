@@ -29,7 +29,7 @@ const NewsSection: React.FC = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("global-news-server-phi.vercel.app/news");
+        const response = await axios.get("http://localhost:3001/news");
         setNews(response.data);
         setLoading(false);
       } catch (err) {

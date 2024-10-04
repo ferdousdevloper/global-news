@@ -19,7 +19,7 @@ const NewsDetail = () => {
     // Fetch the news details based on the id
     const fetchNewsDetail = async () => {
       try {
-        const response = await axios.get(`global-news-server-phi.vercel.app/news/${id}`);
+        const response = await axios.get(`http://localhost:3001/news/${id}`); // Fixing the URL
         setNews(response.data);
         setLoading(false);
 

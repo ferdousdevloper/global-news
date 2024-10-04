@@ -5,14 +5,14 @@ import React from "react";
 const CustomizableNews = ({ openFilter }) => {
   console.log(openFilter);
 
-  const { data: news = [] } = useQuery({
-    queryKey: ["news"],
-    queryFn: async () => {
-      const { data } = await axios.get("global-news-server-phi.vercel.app/news");
-      return data;
-    },
-  });
-  console.log(news);
+    const { data: news = [] } = useQuery({
+        queryKey: ['news'],
+        queryFn: async () => {
+            const { data } = await axios.get('http://localhost:3001/news')
+            return data;
+        }
+    })
+    console.log(news)
 
   const region = [...new Set(news?.map((region) => region.region))];
 
