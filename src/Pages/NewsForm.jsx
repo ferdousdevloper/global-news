@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
-const socket = io('global-news-server-phi.vercel.app'); // Your server URL here
+const socket = io('https://global-news-server-phi.vercel.app'); // Your server URL here
 
 const NewsComponent = () => {
   const { user } = useAuth();
@@ -56,7 +56,7 @@ const NewsComponent = () => {
     };
 
     try {
-      await axios.post('global-news-server-phi.vercel.app/news', newsArticle);
+      await axios.post('https://global-news-server-phi.vercel.app/news', newsArticle);
       setFormData({
         title: '',
         image: '',

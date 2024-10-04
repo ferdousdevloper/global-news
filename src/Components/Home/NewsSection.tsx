@@ -29,7 +29,7 @@ const NewsSection: React.FC = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("global-news-server-phi.vercel.app/news");
+        const response = await axios.get("https://global-news-server-phi.vercel.app/news");
         setNews(response.data);
         setLoading(false);
       } catch (err) {
@@ -72,8 +72,8 @@ const NewsSection: React.FC = () => {
   
       // Send POST request to add/remove bookmark in the backend
       const url = alreadyBookmarked
-        ? "global-news-server-phi.vercel.app/remove-bookmark" // For removing bookmark
-        : "global-news-server-phi.vercel.app/bookmark"; // For adding bookmark
+        ? "https://global-news-server-phi.vercel.app/remove-bookmark" // For removing bookmark
+        : "https://global-news-server-phi.vercel.app/bookmark"; // For adding bookmark
   
       await axios.post(url, {
         email: user.email,  // Use the authenticated user's email

@@ -50,7 +50,7 @@ const SignInPage = () => {
         photoURL: result.user?.photoURL || result.user?.photourl,
       };
       // console.log(userInfo);
-      axios.post("global-news-server-phi.vercel.app/register", userInfo);
+      axios.post("https://global-news-server-phi.vercel.app/register", userInfo);
       Swal.fire({
         position: "top-center",
         icon: "success",
