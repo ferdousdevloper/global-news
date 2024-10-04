@@ -19,7 +19,7 @@ const NewsDetail = () => {
     // Fetch the news details based on the id
     const fetchNewsDetail = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/news/${id}`);
+        const response = await axios.get(`global-news-server-phi.vercel.app/news/${id}`);
         setNews(response.data);
         setLoading(false);
 
@@ -71,8 +71,8 @@ const NewsDetail = () => {
 
       // Send POST request to add/remove bookmark in the backend
       const url = isBookmarked
-        ? "http://localhost:3001/remove-bookmark" // For removing bookmark
-        : "http://localhost:3001/bookmark"; // For adding bookmark
+        ? "global-news-server-phi.vercel.app/remove-bookmark" // For removing bookmark
+        : "global-news-server-phi.vercel.app/bookmark"; // For adding bookmark
 
       await fetch(url, {
         method: "POST",

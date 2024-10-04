@@ -26,7 +26,7 @@ const LiveNews: React.FC = () => {
     // Fetch the latest live news from the server
     const fetchLatestNews = async () => {
       try {
-        const response = await fetch("http://localhost:3001/news?isLive=true");
+        const response = await fetch("global-news-server-phi.vercel.app/news?isLive=true");
         if (!response.ok) {
           throw new Error("Failed to fetch live news");
         }
@@ -99,8 +99,8 @@ const LiveNews: React.FC = () => {
 
       // Send POST request to add/remove bookmark in the backend
       const url = isBookmarked
-        ? "http://localhost:3001/remove-bookmark" // For removing bookmark
-        : "http://localhost:3001/bookmark"; // For adding bookmark
+        ? "global-news-server-phi.vercel.app/remove-bookmark" // For removing bookmark
+        : "global-news-server-phi.vercel.app/bookmark"; // For adding bookmark
 
       await fetch(url, {
         method: "POST",

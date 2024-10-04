@@ -16,7 +16,7 @@ const Sport = () => {
   useEffect(() => {
     const fetchSportsNews = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/news');
+        const response = await axios.get('global-news-server-phi.vercel.app/news');
         const newsData = response.data;
         console.log(newsData);
         // Assuming the API returns an array of news, filter for sports news

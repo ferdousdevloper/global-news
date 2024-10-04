@@ -15,7 +15,7 @@ const Politics = () => {
   const [error, setError] = useState(null);
 
   // useEffect(() => {
-  //   fetch(`http://localhost:3001/news?pages=${currentPage}&size=${newsPerPage}`)
+  //   fetch(`global-news-server-phi.vercel.app/news?pages=${currentPage}&size=${newsPerPage}`)
   //     .then((res) => res.json())
   //     .then((data) => setNewsPerPage(data));
   // }, [currentPage, newsPerPage]);
@@ -43,7 +43,7 @@ const Politics = () => {
   useEffect(() => {
     const fetchPoliticsNews = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/news");
+        const response = await axios.get("global-news-server-phi.vercel.app/news");
         const newsData = response.data;
         const politicsNews = newsData.filter(
           (singleNews) => singleNews.category === "Politics"
