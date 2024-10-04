@@ -28,12 +28,13 @@ import ReporterRequestManagement from "./Pages/Dashboard/AdminPages/ReporterRequ
 import BanSuspendUsers from "./Pages/Dashboard/AdminPages/BanSuspendUsers";
 import ManageNewsArticles from "./Pages/Dashboard/AdminPages/ManageNewsArticles";
 import SubmittedArticles from "./Pages/Dashboard/ReporterPages/SubmittedArticles";
-import EditArticles from "./Pages/Dashboard/ReporterPages/EditArticles";
+// import EditArticles from "./Pages/Dashboard/ReporterPages/EditArticles";
 import DeleteArticles from "./Pages/Dashboard/ReporterPages/DeleteArticles";
 import SavedArticles from "./Pages/Dashboard/NormalUser/SavedArticles";
 import ManageBookmarks from "./Pages/Dashboard/NormalUser/ManageBookmarks";
 import ManageNews from "./Pages/Dashboard/ManageNews";
 import PopularDetails from "./Pages/PopularDetails";
+import EditArticles from "./Pages/Dashboard/ReporterPages/EditArticles";
 
 
 
