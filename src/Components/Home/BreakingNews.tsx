@@ -12,7 +12,7 @@ const BreakingNews: React.FC = () => {
 
   useEffect(() => {
     // Fetch the breaking news from dammy.json
-    fetch("http://localhost:3001")
+    fetch("global-news-server-phi.vercel.app/news")
       .then((response) => response.json())
       .then((data) => {
         // Filter the breaking news
@@ -25,15 +25,16 @@ const BreakingNews: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full bg-gradient-to-r glass from-red-700 to-red-500 text-white h-12 flex items-center overflow-hidden">
-      <div className="bg-red-700 glass px-4 py-1 text-white font-bold uppercase ">
+    <div className="relative w-full bg-slate-900 text-white mr-2 h-16 flex items-center overflow-hidden border-y-2 border-red-400">
+      <div className=" bg-gradient-to-r from-red-700 to-red-500 p-4 text-xl font-bold uppercase text-nowrap">
         Breaking News
       </div>
-      <div className="ml-4 overflow-hidden whitespace-nowrap">
+      <div className="ml-1 overflow-hidden whitespace-nowrap">
         <div className="inline-block whitespace-nowrap animate-marquee text-xl">
           {breakingNews.map((item) => (
             <span key={item.id} className="mx-4">
-              <strong>{item.title}:</strong> {item.description}
+              <strong>|| {item.title} ||</strong>
+              {/* {item.description} */}
             </span>
           ))}
         </div>
