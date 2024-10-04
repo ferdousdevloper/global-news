@@ -49,7 +49,7 @@ const NewsSection: React.FC = () => {
 
   const handleBookmark = async (newsId: string, e: React.MouseEvent) => {
     e.preventDefault();
-
+  
     // Check if user is authenticated
     if (!user) {
       Swal.fire({
@@ -60,22 +60,26 @@ const NewsSection: React.FC = () => {
       });
       return;
     }
-
+  
     try {
       const alreadyBookmarked = bookmarked.includes(newsId);
       const updatedBookmarks = alreadyBookmarked
-        ? bookmarked.filter((id) => id !== newsId)
-        : [...bookmarked, newsId];
-
+        ? bookmarked.filter((id) => id !== newsId) // Remove bookmark
+        : [...bookmarked, newsId]; // Add bookmark
+  
       setBookmarked(updatedBookmarks);
       localStorage.setItem("bookmarkedNews", JSON.stringify(updatedBookmarks));
-
-      // Send POST request to the backend to update the user's bookmarks in the database
-      await axios.post("http://localhost:3001/bookmark", {
+  
+      // Send POST request to add/remove bookmark in the backend
+      const url = alreadyBookmarked
+        ? "http://localhost:3001/remove-bookmark" // For removing bookmark
+        : "http://localhost:3001/bookmark"; // For adding bookmark
+  
+      await axios.post(url, {
         email: user.email,  // Use the authenticated user's email
         newsId,
       });
-
+  
       Swal.fire({
         icon: "success",
         title: alreadyBookmarked ? "Bookmark Removed!" : "Bookmarked!",
@@ -95,6 +99,7 @@ const NewsSection: React.FC = () => {
       });
     }
   };
+  
 
   if (loading || authLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
