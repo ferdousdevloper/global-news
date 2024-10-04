@@ -32,7 +32,7 @@ const Banner: React.FC = () => {
         const latestBreakingNews = data
           .filter((item: NewsItem) => item.breaking_news)
           .sort((a: NewsItem, b: NewsItem) => new Date(b.date_time).getTime() - new Date(a.date_time).getTime());
-        
+
         setNews(latestBreakingNews.slice(0, 5)); // Get the top 5 latest breaking news
       })
       .catch((error) => console.error('Error fetching data:', error));

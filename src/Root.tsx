@@ -19,7 +19,7 @@ import Sport from "./Pages/Sport";
 import Gallery from "./Pages/Gallery";
 import PrivateRoute from "./Routes/PrivateRoute";
 import NewsDetail from "./Pages/NewsDetails";
-import Dashboard from "./LayOut/Dashboard";
+//import Dashboard from "./LayOut/Dashboard";
 import Profile from "./Pages/Dashboard/Profile";
 import AllUsers from "./Pages/Dashboard/AllUsers";
 import NewsForm from "./Pages/NewsForm"
@@ -34,6 +34,7 @@ import SavedArticles from "./Pages/Dashboard/NormalUser/SavedArticles";
 import ManageBookmarks from "./Pages/Dashboard/NormalUser/ManageBookmarks";
 import ManageNews from "./Pages/Dashboard/ManageNews";
 import PopularDetails from "./Pages/PopularDetails";
+
 
 
 
@@ -147,8 +148,8 @@ const Root = createBrowserRouter([
         element: <BanSuspendUsers />
       },
       {
-        path: '/dashboard/manage-news',
-        element: <ManageNews />
+        path: '/dashboard/manage-news-articles',
+        element: <ManageNews/>
       },
       //Reporter Dashboard
       {
@@ -156,13 +157,10 @@ const Root = createBrowserRouter([
         element: <SubmittedArticles />
       },
       {
-        path: '/dashboard/edit-articles',
-        element: <EditArticles />
+        path: '/dashboard/edit-articles/:articleId',
+        element: <EditArticles/>
       },
-      {
-        path: '/dashboard/delete-articles',
-        element: <DeleteArticles />
-      },
+      
       //Normal User Dashboard
       {
         path: '/dashboard/saved-articles',

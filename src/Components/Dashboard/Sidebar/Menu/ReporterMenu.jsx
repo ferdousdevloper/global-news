@@ -21,19 +21,6 @@ const ReporterMenu = () => {
         address="submitted-articles"
       />
 
-      {/* Menu Item for editing articles */}
-      <MenuItem
-        icon={BsPencilSquare}
-        label="Edit Articles"
-        address="edit-articles"
-      />
-
-      {/* Menu Item for deleting articles */}
-      <MenuItem
-        icon={BsTrash}
-        label="Delete Articles"
-        address="delete-articles"
-      />
     </>
   );
 };
