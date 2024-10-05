@@ -15,8 +15,10 @@ interface Article {
 
 const SavedArticles: React.FC = () => {
   const [savedArticles, setSavedArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const auth = useAuth();
-  const { user, loading } = auth || {};
+  const { user } = auth || {};
 
   useEffect(() => {
     const fetchUserBookmarks = async () => {
@@ -35,14 +37,17 @@ const SavedArticles: React.FC = () => {
           setSavedArticles(articles);
         } catch (error) {
           console.error('Error fetching saved articles:', error);
+          setError('Failed to load saved articles. Please try again later.');
+        } finally {
+          setLoading(false);
         }
+      } else {
+        setLoading(false);
       }
     };
 
-    if (!loading && user) {
-      fetchUserBookmarks();
-    }
-  }, [user, loading]);
+    fetchUserBookmarks();
+  }, [user]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -50,6 +55,10 @@ const SavedArticles: React.FC = () => {
 
   if (!user) {
     return <p>Please log in to view saved articles.</p>;
+  }
+
+  if (error) {
+    return <p className="text-red-500">{error}</p>;
   }
 
   return (
