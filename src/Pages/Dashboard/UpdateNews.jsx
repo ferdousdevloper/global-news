@@ -47,7 +47,7 @@ const UpdateNews = () => {
     e.preventDefault();
     console.log("Updating news with data:", newsData); // Log the data being sent
     try {
-      const response = await axios.put(`http://localhost:3001/news/${id}`, newsData);
+      const response = await axios.put(`global-news-server-phi.vercel.app/news/${id}`, newsData);
       if (response.status === 200) {
         Swal.fire({
           title: 'Updated!',
