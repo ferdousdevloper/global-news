@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import axios, { AxiosResponse } from 'axios';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import useAuth from '../../../hooks/useAuth';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import React from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 interface Article {
   _id: string;
@@ -27,7 +27,7 @@ const SubmittedArticles: React.FC = () => {
     queryKey: ['articles', user?.email],
     queryFn: async () => {
       if (user?.email) {
-        const response = await axios.get(`global-news-server-phi.vercel.app/news/my-articles/${user.email}`);
+        const response = await axios.get(`http://localhost:3001/news/my-articles/${user.email}`);
         return response.data;
       }
       return [];
@@ -38,7 +38,7 @@ const SubmittedArticles: React.FC = () => {
   // Mutation to delete an article
   const deleteArticleMutation = useMutation<void, Error, string>({
     mutationFn: (articleId: string) => {
-      return axios.delete(`global-news-server-phi.vercel.app/news/delete-article/${articleId}`);
+      return axios.delete(`http://localhost:3001/news/delete-article/${articleId}`);
     },
     onSuccess: () => {
       // Refetch articles after successful deletion only if the user email is defined
@@ -113,10 +113,10 @@ const SubmittedArticles: React.FC = () => {
                 <div className="flex justify-evenly mt-4">
                   {/* Edit button */}
                   <Link to={`/dashboard/edit-articles/${article._id}`}>
-                  <button className=" text-gray-100 rounded-lg hover:text-blue-700 bg-blue-500 px-3 py-2 glass">
-                    <FaEdit className="inline-block mr-2" />
-                    Edit
-                  </button>
+                    <button className=" text-gray-100 rounded-lg hover:text-blue-700 bg-blue-500 px-3 py-2 glass">
+                      <FaEdit className="inline-block mr-2" />
+                      Edit
+                    </button>
                   </Link>
                   {/* Delete button */}
                   <button

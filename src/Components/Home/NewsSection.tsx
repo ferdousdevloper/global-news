@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import { MdFavoriteBorder } from "react-icons/md";
+import React, { useEffect, useState } from "react";
 import { CiBookmark } from "react-icons/ci";
 import { IoShareSocialOutline } from "react-icons/io5";
+import { MdFavoriteBorder } from "react-icons/md";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 
@@ -49,7 +49,7 @@ const NewsSection: React.FC = () => {
 
   const handleBookmark = async (newsId: string, e: React.MouseEvent) => {
     e.preventDefault();
-  
+
     // Check if user is authenticated
     if (!user) {
       Swal.fire({
@@ -60,26 +60,26 @@ const NewsSection: React.FC = () => {
       });
       return;
     }
-  
+
     try {
       const alreadyBookmarked = bookmarked.includes(newsId);
       const updatedBookmarks = alreadyBookmarked
         ? bookmarked.filter((id) => id !== newsId) // Remove bookmark
         : [...bookmarked, newsId]; // Add bookmark
-  
+
       setBookmarked(updatedBookmarks);
       localStorage.setItem("bookmarkedNews", JSON.stringify(updatedBookmarks));
-  
+
       // Send POST request to add/remove bookmark in the backend
       const url = alreadyBookmarked
-        ? "global-news-server-phi.vercel.app/remove-bookmark" // For removing bookmark
-        : "global-news-server-phi.vercel.app/bookmark"; // For adding bookmark
-  
+        ? "http://localhost:3001/remove-bookmark" // For removing bookmark
+        : "http://localhost:3001/bookmark"; // For adding bookmark
+
       await axios.post(url, {
         email: user.email,  // Use the authenticated user's email
         newsId,
       });
-  
+
       Swal.fire({
         icon: "success",
         title: alreadyBookmarked ? "Bookmark Removed!" : "Bookmarked!",
@@ -99,7 +99,7 @@ const NewsSection: React.FC = () => {
       });
     }
   };
-  
+
 
   if (loading || authLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -166,9 +166,8 @@ const NewsSection: React.FC = () => {
                 <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
                   <MdFavoriteBorder />
                   <CiBookmark
-                    className={`cursor-pointer ${
-                      bookmarked.includes(item._id) ? "text-green-500" : ""
-                    }`}
+                    className={`cursor-pointer ${bookmarked.includes(item._id) ? "text-green-500" : ""
+                      }`}
                     onClick={(e) => handleBookmark(item._id, e)}
                   />
                   <IoShareSocialOutline />
@@ -220,9 +219,8 @@ const NewsSection: React.FC = () => {
                 <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
                   <MdFavoriteBorder />
                   <CiBookmark
-                    className={`cursor-pointer ${
-                      bookmarked.includes(item._id) ? "text-green-500" : ""
-                    }`}
+                    className={`cursor-pointer ${bookmarked.includes(item._id) ? "text-green-500" : ""
+                      }`}
                     onClick={(e) => handleBookmark(item._id, e)}
                   />
                   <IoShareSocialOutline />
