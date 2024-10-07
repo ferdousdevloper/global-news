@@ -15,20 +15,18 @@ interface Article {
 
 const SavedArticles: React.FC = () => {
   const [savedArticles, setSavedArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const auth = useAuth();
-  const { user } = auth || {};
+  const { user, loading } = auth || {};
 
   useEffect(() => {
     const fetchUserBookmarks = async () => {
       if (user) {
         try {
-          const bookmarksResponse = await axios.get(`global-news-server-phi.vercel.app/bookmarks/${user.email}`);
+          const bookmarksResponse = await axios.get(`http://localhost:3001/bookmarks/${user.email}`);
           const bookmarks = bookmarksResponse.data;
 
           const articlePromises = bookmarks.map((newsId: string) =>
-            axios.get(`global-news-server-phi.vercel.app/news/${newsId}`)
+            axios.get(`http://localhost:3001/news/${newsId}`)
           );
 
           const articlesResponses = await Promise.all(articlePromises);
@@ -37,17 +35,14 @@ const SavedArticles: React.FC = () => {
           setSavedArticles(articles);
         } catch (error) {
           console.error('Error fetching saved articles:', error);
-          setError('Failed to load saved articles. Please try again later.');
-        } finally {
-          setLoading(false);
         }
-      } else {
-        setLoading(false);
       }
     };
 
-    fetchUserBookmarks();
-  }, [user]);
+    if (!loading && user) {
+      fetchUserBookmarks();
+    }
+  }, [user, loading]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -55,10 +50,6 @@ const SavedArticles: React.FC = () => {
 
   if (!user) {
     return <p>Please log in to view saved articles.</p>;
-  }
-
-  if (error) {
-    return <p className="text-red-500">{error}</p>;
   }
 
   return (

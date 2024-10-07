@@ -22,7 +22,7 @@ const Sport = () => {
   useEffect(() => {
     const fetchSportsNews = async () => {
       try {
-        const response = await axios.get('global-news-server-phi.vercel.app/news');
+        const response = await axios.get('http://localhost:3001/news');
         const newsData = response.data;
 
         // Filter for sports news

@@ -72,8 +72,8 @@ const NewsSection: React.FC = () => {
   
       // Send POST request to add/remove bookmark in the backend
       const url = alreadyBookmarked
-        ? "global-news-server-phi.vercel.app/remove-bookmark" // For removing bookmark
-        : "global-news-server-phi.vercel.app/bookmark"; // For adding bookmark
+        ? "http://localhost:3001/remove-bookmark" // For removing bookmark
+        : "http://localhost:3001/bookmark"; // For adding bookmark
   
       await axios.post(url, {
         email: user.email,  // Use the authenticated user's email

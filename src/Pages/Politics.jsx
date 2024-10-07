@@ -43,7 +43,7 @@ const Politics = () => {
   useEffect(() => {
     const fetchPoliticsNews = async () => {
       try {
-        const response = await axios.get("global-news-server-phi.vercel.app/news");
+        const response = await axios.get("http://localhost:3001/news");
         const newsData = response.data;
         const politicsNews = newsData.filter(
           (singleNews) => singleNews.category === "Politics"
