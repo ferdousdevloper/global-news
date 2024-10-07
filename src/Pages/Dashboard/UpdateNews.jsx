@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { useParams, useNavigate } from 'react-router-dom';
 
 const UpdateNews = () => {
   const { id } = useParams(); // Get the news ID from the URL parameters
@@ -13,7 +13,7 @@ const UpdateNews = () => {
     region: '',
     description: '',
     date_time: '',
-    breaking_news: false,   
+    breaking_news: false,
     popular_news: false,
   });
 
@@ -47,7 +47,7 @@ const UpdateNews = () => {
     e.preventDefault();
     console.log("Updating news with data:", newsData); // Log the data being sent
     try {
-      const response = await axios.put(`global-news-server-phi.vercel.app/news/${id}`, newsData);
+      const response = await axios.put(`http://localhost:3001/news/${id}`, newsData);
       if (response.status === 200) {
         Swal.fire({
           title: 'Updated!',

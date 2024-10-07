@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import LiveNews from "../Components/AllNews/LiveNews";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { CiBookmark } from "react-icons/ci";
-import { MdFavoriteBorder } from "react-icons/md";
 import { IoShareSocialOutline } from "react-icons/io5";
+import { MdFavoriteBorder } from "react-icons/md";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import LiveNews from "../Components/AllNews/LiveNews";
 import useAuth from "../hooks/useAuth";
 
 interface NewsItem {
@@ -46,7 +46,7 @@ const AllNews: React.FC = () => {
     const fetchNews = async () => {
       try {
         const response = await axios.get<NewsItem[]>(
-          "global-news-server-phi.vercel.app/news"
+          "http://localhost:3001/news"
         );
         setNews(response.data);
         setFilteredNews(response.data);
@@ -199,8 +199,8 @@ const AllNews: React.FC = () => {
 
       // Send POST request to add/remove bookmark in the backend
       const url = alreadyBookmarked
-        ? "global-news-server-phi.vercel.app/remove-bookmark" // For removing bookmark
-        : "global-news-server-phi.vercel.app/bookmark"; // For adding bookmark
+        ? "http://localhost:3001/remove-bookmark" // For removing bookmark
+        : "http://localhost:3001/bookmark"; // For adding bookmark
 
       await axios.post(url, {
         email: user.email, // Use the authenticated user's email
@@ -344,9 +344,8 @@ const AllNews: React.FC = () => {
               <div className="flex justify-between items-center text-xl md:text-2xl my-3">
                 <MdFavoriteBorder />
                 <CiBookmark
-                  className={`cursor-pointer ${
-                    bookmarked.includes(item._id) ? "text-green-500" : ""
-                  }`}
+                  className={`cursor-pointer ${bookmarked.includes(item._id) ? "text-green-500" : ""
+                    }`}
                   onClick={(e) => handleBookmark(item._id, e)}
                 />
                 <IoShareSocialOutline />

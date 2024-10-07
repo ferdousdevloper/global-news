@@ -1,8 +1,8 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { CiBookmark } from "react-icons/ci";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { MdFavoriteBorder } from "react-icons/md";
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Politics = () => {
@@ -15,7 +15,7 @@ const Politics = () => {
   const [error, setError] = useState(null);
 
   // useEffect(() => {
-  //   fetch(`global-news-server-phi.vercel.app/news?pages=${currentPage}&size=${newsPerPage}`)
+  //   fetch(`http://localhost:3001/news?pages=${currentPage}&size=${newsPerPage}`)
   //     .then((res) => res.json())
   //     .then((data) => setNewsPerPage(data));
   // }, [currentPage, newsPerPage]);
@@ -43,7 +43,7 @@ const Politics = () => {
   useEffect(() => {
     const fetchPoliticsNews = async () => {
       try {
-        const response = await axios.get("global-news-server-phi.vercel.app/news");
+        const response = await axios.get("http://localhost:3001/news");
         const newsData = response.data;
         const politicsNews = newsData.filter(
           (singleNews) => singleNews.category === "Politics"
