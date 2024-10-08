@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import LiveNews from "../Components/AllNews/LiveNews";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { CiBookmark } from "react-icons/ci";
-import { MdFavoriteBorder } from "react-icons/md";
 import { IoShareSocialOutline } from "react-icons/io5";
+import { MdFavoriteBorder } from "react-icons/md";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import LiveNews from "../Components/AllNews/LiveNews";
 import useAuth from "../hooks/useAuth";
 
 interface NewsItem {
@@ -344,9 +344,8 @@ const AllNews: React.FC = () => {
               <div className="flex justify-between items-center text-xl md:text-2xl my-3">
                 <MdFavoriteBorder />
                 <CiBookmark
-                  className={`cursor-pointer ${
-                    bookmarked.includes(item._id) ? "text-green-500" : ""
-                  }`}
+                  className={`cursor-pointer ${bookmarked.includes(item._id) ? "text-green-500" : ""
+                    }`}
                   onClick={(e) => handleBookmark(item._id, e)}
                 />
                 <IoShareSocialOutline />
