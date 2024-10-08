@@ -5,12 +5,12 @@ import { MdFavoriteBorder } from "react-icons/md";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Business = () => {
+const Technology = () => {
   const [allNews, setAllNews] = useState([]);
   const [popularNews, setPopularNews] = useState([]);
   const [newsPerPage, setNewsPerPage] = useState(8);
   const [currentPage, setCurrentPage] = useState(0);
-  const [liveBusinessNews, setLiveBusinessNews] = useState([]);
+  const [liveTechNews, setLiveTechNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -35,25 +35,25 @@ const Business = () => {
   };
 
   useEffect(() => {
-    const fetchBusinessNews = async () => {
+    const fetchTechNews = async () => {
       try {
         const response = await axios.get("http://localhost:3001/news");
         const newsData = response.data;
-        const businessNews = newsData.filter(
-          (singleNews) => singleNews.category === "Business"
+        const techNews = newsData.filter(
+          (singleNews) => singleNews.category === "Technology"
         );
-        const popularBusinessNews = allNews.filter(
+        const popularTechNews = allNews.filter(
           (singleNews) =>
-            singleNews.category === "Business" &&
+            singleNews.category === "Technology" &&
             singleNews.popular_news === true
         );
         const liveNews = allNews.filter(
           (singleNews) =>
-            singleNews.category === "Business" && singleNews.isLive === true
+            singleNews.category === "Technology" && singleNews.isLive === true
         );
-        setLiveBusinessNews(liveNews[0]);
-        setAllNews(businessNews);
-        setPopularNews(popularBusinessNews);
+        setLiveTechNews(liveNews[0]);
+        setAllNews(techNews);
+        setPopularNews(popularTechNews);
 
         setLoading(false);
       } catch (err) {
@@ -62,7 +62,7 @@ const Business = () => {
       }
     };
 
-    fetchBusinessNews();
+    fetchTechNews();
   }, [currentPage, newsPerPage, allNews]);
 
   if (loading) {
@@ -80,39 +80,38 @@ const Business = () => {
   return (
     <div className="bg-gray-800 container mx-auto min-h-screen pt-20">
       <div className="lg:w-1/2 mx-auto my-3 lg:my-4 text-center text-gray-100">
-        <h2 className="font-bold text-2xl lg:text-4xl">Business</h2>
+        <h2 className="font-bold text-2xl lg:text-4xl">Technology</h2>
         <p className="mt-3">
-          Stay Informed with the Latest Business News, Trends, and Market
-          Insights. Explore In-Depth Analysis on Global Markets, Emerging
-          Industries, and Economic Developments.
+          Discover the latest advancements and innovations in the world of
+          technology, covering everything from groundbreaking gadgets to
+          emerging trends. Stay informed with in-depth analysis and news on how
+          technology is shaping the future.
         </p>
       </div>
 
       {/* Live Politics News */}
-      {liveBusinessNews && (
+      {liveTechNews && (
         <div className="flex flex-col md:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden glass my-10">
           <div className="md:w-1/2 w-full">
             <img
-              src={liveBusinessNews?.image}
-              alt={liveBusinessNews?.title}
+              src={liveTechNews?.image}
+              alt={liveTechNews?.title}
               className="w-full h-full object-cover"
             />
           </div>
           <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
             <div>
-              <h3 className="text-2xl font-bold mb-2">
-                {liveBusinessNews?.title}
-              </h3>
+              <h3 className="text-2xl font-bold mb-2">{liveTechNews?.title}</h3>
               <hr className="my-4" />
               <p className="text-gray-300 mb-4">
-                {liveBusinessNews?.description.slice(0, 1000)}...
+                {liveTechNews?.description.slice(0, 1000)}...
               </p>
             </div>
             <div>
               <p className="text-gray-100 text-sm mb-2">
-                {new Date(liveBusinessNews?.timestamp).toLocaleString()}
+                {new Date(liveTechNews?.timestamp).toLocaleString()}
               </p>
-              {liveBusinessNews?.isLive && (
+              {liveTechNews?.isLive && (
                 <span className="px-4 py-1 bg-red-600 text-white text-xs font-semibold uppercase rounded-full">
                   Live
                 </span>
@@ -154,7 +153,7 @@ const Business = () => {
                   </p>
                   <div>
                     <p className="text-gray-100 text-sm mb-2">
-                      {new Date(liveBusinessNews?.timestamp).toLocaleString()}
+                      {new Date(liveTechNews?.timestamp).toLocaleString()}
                     </p>
                     <div className="flex justify-around items-center text-xl md:text-2xl my-5 text-slate-100">
                       <MdFavoriteBorder />
@@ -264,4 +263,4 @@ const Business = () => {
   );
 };
 
-export default Business;
+export default Technology;
