@@ -1,4 +1,5 @@
 import axios from "axios";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { CiBookmark } from "react-icons/ci";
 import { MdFavoriteBorder } from "react-icons/md";
@@ -57,6 +58,7 @@ const NewsSection: React.FC = () => {
       });
       return;
     }
+
 
     try {
       const alreadyBookmarked = bookmarked.includes(newsId);
