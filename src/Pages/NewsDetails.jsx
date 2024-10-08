@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { GiMicrophone } from "react-icons/gi";
-import { FaLocationDot } from 'react-icons/fa6';
-import { MdFavoriteBorder } from 'react-icons/md';
+import { useEffect, useState } from 'react';
 import { CiBookmark } from 'react-icons/ci';
+import { FaLocationDot } from 'react-icons/fa6';
+import { GiMicrophone } from "react-icons/gi";
 import { IoShareSocialOutline } from 'react-icons/io5';
+import { MdFavoriteBorder } from 'react-icons/md';
+import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const NewsDetail = () => {
@@ -19,7 +19,7 @@ const NewsDetail = () => {
     // Fetch the news details based on the id
     const fetchNewsDetail = async () => {
       try {
-        const response = await axios.get(`https://global-news-server-phi.vercel.app/news/${id}`);
+        const response = await axios.get(`http://localhost:3001/news/${id}`); // Fixing the URL
         setNews(response.data);
         setLoading(false);
 
@@ -71,8 +71,8 @@ const NewsDetail = () => {
 
       // Send POST request to add/remove bookmark in the backend
       const url = isBookmarked
-        ? "https://global-news-server-phi.vercel.app/remove-bookmark" // For removing bookmark
-        : "https://global-news-server-phi.vercel.app/bookmark"; // For adding bookmark
+        ? "http://localhost:3001/remove-bookmark" // For removing bookmark
+        : "http://localhost:3001/bookmark"; // For adding bookmark
 
       await fetch(url, {
         method: "POST",

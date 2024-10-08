@@ -1,6 +1,6 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'; // Assuming you're using react-router-dom for routing
-import axios from 'axios';
 import useAuth from '../../../hooks/useAuth';
 
 interface Article {
@@ -22,11 +22,11 @@ const SavedArticles: React.FC = () => {
     const fetchUserBookmarks = async () => {
       if (user) {
         try {
-          const bookmarksResponse = await axios.get(`https://global-news-server-phi.vercel.app/bookmarks/${user.email}`);
+          const bookmarksResponse = await axios.get(`http://localhost:3001/bookmarks/${user.email}`);
           const bookmarks = bookmarksResponse.data;
 
           const articlePromises = bookmarks.map((newsId: string) =>
-            axios.get(`https://global-news-server-phi.vercel.app/news/${newsId}`)
+            axios.get(`http://localhost:3001/news/${newsId}`)
           );
 
           const articlesResponses = await Promise.all(articlePromises);
