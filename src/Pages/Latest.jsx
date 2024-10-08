@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { CiBookmark } from "react-icons/ci";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { MdFavoriteBorder } from "react-icons/md";
+import { Link } from "react-router-dom";
 import LatestCard from "./LatestCard";
 
 const Latest = () => {
@@ -20,14 +21,13 @@ const Latest = () => {
         const response = await axios.get('http://localhost:3001/news');
         const newsData = response.data;
         console.log(newsData);
-        // Assuming the API returns an array of news, filter for latest news
-        const filteredLatestNews = newsData.filter(news => (news.breaking_news === true && news.popular_news === true));
-        const filteredLiveNews = filteredLatestNews.filter(news => news.isLive === true);
+        // Sort the newsData by timestamp in descending order (newest first)
+        const sortedNewsData = newsData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        const filteredLiveNews = sortedNewsData.filter(news => news.isLive === true);
         console.log(filteredLiveNews);
-        const filteredPopularNews = filteredLatestNews.filter(news => news.popular_news === true);
-        console.log(filteredLiveNews);
+        const filteredPopularNews = sortedNewsData.filter(news => news.popular_news === true);
         setLiveLatestNews(filteredLiveNews[0]);
-        letLatestNews(filteredLatestNews);
+        letLatestNews(sortedNewsData);
         setPopularNews(filteredPopularNews);
         setLoading(false);
       } catch (err) {
@@ -56,37 +56,39 @@ const Latest = () => {
     </div>
 
     {/* Live Sports News */}
-    {
-      liveLatestNews && <div className="flex flex-col md:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden glass my-10">
-        <div className="md:w-1/2 w-full">
-          <img
-            src={liveLatestNews?.image}
-            alt={liveLatestNews?.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
-          <div>
-            <h3 className="text-2xl font-bold mb-2">{liveLatestNews?.title}</h3>
-            <hr className='my-4' />
-            <p className="text-gray-300 mb-4">{liveLatestNews?.description.slice(0, 1000)}...</p>
+    <Link to={`/news/${liveLatestNews?._id}`}>
+      {
+        liveLatestNews && <div className="flex flex-col md:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden glass my-10">
+          <div className="md:w-1/2 w-full">
+            <img
+              src={liveLatestNews?.image}
+              alt={liveLatestNews?.title}
+              className="w-full h-full object-cover"
+            />
           </div>
-          <div>
-            <p className="text-gray-100 text-sm mb-2">{new Date(liveLatestNews?.timestamp).toLocaleString()}</p>
-            {liveLatestNews?.isLive && (
-              <span className="px-4 py-1 bg-red-600 text-white text-xs font-semibold uppercase rounded-full">
-                Live
-              </span>
-            )}
-            <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
-              <MdFavoriteBorder />
-              <CiBookmark />
-              <IoShareSocialOutline />
+          <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
+            <div>
+              <h3 className="text-2xl font-bold mb-2">{liveLatestNews?.title}</h3>
+              <hr className='my-4' />
+              <p className="text-gray-300 mb-4">{liveLatestNews?.description.slice(0, 1000)}...</p>
+            </div>
+            <div>
+              <p className="text-gray-100 text-sm mb-2">{new Date(liveLatestNews?.timestamp).toLocaleString()}</p>
+              {liveLatestNews?.isLive && (
+                <span className="px-4 py-1 bg-red-600 text-white text-xs font-semibold uppercase rounded-full">
+                  Live
+                </span>
+              )}
+              <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
+                <MdFavoriteBorder />
+                <CiBookmark />
+                <IoShareSocialOutline />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    }
+      }
+    </Link>
 
     {/* All Sports News */}
     <div className='flex flex-col lg:flex-row gap-5 px-4'>
