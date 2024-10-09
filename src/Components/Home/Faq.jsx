@@ -46,7 +46,7 @@ const Faq = () => {
                 {/* Accordion section */}
                 <div className="space-y-1 w-full ">
                     {
-                        faqData.map((faq, index) => (
+                        faqData.slice(0, 5).map((faq, index) => (
                             <div key={index} className="collapse collapse-arrow join-faq border-base-300 border">
                                 <input type="radio" name="my-accordion-4" defaultChecked />
                                 <div className="collapse-title text-xl font-medium">{faq.question}</div>
