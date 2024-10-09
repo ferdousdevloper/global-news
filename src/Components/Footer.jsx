@@ -53,6 +53,11 @@ const Footer = () => {
                     Entertainment
                   </a>
                 </li>
+                <li>
+                  <Link to='/category/gallery'>
+                    Gallery
+                  </Link>
+                </li>
               </ul>
             </div>
             <div className="space-y-3 text-center">
@@ -90,11 +95,6 @@ const Footer = () => {
                   <a rel="noopener noreferrer" href="#">
                     Advertise
                   </a>
-                </li>
-                <li>
-                  <Link to='/category/gallery'>
-                    Gallery
-                  </Link>
                 </li>
               </ul>
             </div>
