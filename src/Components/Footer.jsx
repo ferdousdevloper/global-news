@@ -91,6 +91,11 @@ const Footer = () => {
                     Advertise
                   </a>
                 </li>
+                <li>
+                  <Link to='/category/gallery'>
+                    Gallery
+                  </Link>
+                </li>
               </ul>
             </div>
             <div className="space-y-3 text-center">
