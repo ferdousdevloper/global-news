@@ -8,30 +8,36 @@ const Gallery = () => {
   const { data: images = [] } = useQuery({
     queryKey: ['image'],
     queryFn: async () => {
-      const { data } = await axios.get('http://localhost:3001/imageNews/images')
+      const { data } = await axios.get('http://localhost:3001/news')
       return data;
     }
   })
 
-  // const splitIntoFrames = (images, imagesPerFrame) => {
-  //   let frames = [];
-  //   for (let i = 0; i < images.length; i += imagesPerFrame) {
-  //     frames.push(images.slice(i, i + imagesPerFrame));
-  //   }
-  //   return frames;
-  // };
+  const splitIntoFrames = (images, imagesPerFrame) => {
+    let frames = [];
+    for (let i = 0; i < images.length; i += imagesPerFrame) {
+      frames.push(images.slice(i, i + imagesPerFrame));
+    }
+    return frames;
+  };
 
-  // const frames = splitIntoFrames(images, imagesPerFrame);
-
-
-
+  const frames = splitIntoFrames(images, 19);
+  // console.log(frames)
 
 
 
   return (
     <div>
-      <GalleryCard></GalleryCard>
-      
+      <h2 className='h-full mt-20 text-center text-3xl font-semibold text-white py-6'>Our News Gallery</h2>
+
+      {
+        frames?.map(frame => <GalleryCard
+          key={frame._id}
+          frame={frame}
+        ></GalleryCard>)
+      }
+
+
       {/* <section className="py-6 dark:bg-gray-100 dark:text-gray-900">
         <div className="container grid grid-cols-2 gap-4 p-4 mx-auto md:grid-cols-4">
           <img
