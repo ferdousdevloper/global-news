@@ -108,7 +108,7 @@ const Sport = () => {
 
   return (
     <div className="container mx-auto min-h-screen py-20">
-      <div className='lg:w-1/2 mx-auto my-3 lg:my-4 text-center text-gray-100'>
+      <div className='lg:w-1/2 mx-auto my-3 lg:my-4 text-center text-gray-100 px-3'>
         <h2 className="font-bold text-2xl lg:text-4xl">Sports</h2>
         <p className='mt-3'>Sports bring people together...</p>
       </div>
@@ -116,11 +116,11 @@ const Sport = () => {
       {/* Live Sports News */}
       {liveSportsNews && (
         <div className="flex flex-col md:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden glass my-10">
-          <div className="md:w-1/2 w-full">
+          <div className="lg:w-1/2">
             <img
               src={liveSportsNews.image}
               alt={liveSportsNews.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover p-3 lg:p-0"
             />
           </div>
           <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
@@ -138,8 +138,8 @@ const Sport = () => {
               )}
               <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
                 <MdFavoriteBorder />
-                <CiBookmark 
-                  onClick={handleBookmark} 
+                <CiBookmark
+                  onClick={handleBookmark}
                   className={`cursor-pointer ${isBookmarked ? 'text-green-500' : 'text-white'}`}
                 />
                 <IoShareSocialOutline />

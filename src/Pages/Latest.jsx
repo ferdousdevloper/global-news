@@ -47,7 +47,7 @@ const Latest = () => {
 
   return (
     <div className="container mx-auto min-h-screen py-20">
-      <div className='lg:w-1/2 mx-auto my-3 lg:my-4 text-center text-gray-100'>
+      <div className='lg:w-1/2 mx-auto my-3 lg:my-4 text-center text-gray-100 px-3  '>
         <h2 className="font-bold text-2xl lg:text-4xl">
           Latest News Here
         </h2>
@@ -57,15 +57,15 @@ const Latest = () => {
       {/* Live Latest News */}
       <Link to={`/news/${liveLatestNews?._id}`}>
         {
-          liveLatestNews && <div className="flex flex-col md:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden glass my-10">
-            <div className="md:w-1/2 h-[500px] w-[500px]">
+          liveLatestNews && <div className="flex flex-col lg:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden glass my-10">
+            <div className="lg:w-1/2">
               <img
                 src={liveLatestNews?.image}
                 alt={liveLatestNews?.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover p-2 lg:p-0"
               />
             </div>
-            <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
+            <div className="w-full lg:w-1/2 p-6 flex flex-col justify-between">
               <div>
                 <h3 className="text-2xl font-bold mb-2">{liveLatestNews?.title}</h3>
                 <hr className='my-4' />

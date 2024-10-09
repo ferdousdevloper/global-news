@@ -1,33 +1,4 @@
-
-
-const Faq = () => {
-    return (
-        <div className="container mx-auto py-8 text-white" style={{ width: "85%" }}>
-            <div className="mb-6 text-center ">
-                <h2 className="text-3xl md:text-5xl font-bold tracking-wider">
-                    Frequently Asked Questions
-                </h2>
-                <p className="mt-3 md:mt-6 md:text-xl text-base-300 tracking-wider">Answers to the most common questions you might have</p>
-            </div>
-            <div className="join join-vertical w-full mt-3">
-                {
-                    faqData.map((faq, index) => (
-                        <div key={index} className="collapse collapse-arrow join-faq border-base-300 border">
-                            <input type="radio" name="my-accordion-4" defaultChecked />
-                            <div className="collapse-title text-xl font-medium">{faq.question}</div>
-                            <div className="collapse-content">
-                                <p>{faq.answer}</p>
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
-        </div>
-    );
-}
-
-export default Faq;
-
+import queAns from '../../Images/queAns.png';
 
 const faqData = [
     {
@@ -52,4 +23,47 @@ const faqData = [
     }
 
 ];
+
+const Faq = () => {
+    return (
+        <div className="container mx-auto py-8 text-white" style={{ width: "85%" }}>
+            <div className="mb-12 text-center ">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-wider">
+                    Frequently Asked Questions
+                </h2>
+                <p className="mt-3 md:mt-6 lg:text-xl text-base-300 tracking-wider">Answers to the most common questions you might have</p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-4 md:gap-8">
+                {/* Banner Section */}
+                <div className="bg-green-200 rounded-lg">
+                    <img
+                        src={queAns}
+                        alt="queAns"
+                        className='w-full p-4 h=[300px] md:h-[400px] object-cover rounded-3xl'
+                    />
+                </div>
+                {/* Accordion section */}
+                <div className="space-y-1 w-full ">
+                    {
+                        faqData.map((faq, index) => (
+                            <div key={index} className="collapse collapse-arrow join-faq border-base-300 border">
+                                <input type="radio" name="my-accordion-4" defaultChecked />
+                                <div className="collapse-title text-xl font-medium">{faq.question}</div>
+                                <div className="collapse-content">
+                                    <p>{faq.answer}</p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Faq;
+
+
+
 
