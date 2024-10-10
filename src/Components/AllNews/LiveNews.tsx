@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { CiBookmark } from "react-icons/ci";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import ShareDropdown from "../Home/ShareDropdown";
+import Bookmark from "../Bookmark";
 
 interface NewsArticle {
   _id: string;
@@ -18,7 +19,6 @@ interface NewsArticle {
 const LiveNews: React.FC = () => {
   const [latestNews, setLatestNews] = useState<NewsArticle | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   const auth = useAuth();
   const { user, loading: authLoading } = auth || {};
 
@@ -47,81 +47,7 @@ const LiveNews: React.FC = () => {
     };
 
     fetchLatestNews();
-
-    // Check if the news is already bookmarked
-    const storedBookmarks = localStorage.getItem("bookmarkedNews");
-    if (storedBookmarks && latestNews) {
-      const bookmarks = JSON.parse(storedBookmarks);
-      setIsBookmarked(bookmarks.includes(latestNews._id));
-    }
-  }, [latestNews]);
-
-  const handleBookmarkToggle = async (newsId: string, e: React.MouseEvent) => {
-    e.preventDefault();
-
-    if (!user) {
-      Swal.fire({
-        icon: "warning",
-        title: "Not Authenticated",
-        text: "Please login to bookmark news.",
-        confirmButtonText: "OK",
-      });
-      return;
-    }
-
-    const storedBookmarks = localStorage.getItem("bookmarkedNews");
-    let bookmarks = storedBookmarks ? JSON.parse(storedBookmarks) : [];
-
-    try {
-      if (isBookmarked) {
-        // Remove from bookmarks
-        bookmarks = bookmarks.filter((id: string) => id !== newsId);
-        Swal.fire({
-          title: "Bookmark Removed!",
-          text: "You have removed this news from your bookmarks.",
-          icon: "info",
-          confirmButtonText: "Okay",
-        });
-      } else {
-        // Add to bookmarks
-        bookmarks.push(newsId);
-        Swal.fire({
-          title: "Bookmarked!",
-          text: "You have added this news to your bookmarks.",
-          icon: "success",
-          confirmButtonText: "Okay",
-        });
-      }
-
-      // Update bookmarks in localStorage and state
-      localStorage.setItem("bookmarkedNews", JSON.stringify(bookmarks));
-      setIsBookmarked(!isBookmarked);
-
-      // Send POST request to add/remove bookmark in the backend
-      const url = isBookmarked
-        ? "http://localhost:3001/remove-bookmark" // For removing bookmark
-        : "http://localhost:3001/bookmark"; // For adding bookmark
-
-      await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: user.email, // Use authenticated user's email
-          newsId,
-        }),
-      });
-    } catch (error) {
-      console.error("Error bookmarking:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: "There was an error trying to bookmark this item. Please try again.",
-        confirmButtonText: "OK",
-      });
-    }
-  };
+  }, []);
 
   if (authLoading) return <p>Loading...</p>;
   if (error) {
@@ -174,11 +100,9 @@ const LiveNews: React.FC = () => {
             <p className="text-gray-100 text-sm mb-2">{formattedDate}</p>
             <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
               <MdFavoriteBorder />
-              <CiBookmark
-                className={`cursor-pointer ${isBookmarked ? "text-green-500" : ""}`}
-                onClick={(e) => handleBookmarkToggle(latestNews._id, e)}
-              />
-              <IoShareSocialOutline />
+              {/* Use Bookmark component */}
+              <Bookmark newsId={latestNews._id} />
+              <ShareDropdown url={`http://localhost:3001/news/${latestNews._id}`} />
             </div>
           </div>
         </div>
