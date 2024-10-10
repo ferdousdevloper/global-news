@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { GiMicrophone } from "react-icons/gi";
+import { useEffect, useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
+import { GiMicrophone } from "react-icons/gi";
 import { MdFavoriteBorder } from 'react-icons/md';
-import { CiBookmark } from 'react-icons/ci';
-import { IoShareSocialOutline } from 'react-icons/io5';
-import Swal from 'sweetalert2';
+import { useParams } from 'react-router-dom';
+import ShareDropdown from '../Components/Home/ShareDropdown';
+import Bookmark from '../Components/Bookmark';
 
 const NewsDetail = () => {
   const { id } = useParams(); // Get the id from the URL
   const [news, setNews] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isBookmarked, setIsBookmarked] = useState(false); // Manage bookmark state
-
+ 
   useEffect(() => {
     // Fetch the news details based on the id
     const fetchNewsDetail = async () => {
@@ -22,13 +20,6 @@ const NewsDetail = () => {
         const response = await axios.get(`https://global-news-server-phi.vercel.app/news/${id}`);
         setNews(response.data);
         setLoading(false);
-
-        // Check if the news is already bookmarked
-        const storedBookmarks = localStorage.getItem("bookmarkedNews");
-        if (storedBookmarks && response.data) {
-          const bookmarks = JSON.parse(storedBookmarks);
-          setIsBookmarked(bookmarks.includes(response.data._id));
-        }
       } catch (err) {
         setError("Failed to load news details");
         setLoading(false);
@@ -38,61 +29,7 @@ const NewsDetail = () => {
     fetchNewsDetail();
   }, [id]);
 
-  const handleBookmarkToggle = async (newsId, e) => {
-    e.preventDefault();
-
-    const storedBookmarks = localStorage.getItem("bookmarkedNews");
-    let bookmarks = storedBookmarks ? JSON.parse(storedBookmarks) : [];
-
-    try {
-      if (isBookmarked) {
-        // Remove from bookmarks
-        bookmarks = bookmarks.filter((id) => id !== newsId);
-        Swal.fire({
-          title: "Bookmark Removed!",
-          text: "You have removed this news from your bookmarks.",
-          icon: "info",
-          confirmButtonText: "Okay",
-        });
-      } else {
-        // Add to bookmarks
-        bookmarks.push(newsId);
-        Swal.fire({
-          title: "Bookmarked!",
-          text: "You have added this news to your bookmarks.",
-          icon: "success",
-          confirmButtonText: "Okay",
-        });
-      }
-
-      // Update bookmarks in localStorage and state
-      localStorage.setItem("bookmarkedNews", JSON.stringify(bookmarks));
-      setIsBookmarked(!isBookmarked);
-
-      // Send POST request to add/remove bookmark in the backend
-      const url = isBookmarked
-        ? "https://global-news-server-phi.vercel.app/remove-bookmark" // For removing bookmark
-        : "https://global-news-server-phi.vercel.app/bookmark"; // For adding bookmark
-
-      await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          newsId,
-        }),
-      });
-    } catch (error) {
-      console.error("Error bookmarking:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: "There was an error trying to bookmark this item. Please try again.",
-        confirmButtonText: "OK",
-      });
-    }
-  };
+  
 
   if (loading) {
     return <p>Loading...</p>;
@@ -146,11 +83,8 @@ const NewsDetail = () => {
               <p className="text-lg leading-relaxed mb-6 text-justify">{news.description}</p>
               <div className="flex justify-between items-center text-xl md:text-2xl my-3">
                 <MdFavoriteBorder />
-                <CiBookmark
-                  onClick={(e) => handleBookmarkToggle(news._id, e)} // Click to toggle bookmark
-                  className={`cursor-pointer ${isBookmarked ? "text-green-500" : ''}`} // Change color if bookmarked
-                />
-                <IoShareSocialOutline />
+                <Bookmark newsId={news._id} />
+                <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${news._id}`} />
               </div>
             </div>
           </>

@@ -15,12 +15,12 @@ import PopularNewsCard from "../PopularNewsCard";
 const PopulerNews = () => {
   const [populars, setPopulars] = useState(null);
 
-  useEffect(() => {
-    fetch("https://global-news-server-phi.vercel.app/news")
-      .then((response) => response.json())
-      .then((data) => setPopulars(data))
-      .catch((error) => console.error("Error fetching JSON:", error));
-  }, []);
+    useEffect(() => {
+        fetch('https://global-news-server-phi.vercel.app/news')
+            .then(response => response.json())
+            .then(data => setPopulars(data))
+            .catch(error => console.error('Error fetching JSON:', error));
+    }, []);
 
   console.log(populars);
 

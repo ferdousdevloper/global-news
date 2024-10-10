@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import LiveNews from "../Components/AllNews/LiveNews";
-import { Link } from "react-router-dom";
-import { CiBookmark } from "react-icons/ci";
+import React, { useEffect, useState } from "react";
 import { MdFavoriteBorder } from "react-icons/md";
-import { IoShareSocialOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import LiveNews from "../Components/AllNews/LiveNews";
 import useAuth from "../hooks/useAuth";
+import ShareDropdown from "../Components/Home/ShareDropdown";
+import Bookmark from "../Components/Bookmark";
 
 interface NewsItem {
   _id: string;
@@ -25,22 +25,19 @@ interface NewsItem {
 const AllNews: React.FC = () => {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [filteredNews, setFilteredNews] = useState<NewsItem[]>([]);
-  const [bookmarked, setBookmarked] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [categories, setCategories] = useState<string[]>([]);
   const [countries, setCountries] = useState<string[]>([]);
   const [selectedFilter, setSelectedFilter] = useState<string>("All News");
-  const [selectedCountry, setSelectedCountry] = useState<string>(
-    "All Countries"
-  );
+  const [selectedCountry, setSelectedCountry] =
+    useState<string>("All Countries");
   const [selectedDateFilter, setSelectedDateFilter] =
     useState<string>("All Dates");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  // Fetch the user and loading state from the authentication hook
   const auth = useAuth();
-  const { user, loading: authLoading } = auth || {};
+  const { loading: authLoading } = auth || {};
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -70,24 +67,11 @@ const AllNews: React.FC = () => {
     };
 
     fetchNews();
-
-    // Load bookmarked news from localStorage
-    const storedBookmarks = localStorage.getItem("bookmarkedNews");
-    if (storedBookmarks) {
-      setBookmarked(JSON.parse(storedBookmarks));
-    }
   }, []);
 
   useEffect(() => {
     filterNews();
-  }, [
-    searchTerm,
-    selectedFilter,
-    selectedCountry,
-    selectedDateFilter,
-    news,
-    bookmarked,
-  ]);
+  }, [searchTerm, selectedFilter, selectedCountry, selectedDateFilter, news]);
 
   const filterNews = () => {
     let updatedFilteredNews = news;
@@ -114,9 +98,7 @@ const AllNews: React.FC = () => {
           (item) => item.popular_news
         );
       } else if (selectedFilter === "Live News") {
-        updatedFilteredNews = updatedFilteredNews.filter(
-          (item) => item.isLive
-        );
+        updatedFilteredNews = updatedFilteredNews.filter((item) => item.isLive);
       } else {
         updatedFilteredNews = updatedFilteredNews.filter(
           (item) => item.category === selectedFilter
@@ -157,9 +139,7 @@ const AllNews: React.FC = () => {
     setFilteredNews(updatedFilteredNews);
   };
 
-  const handleSearchChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
@@ -169,62 +149,6 @@ const AllNews: React.FC = () => {
     setSelectedDateFilter("All Dates");
     setSearchTerm("");
     setFilteredNews(news);
-  };
-
-  const handleBookmark = async (newsId: string, e: React.MouseEvent) => {
-    e.preventDefault();
-
-    // Check if user is authenticated
-    if (!user) {
-      Swal.fire({
-        icon: "warning",
-        title: "Not Authenticated",
-        text: "Please login to bookmark news.",
-        confirmButtonText: "OK",
-      });
-      return;
-    }
-
-    try {
-      const alreadyBookmarked = bookmarked.includes(newsId);
-      const updatedBookmarks = alreadyBookmarked
-        ? bookmarked.filter((id) => id !== newsId) // Remove bookmark
-        : [...bookmarked, newsId]; // Add bookmark
-
-      setBookmarked(updatedBookmarks);
-      localStorage.setItem(
-        "bookmarkedNews",
-        JSON.stringify(updatedBookmarks)
-      );
-
-      // Send POST request to add/remove bookmark in the backend
-      const url = alreadyBookmarked
-        ? "https://global-news-server-phi.vercel.app/remove-bookmark" // For removing bookmark
-        : "https://global-news-server-phi.vercel.app/bookmark"; // For adding bookmark
-
-      await axios.post(url, {
-        email: user.email, // Use the authenticated user's email
-        newsId,
-      });
-
-      Swal.fire({
-        icon: "success",
-        title: alreadyBookmarked ? "Bookmark Removed!" : "Bookmarked!",
-        text: alreadyBookmarked
-          ? "This item has been removed from your bookmarks."
-          : "This item has been added to your bookmarks.",
-        confirmButtonText: "OK",
-        timer: 2000,
-      });
-    } catch (error) {
-      console.error("Error bookmarking:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: "There was an error trying to bookmark this item. Please try again.",
-        confirmButtonText: "OK",
-      });
-    }
   };
 
   if (loading || authLoading) return <p>Loading...</p>;
@@ -309,9 +233,7 @@ const AllNews: React.FC = () => {
                   className="w-full h-48 object-cover rounded-md"
                 />
                 <div className="flex justify-between items-center my-3">
-                  <p className="text-sm text-gray-500 badge">
-                    {item.category}
-                  </p>
+                  <p className="text-sm text-gray-500 badge">{item.category}</p>
                   <p className="text-sm text-gray-300">
                     {new Date(item.date_time).toLocaleString()}
                   </p>
@@ -343,13 +265,11 @@ const AllNews: React.FC = () => {
               {/* Buttons Section */}
               <div className="flex justify-between items-center text-xl md:text-2xl my-3">
                 <MdFavoriteBorder />
-                <CiBookmark
-                  className={`cursor-pointer ${
-                    bookmarked.includes(item._id) ? "text-green-500" : ""
-                  }`}
-                  onClick={(e) => handleBookmark(item._id, e)}
-                />
-                <IoShareSocialOutline />
+
+                {/* Include the Bookmark component and pass newsId */}
+                <Bookmark newsId={item._id} />
+
+                <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${item._id}`} />
               </div>
             </div>
           ))}
