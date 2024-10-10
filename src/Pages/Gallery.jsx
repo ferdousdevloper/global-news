@@ -22,7 +22,7 @@ const Gallery = () => {
   };
 
   const frames = splitIntoFrames(images, 19);
-  console.log(frames)
+  // console.log(frames)
 
 
 
