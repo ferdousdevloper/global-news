@@ -43,7 +43,7 @@ const AllNews: React.FC = () => {
     const fetchNews = async () => {
       try {
         const response = await axios.get<NewsItem[]>(
-          "http://localhost:3001/news"
+          "https://global-news-server-phi.vercel.app/news"
         );
         setNews(response.data);
         setFilteredNews(response.data);
@@ -269,7 +269,7 @@ const AllNews: React.FC = () => {
                 {/* Include the Bookmark component and pass newsId */}
                 <Bookmark newsId={item._id} />
 
-                <ShareDropdown url={`http://localhost:3001/news/${item._id}`} />
+                <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${item._id}`} />
               </div>
             </div>
           ))}
