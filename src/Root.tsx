@@ -87,6 +87,10 @@ const Root = createBrowserRouter([
         path: "/contact",
         element: <Contact></Contact>,
       },
+      // {
+      //   path: "/gallery",
+      //   element: <Gallery></Gallery>,
+      // },
       {
         path: "/category/business",
         element: <Business />,

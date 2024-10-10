@@ -6,6 +6,8 @@ import { MdFavoriteBorder } from 'react-icons/md';
 import Swal from 'sweetalert2';
 import SportCard from './SportCard';
 import useAuth from '../hooks/useAuth';
+import Bookmark from '../Components/Bookmark';
+import ShareDropdown from '../Components/Home/ShareDropdown';
 
 const Sport = () => {
   const [sportsNews, setSportsNews] = useState([]);
@@ -13,11 +15,9 @@ const Sport = () => {
   const [liveSportsNews, setLiveSportsNews] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isBookmarked, setIsBookmarked] = useState(false); // Track bookmark status
 
   // Fetch user authentication
   const auth = useAuth();
-  const { user } = auth || {};
 
   useEffect(() => {
     const fetchSportsNews = async () => {
@@ -34,13 +34,6 @@ const Sport = () => {
         setPopularSportsNews(filteredPopularSportsNews);
         setLiveSportsNews(filteredLiveSportsNews || null);
         setLoading(false);
-
-        // Check if the live news is bookmarked
-        const storedBookmarks = localStorage.getItem("bookmarkedNews");
-        if (storedBookmarks) {
-          const bookmarkedIds = JSON.parse(storedBookmarks);
-          setIsBookmarked(bookmarkedIds.includes(filteredLiveSportsNews._id));
-        }
       } catch (err) {
         setError('Failed to fetch news');
         setLoading(false);
@@ -50,53 +43,7 @@ const Sport = () => {
     fetchSportsNews();
   }, []);
 
-  // Bookmark or remove bookmark function
-  const handleBookmark = async () => {
-    if (!user) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Not Authenticated',
-        text: 'Please login to bookmark news.',
-        confirmButtonText: 'OK',
-      });
-      return;
-    }
-
-    const url = isBookmarked ? 'http://localhost:3001/remove-bookmark' : 'http://localhost:3001/bookmark';
-    const method = isBookmarked ? 'DELETE' : 'POST';
-
-    try {
-      await axios({
-        method: method,
-        url: url,
-        data: { email: user.email, newsId: liveSportsNews._id },
-      });
-
-      // Toggle bookmark status
-      setIsBookmarked(!isBookmarked);
-      const updatedBookmarks = JSON.parse(localStorage.getItem("bookmarkedNews") || "[]");
-      if (isBookmarked) {
-        const newBookmarks = updatedBookmarks.filter(id => id !== liveSportsNews._id);
-        localStorage.setItem("bookmarkedNews", JSON.stringify(newBookmarks));
-      } else {
-        updatedBookmarks.push(liveSportsNews._id);
-        localStorage.setItem("bookmarkedNews", JSON.stringify(updatedBookmarks));
-      }
-
-      Swal.fire({
-        icon: 'success',
-        title: isBookmarked ? 'Removed from bookmarks!' : 'Bookmarked!',
-        text: isBookmarked ? 'This news item has been removed from your bookmarks.' : 'This news item has been added to your bookmarks.',
-        confirmButtonText: 'OK',
-      });
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-      });
-    }
-  };
+  
 
   if (loading) {
     return <div>Loading...</div>;
@@ -138,11 +85,8 @@ const Sport = () => {
               )}
               <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
                 <MdFavoriteBorder />
-                <CiBookmark 
-                  onClick={handleBookmark} 
-                  className={`cursor-pointer ${isBookmarked ? 'text-green-500' : 'text-white'}`}
-                />
-                <IoShareSocialOutline />
+                <Bookmark newsId={liveSportsNews._id} />
+                <ShareDropdown url={`http://localhost:3001/news/${liveSportsNews._id}`} />
               </div>
             </div>
           </div>
