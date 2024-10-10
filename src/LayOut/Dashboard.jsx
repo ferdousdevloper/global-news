@@ -6,6 +6,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
 import { useState } from "react";
 import RequestReporterModal from "../Components/Dashboard/RequestReporterModal";
+import { ToastBar, Toaster } from "react-hot-toast";
 
 
 const Dashboard = () => {
@@ -34,12 +35,13 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="flex">
+    <div className="flex glass">
+      <Toaster></Toaster>
       {/* dashboard side bar */}
       <div
-        className={`w-64 min-h-screen bg-[#1A1A1A] text-white ${
-          sidebarOpen ? "block transition-all duration-300" : "hidden transition-all duration-300"
-        } lg:block`}
+        className={`w-64 min-h-screen bg-[#1A1A1A] text-white glass ${
+          sidebarOpen ? "block transition-all duration-300 glass" : "hidden transition-all duration-300"
+        } lg:block glass`}
       >
         <div>
           <img

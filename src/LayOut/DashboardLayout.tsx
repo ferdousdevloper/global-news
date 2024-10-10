@@ -1,11 +1,13 @@
 import { Outlet } from 'react-router-dom'
 import Sidebar from '../Components/Dashboard/Sidebar/Sidebar'
+import { Toaster } from 'react-hot-toast'
 
 
 
 const DashboardLayout = () => {
   return (
-    <div className='relative min-h-screen md:flex'>
+    <div className='relative min-h-screen md:flex bg-neutral-950 glass'>
+      <Toaster></Toaster>
       {/* Sidebar */}
       <Sidebar /> 
 

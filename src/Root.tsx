@@ -49,7 +49,7 @@ const Root = createBrowserRouter([
         path: "/category/:popularId",
         element: <PopularDetails></PopularDetails>,
         loader: ({ params }) =>
-          fetch(`https://global-news-server-phi.vercel.app/news/${params.popularId}`),
+          fetch(`http://localhost:3001/news/${params.popularId}`),
       },
       {
         path: "/category/politics",
