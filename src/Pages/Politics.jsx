@@ -1,8 +1,8 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { CiBookmark } from "react-icons/ci";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { MdFavoriteBorder } from "react-icons/md";
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Politics = () => {
@@ -90,7 +90,7 @@ const Politics = () => {
         <p className="mt-3">
           Stay informed with the latest political news from around the world.
           Explore in-depth coverage, analysis, and updates on global political
-          events, government policies, elections, and more.
+          events, government policies, elections, and more..
         </p>
       </div>
 

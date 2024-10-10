@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { useParams, useNavigate } from 'react-router-dom';
 
 const UpdateNews = () => {
   const { id } = useParams(); // Get the news ID from the URL parameters
@@ -13,7 +13,7 @@ const UpdateNews = () => {
     region: '',
     description: '',
     date_time: '',
-    breaking_news: false,   
+    breaking_news: false,
     popular_news: false,
   });
 

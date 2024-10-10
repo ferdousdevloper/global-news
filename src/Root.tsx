@@ -32,6 +32,7 @@ import DeleteArticles from "./Pages/Dashboard/ReporterPages/DeleteArticles";
 import SavedArticles from "./Pages/Dashboard/NormalUser/SavedArticles";
 import ManageBookmarks from "./Pages/Dashboard/NormalUser/ManageBookmarks";
 import ManageNews from "./Pages/Dashboard/ManageNews";
+import PopularDetails from "./Pages/PopularDetails";
 import Technology from "./Pages/Technology";
 
 const Root = createBrowserRouter([
@@ -43,6 +44,12 @@ const Root = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/category/:popularId",
+        element: <PopularDetails></PopularDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3001/news/${params.popularId}`),
       },
       {
         path: "/category/politics",
