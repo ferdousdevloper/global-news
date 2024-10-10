@@ -30,7 +30,7 @@ const PopularDetails = () => {
             .catch(error => console.error('Error fetching JSON:', error));
     }, []);
 
-  
+
 
     return (
         <div className='mt-28 md:grid grid-cols-9'>
@@ -56,10 +56,10 @@ const PopularDetails = () => {
                         <Tabs>
                             <TabList>
                                 <Tab>
-                                    <h2 className="py-4 text-2xl font-bold text-center text-white">Latest News</h2>
+                                    <h2 className="py-4 text-2xl font-bold text-center text-[#02AA08] ">Latest News</h2>
                                 </Tab>
                                 <Tab>
-                                    <h2 className="py-4 text-2xl font-bold text-center text-white">Popular News</h2>
+                                    <h2 className="py-4 text-2xl font-bold text-center text-[#02AA08]">Popular News</h2>
                                 </Tab>
                             </TabList>
 
@@ -67,7 +67,7 @@ const PopularDetails = () => {
                                 <div className="divide-y  dark:divide-[#02AA08] mb-4">
 
                                     {
-                                        latest?.map(ltNews => <div className="grid justify-center grid-cols-4 mx-auto space-y-8 lg:space-y-0 md:pt-5">
+                                        latest?.map(ltNews => <Link to={`/news/${ltNews?._id}`}> <div className="grid justify-center grid-cols-4 mx-auto space-y-8 lg:space-y-0 md:pt-5">
                                             <div className="flex items-center justify-center lg:col-span-1 col-span-full">
                                                 <img className='md:h-full md:py-2' src={ltNews.image} alt="" />
                                             </div>
@@ -76,7 +76,7 @@ const PopularDetails = () => {
                                                 <span className="text-sm font-bold md:text-sm text-[#d8cece]">{ltNews.title}</span>
                                                 <span className="mt-4 text-gray-400">{ltNews.description.slice(0, 50)}.... </span>
                                             </div>
-                                        </div>)
+                                        </div> </Link>)
                                     }
 
                                 </div>
