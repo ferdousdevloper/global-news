@@ -20,7 +20,7 @@ const Banner: React.FC = () => {
 
   useEffect(() => {
     // Fetch the data from the dummy JSON file
-    fetch('http://localhost:3001/news')
+    fetch('http://localhost:3001')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -32,7 +32,7 @@ const Banner: React.FC = () => {
         const latestBreakingNews = data
           .filter((item: NewsItem) => item.breaking_news)
           .sort((a: NewsItem, b: NewsItem) => new Date(b.date_time).getTime() - new Date(a.date_time).getTime());
-
+        
         setNews(latestBreakingNews.slice(0, 5)); // Get the top 5 latest breaking news
       })
       .catch((error) => console.error('Error fetching data:', error));
