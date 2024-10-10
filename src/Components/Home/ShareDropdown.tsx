@@ -34,14 +34,14 @@ const ShareDropdown: React.FC<ShareDropdownProps> = ({ url }) => {
   };
 
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block z-50">
       <IoShareSocialOutline
-        className="cursor-pointer text-slate-100"
+        className="cursor-pointer text-slate-100 hover:text-black z-50"
         onClick={() => setIsOpen((prev) => !prev)}
       />
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bgblack rounded shadow-lg z-10">
-          <div className="flex flex-col p-2">
+        <div className="absolute right-0 mt-2 w-48 bg-black rounded shadow-lg z-50">
+          <div className="flex flex-col p-2 z-50">
             <button onClick={() => handleShare("facebook")} className="flex items-center p-2 hover:bg-gray-200">
               <FaFacebookF className="mr-2" /> Facebook
             </button>
