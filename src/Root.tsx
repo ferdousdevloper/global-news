@@ -12,7 +12,6 @@ import Latest from "./Pages/Latest";
 import Entertainment from "./Pages/Entertainment";
 import Contact from "./Pages/Contact";
 import Business from "./Pages/Business";
-import Tech from "./Pages/Tech";
 import Feature from "./Pages/Feature";
 import Opinion from "./Pages/Opinion";
 import Sport from "./Pages/Sport";
@@ -22,7 +21,7 @@ import NewsDetail from "./Pages/NewsDetails";
 //import Dashboard from "./LayOut/Dashboard";
 import Profile from "./Pages/Dashboard/Profile";
 import AllUsers from "./Pages/Dashboard/AllUsers";
-import NewsForm from "./Pages/NewsForm"
+import NewsForm from "./Pages/NewsForm";
 import DashboardLayout from "./LayOut/DashboardLayout";
 import ReporterRequestManagement from "./Pages/Dashboard/AdminPages/ReporterRequestManagement";
 import BanSuspendUsers from "./Pages/Dashboard/AdminPages/BanSuspendUsers";
@@ -34,11 +33,7 @@ import SavedArticles from "./Pages/Dashboard/NormalUser/SavedArticles";
 import ManageBookmarks from "./Pages/Dashboard/NormalUser/ManageBookmarks";
 import ManageNews from "./Pages/Dashboard/ManageNews";
 import PopularDetails from "./Pages/PopularDetails";
-
-
-
-
-
+import Technology from "./Pages/Technology";
 
 const Root = createBrowserRouter([
   {
@@ -53,7 +48,8 @@ const Root = createBrowserRouter([
       {
         path: "/category/:popularId",
         element: <PopularDetails></PopularDetails>,
-        loader: ({ params }) => fetch(`http://localhost:3001/news/${params.popularId}`)
+        loader: ({ params }) =>
+          fetch(`http://localhost:3001/news/${params.popularId}`),
       },
       {
         path: "/category/politics",
@@ -96,8 +92,8 @@ const Root = createBrowserRouter([
         element: <Business />,
       },
       {
-        path: "/category/tech",
-        element: <Tech />,
+        path: "/category/technology",
+        element: <Technology />,
       },
       {
         path: "/category/feature",
@@ -122,7 +118,7 @@ const Root = createBrowserRouter([
             <NewsDetail />
           </PrivateRoute>
         ),
-      }
+      },
     ],
   },
   // DASHBOARD ROUTE START ----------------------------------------
@@ -145,37 +141,37 @@ const Root = createBrowserRouter([
         element: <AllUsers></AllUsers>,
       },
       {
-        path: '/dashboard/reporter-request',
-        element: <ReporterRequestManagement />
+        path: "/dashboard/reporter-request",
+        element: <ReporterRequestManagement />,
       },
       {
-        path: '/dashboard/ban-suspend-users',
-        element: <BanSuspendUsers />
+        path: "/dashboard/ban-suspend-users",
+        element: <BanSuspendUsers />,
       },
       {
-        path: '/dashboard/manage-news-articles',
-        element: <ManageNews/>
+        path: "/dashboard/manage-news-articles",
+        element: <ManageNews />,
       },
       //Reporter Dashboard
       {
-        path: '/dashboard/submitted-articles',
-        element: <SubmittedArticles />
+        path: "/dashboard/submitted-articles",
+        element: <SubmittedArticles />,
       },
       {
-        path: '/dashboard/edit-articles/:articleId',
-        element: <EditArticles/>
+        path: "/dashboard/edit-articles/:articleId",
+        element: <EditArticles />,
       },
-      
+
       //Normal User Dashboard
       {
-        path: '/dashboard/saved-articles',
-        element: <SavedArticles />
+        path: "/dashboard/saved-articles",
+        element: <SavedArticles />,
       },
       {
-        path: '/dashboard/manage-bookmarks',
-        element: <ManageBookmarks />
-      }
-    ]
+        path: "/dashboard/manage-bookmarks",
+        element: <ManageBookmarks />,
+      },
+    ],
   },
 ]);
 export default Root;
