@@ -78,7 +78,7 @@ const Bookmark: React.FC<BookmarkProps> = ({ newsId }) => {
 
   return (
     <CiBookmark
-      className={`cursor-pointer ${bookmarked ? "text-green-500" : ""}`}
+      className={`cursor-pointer text-slate-100 hover:text-black ${bookmarked ? "text-green-500" : ""}`}
       onClick={handleBookmark}
     />
   );
