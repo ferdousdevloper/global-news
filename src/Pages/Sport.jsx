@@ -22,7 +22,7 @@ const Sport = () => {
   useEffect(() => {
     const fetchSportsNews = async () => {
       try {
-        const response = await axios.get('https://global-news-server-phi.vercel.app/news');
+        const response = await axios.get('http://localhost:3001/news');
         const newsData = response.data;
 
         // Filter for sports news
@@ -86,7 +86,8 @@ const Sport = () => {
               <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
                 <MdFavoriteBorder />
                 <Bookmark newsId={liveSportsNews._id} />
-                <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${liveSportsNews._id}`} />
+                <ShareDropdown url={`http://localhost:3001/news/${liveSportsNews._id}`} />
+                <IoShareSocialOutline />
               </div>
             </div>
           </div>

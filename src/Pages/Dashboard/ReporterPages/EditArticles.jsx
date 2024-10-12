@@ -24,7 +24,7 @@ const EditArticles = () => {
       }
 
       try {
-        const response = await axios.get(`https://global-news-server-phi.vercel.app/news/get-article/${articleId}`);
+        const response = await axios.get(`http://localhost:3001/news/get-article/${articleId}`);
         setArticle(response.data);
       } catch (err) {
         setError(err.response?.data?.message || 'Error fetching article data');
@@ -43,7 +43,7 @@ const EditArticles = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`https://global-news-server-phi.vercel.app/news/edit-article/${articleId}`, article);
+      await axios.patch(`http://localhost:3001/news/edit-article/${articleId}`, article);
       toast.success("Article updated successfully")
       navigate('/dashboard/submitted-articles'); // Redirect to submitted articles page after successful edit
     } catch (err) {

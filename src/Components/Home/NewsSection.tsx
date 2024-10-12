@@ -5,6 +5,7 @@ import axios from "axios";
 import ShareDropdown from "./ShareDropdown";
 import useAuth from "../../hooks/useAuth";
 import Bookmark from "../Bookmark";
+import Favorite from "../Favorite";
 
 interface NewsItem {
   category: string;
@@ -25,7 +26,7 @@ const NewsSection: React.FC = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("https://global-news-server-phi.vercel.app/news");
+        const response = await axios.get("http://localhost:3001/news");
         setNews(response.data);
         setLoading(false);
       } catch (err) {
@@ -74,10 +75,10 @@ const NewsSection: React.FC = () => {
                 </div>
 
                 <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
-                  <MdFavoriteBorder />
+                <Favorite newsId={item._id} />
                   {/* Use the Bookmark component here */}
                   <Bookmark newsId={item._id} />
-                  <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${item._id}`} />
+                  <ShareDropdown url={`http://localhost:3001/news/${item._id}`} />
                 </div>
               </div>
             ))}
@@ -103,10 +104,10 @@ const NewsSection: React.FC = () => {
                 </div>
 
                 <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
-                  <MdFavoriteBorder />
+                <Favorite newsId={item._id} />
                   {/* Use the Bookmark component here as well */}
                   <Bookmark newsId={item._id} />
-                  <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${item._id}`} />
+                  <ShareDropdown url={`http://localhost:3001/news/${item._id}`} />
                 </div>
               </div>
             ))}

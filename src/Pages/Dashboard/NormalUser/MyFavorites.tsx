@@ -1,39 +1,39 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import useAuth from '../../../hooks/useAuth';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MdDelete } from 'react-icons/md';
+import { AiOutlineDelete } from 'react-icons/ai';
+import useAuth from '../../../hooks/useAuth';
 
-interface Bookmark {
+interface Article {
   _id: string;
   title: string;
   image: string;
   category: string;
   description: string;
-  timestamp: string;
+  date_time: string;
   authorName: string;
 }
 
-const ManageBookmarks: React.FC = () => {
-  const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
+const MyFavorites: React.FC = () => {
+  const [favoriteArticles, setFavoriteArticles] = useState<Article[]>([]);
   const auth = useAuth();
   const { user, loading } = auth || {};
 
   useEffect(() => {
-    const fetchUserBookmarks = async () => {
+    const fetchUserFavorites = async () => {
       if (user) {
         try {
-          const bookmarksResponse = await axios.get(`http://localhost:3001/bookmarks/${user.email}`);
-          const bookmarks = bookmarksResponse.data;
+          const favoritesResponse = await axios.get(`http://localhost:3001/favorites/${user.email}`);
+          const favorites = favoritesResponse.data;
 
-          const articlePromises = bookmarks.map((newsId: string) =>
+          const articlePromises = favorites.map((newsId: string) =>
             axios.get(`http://localhost:3001/news/${newsId}`)
           );
 
           const articlesResponses = await Promise.all(articlePromises);
-          const articles: Bookmark[] = articlesResponses.map((res) => res.data);
+          const articles: Article[] = articlesResponses.map((res) => res.data);
 
-          setBookmarks(articles);
+          setFavoriteArticles(articles);
         } catch (error) {
           console.error('Error fetching favorite articles:', error);
         }
@@ -41,17 +41,17 @@ const ManageBookmarks: React.FC = () => {
     };
 
     if (!loading && user) {
-      fetchUserBookmarks();
+      fetchUserFavorites();
     }
   }, [user, loading]);
 
-  const handleRemoveBookmark = async (newsId: string) => {
+  const handleRemoveFavorite = async (newsId: string) => {
     if (user) {
       try {
-        await axios.delete('http://localhost:3001/bookmarks', {
+        await axios.delete('http://localhost:3001/favorites', {
           data: { email: user.email, newsId },
         });
-        setBookmarks((prevArticles) => prevArticles.filter(article => article._id !== newsId));
+        setFavoriteArticles((prevArticles) => prevArticles.filter(article => article._id !== newsId));
       } catch (error) {
         console.error('Error removing favorite article:', error);
       }
@@ -67,16 +67,15 @@ const ManageBookmarks: React.FC = () => {
   }
 
   return (
-    <div className="bg-neutral-950 p-6 glass rounded-lg">
-      <div className="md:container mx-auto">
-        <h1 className="text-3xl font-bold mb-6 text-center text-slate-50">My Bookmarks</h1>
-        <hr className='my-5' />
-        {bookmarks.length > 0 ? (
-          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {bookmarks.map((article) => (
+    <div className="bg-neutral-950 p-6">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-3xl font-bold mb-6 text-center text-slate-50">My Favorites</h1>
+        {favoriteArticles.length > 0 ? (
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {favoriteArticles.map((article) => (
               <li
                 key={article._id}
-                className="border p-4 rounded-lg shadow-lg bg-neutral-800 glass flex flex-col h-full"
+                className="border p-4 rounded-lg shadow-lg bg-neutral-800 glass flex flex-col h-full relative"
               >
                 <img src={article.image} alt={article.title} className="w-full h-48 object-cover mb-4 rounded-md" />
                 <h2 className="text-xl font-semibold text-slate-50">{article.title}</h2>
@@ -91,20 +90,17 @@ const ManageBookmarks: React.FC = () => {
                     article.description
                   )}
                 </p>
-                <div className='flex justify-between items-center'>
-                  <div>
-                  <p className="text-gray-400">By {article.authorName}</p>
-                  <p className="text-gray-400">{new Date(article.timestamp).toLocaleDateString()}</p>
-                  </div>
-                  {/* Delete Icon */}
+                <p className="text-gray-400">By {article.authorName}</p>
+                <p className="text-gray-400">{new Date(article.date_time).toLocaleDateString()}</p>
+
+                {/* Delete Icon */}
                 <button
-                  className="text-red-500 hover:text-red-700"
-                  onClick={() => handleRemoveBookmark(article._id)}
+                  className="absolute top-2 right-2 text-red-500 hover:text-red-700"
+                  onClick={() => handleRemoveFavorite(article._id)}
+                  style={{ transform: 'translate(50%, -50%)' }} // Adjust position of the icon
                 >
-                  <MdDelete  size={24} />
+                  <AiOutlineDelete size={24} />
                 </button>
-                </div>
-                
               </li>
             ))}
           </ul>
@@ -116,4 +112,4 @@ const ManageBookmarks: React.FC = () => {
   );
 };
 
-export default ManageBookmarks;
+export default MyFavorites;
