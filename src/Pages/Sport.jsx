@@ -60,14 +60,14 @@ const Sport = () => {
         <p className='mt-3'>Sports bring people together...</p>
       </div>
 
-      {/* Live Sports News */}
-      {liveSportsNews && (
+            {/* Live Sports News */}
+            {liveSportsNews && (
         <div className="flex flex-col md:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden glass my-10">
-          <div className="lg:w-1/2">
+          <div className="md:w-1/2 w-full">
             <img
               src={liveSportsNews.image}
               alt={liveSportsNews.title}
-              className="w-full h-full object-cover p-3 lg:p-0"
+              className="w-full h-full object-cover"
             />
           </div>
           <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">

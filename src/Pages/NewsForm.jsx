@@ -79,7 +79,7 @@ const NewsComponent = () => {
   return (
     <div className="min-h-screen p-6 mt-16">
       <div className="container mx-auto max-w-7xl">
-        <h1 className="text-xl md:text-6xl fontBebas font-extrabold text-center mb-10">
+        <h1 className="text-xl md:text-6xl fontBebas font-extrabold text-center mb-10 text-gray-100">
           POST ARTICLE
         </h1>
         <hr className="my-10 border-2" />
