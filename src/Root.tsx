@@ -34,6 +34,7 @@ import ManageBookmarks from "./Pages/Dashboard/NormalUser/ManageBookmarks";
 import ManageNews from "./Pages/Dashboard/ManageNews";
 import PopularDetails from "./Pages/PopularDetails";
 import Technology from "./Pages/Technology";
+import MyFavorites from "./Pages/Dashboard/NormalUser/MyFavorites";
 
 const Root = createBrowserRouter([
   {
@@ -171,6 +172,10 @@ const Root = createBrowserRouter([
         path: "/dashboard/manage-bookmarks",
         element: <ManageBookmarks />,
       },
+      {
+        path: '/dashboard/my-favorites',
+        element: <MyFavorites/>
+      }
     ],
   },
 ]);

@@ -85,10 +85,8 @@ const Sport = () => {
               )}
               <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
                 <MdFavoriteBorder />
-                <CiBookmark
-                  onClick={handleBookmark}
-                  className={`cursor-pointer ${isBookmarked ? 'text-green-500' : 'text-white'}`}
-                />
+                <Bookmark newsId={liveSportsNews._id} />
+                <ShareDropdown url={`http://localhost:3001/news/${liveSportsNews._id}`} />
                 <IoShareSocialOutline />
               </div>
             </div>

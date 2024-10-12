@@ -1,4 +1,3 @@
-// Bookmark.tsx
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { CiBookmark } from "react-icons/ci";
@@ -10,19 +9,16 @@ interface BookmarkProps {
 }
 
 const Bookmark: React.FC<BookmarkProps> = ({ newsId }) => {
-  const [bookmarked, setBookmarked] = useState(false); // Use boolean to track single bookmark state
+  const [bookmarked, setBookmarked] = useState(false);
   const auth = useAuth();
   const { user } = auth || {};
 
   useEffect(() => {
     if (user) {
-      // Fetch bookmarked news from the DB when the component loads
       const fetchBookmarkedNews = async () => {
         try {
           const response = await axios.get(`http://localhost:3001/bookmarks/${user.email}`);
           const userBookmarks = response.data;
-
-          // Set bookmarked state if the newsId is already in user's bookmarks
           setBookmarked(userBookmarks.includes(newsId));
         } catch (err) {
           console.error("Error fetching bookmarks:", err);
@@ -52,8 +48,6 @@ const Bookmark: React.FC<BookmarkProps> = ({ newsId }) => {
         : "http://localhost:3001/bookmark";
 
       await axios.post(url, { email: user.email, newsId });
-
-      // Toggle the bookmarked state after successful response
       setBookmarked(!bookmarked);
 
       Swal.fire({
@@ -78,7 +72,7 @@ const Bookmark: React.FC<BookmarkProps> = ({ newsId }) => {
 
   return (
     <CiBookmark
-      className={`cursor-pointer text-slate-100 hover:text-black ${bookmarked ? "text-green-500" : ""}`}
+      className={`cursor-pointer text-slate-100 hover:text-black ${bookmarked ? "text-green-500" : "text-slate-100"}`}
       onClick={handleBookmark}
     />
   );
