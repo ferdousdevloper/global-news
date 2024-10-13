@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import ShareDropdown from "../Home/ShareDropdown";
 import Bookmark from "../Bookmark";
+import Favorite from "../Favorite";
 
 interface NewsArticle {
   _id: string;
@@ -99,7 +100,7 @@ const LiveNews: React.FC = () => {
           <div>-
             <p className="text-gray-100 text-sm mb-2">{formattedDate}</p>
             <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
-              <MdFavoriteBorder />
+            <Favorite newsId={latestNews._id} />
               {/* Use Bookmark component */}
               <Bookmark newsId={latestNews._id} />
               <ShareDropdown url={`http://localhost:3001/news/${latestNews._id}`} />

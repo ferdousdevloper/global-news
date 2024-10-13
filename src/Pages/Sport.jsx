@@ -8,6 +8,7 @@ import SportCard from './SportCard';
 import useAuth from '../hooks/useAuth';
 import Bookmark from '../Components/Bookmark';
 import ShareDropdown from '../Components/Home/ShareDropdown';
+import Favorite from '../Components/Favorite';
 
 const Sport = () => {
   const [sportsNews, setSportsNews] = useState([]);
@@ -84,7 +85,7 @@ const Sport = () => {
                 </span>
               )}
               <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
-                <MdFavoriteBorder />
+              <Favorite newsId={liveSportsNews._id} />
                 <Bookmark newsId={liveSportsNews._id} />
                 <ShareDropdown url={`http://localhost:3001/news/${liveSportsNews._id}`} />
                 <IoShareSocialOutline />

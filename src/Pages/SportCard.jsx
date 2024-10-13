@@ -3,6 +3,7 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
 import ShareDropdown from "../Components/Home/ShareDropdown";
 import Bookmark from "../Components/Bookmark";
+import Favorite from "../Components/Favorite";
 
 const SportCard = ({ news }) => {
     const {
@@ -51,7 +52,7 @@ const SportCard = ({ news }) => {
 
             {/* Buttons Section */}
             <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
-                <MdFavoriteBorder />
+            <Favorite newsId={news._id} />
                 <Bookmark newsId={news._id} />
                 <ShareDropdown url={`http://localhost:3001/news/${news._id}`} />
             </div>

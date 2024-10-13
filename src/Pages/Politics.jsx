@@ -6,6 +6,7 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
 import ShareDropdown from "../Components/Home/ShareDropdown";
 import Bookmark from "../Components/Bookmark";
+import Favorite from "../Components/Favorite";
 
 const Politics = () => {
   const [allNews, setAllNews] = useState([]);
@@ -120,7 +121,7 @@ const Politics = () => {
                 </span>
               )}
               <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
-                <MdFavoriteBorder />
+              <Favorite newsId={livePoliticsNews._id} />
                 <Bookmark newsId={livePoliticsNews._id} />
                 <ShareDropdown url={`http://localhost:3001/news/${livePoliticsNews._id}`} />
               </div>
@@ -171,7 +172,7 @@ const Politics = () => {
                   )}
                 </p>
                 <div className="flex justify-between items-center text-xl md:text-2xl my-3">
-                  <MdFavoriteBorder />
+                <Favorite newsId={item._id} />
                   <Bookmark newsId={item._id} />
                   <ShareDropdown url={`http://localhost:3001/news/${item._id}`} />
                 </div>

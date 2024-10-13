@@ -44,10 +44,17 @@ const Bookmark: React.FC<BookmarkProps> = ({ newsId }) => {
 
     try {
       const url = bookmarked
-        ? "http://localhost:3001/remove-bookmark"
-        : "http://localhost:3001/bookmark";
+        ? "http://localhost:3001/bookmarks"  // DELETE route for removing bookmark
+        : "http://localhost:3001/bookmark";  // POST route for adding bookmark
 
-      await axios.post(url, { email: user.email, newsId });
+      const method = bookmarked ? 'delete' : 'post';
+
+      await axios({
+        method,
+        url,
+        data: { email: user.email, newsId },
+      });
+
       setBookmarked(!bookmarked);
 
       Swal.fire({
@@ -72,7 +79,7 @@ const Bookmark: React.FC<BookmarkProps> = ({ newsId }) => {
 
   return (
     <CiBookmark
-      className={`cursor-pointer  hover:text-black ${bookmarked ? "text-green-500" : "text-slate-100"}`}
+      className={`cursor-pointer hover:text-black ${bookmarked ? "text-green-500" : "text-slate-100"}`}
       onClick={handleBookmark}
     />
   );

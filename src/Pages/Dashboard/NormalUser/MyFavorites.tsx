@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AiOutlineDelete } from 'react-icons/ai';
+import { MdDelete } from 'react-icons/md';  // Updated delete icon
 import useAuth from '../../../hooks/useAuth';
 
 interface Article {
@@ -93,13 +93,12 @@ const MyFavorites: React.FC = () => {
                 <p className="text-gray-400">By {article.authorName}</p>
                 <p className="text-gray-400">{new Date(article.date_time).toLocaleDateString()}</p>
 
-                {/* Delete Icon */}
+                {/* Delete Icon - Positioned at bottom right */}
                 <button
-                  className="absolute top-2 right-2 text-red-500 hover:text-red-700"
+                  className="absolute bottom-2 right-2 text-red-500 hover:text-red-700"
                   onClick={() => handleRemoveFavorite(article._id)}
-                  style={{ transform: 'translate(50%, -50%)' }} // Adjust position of the icon
                 >
-                  <AiOutlineDelete size={24} />
+                  <MdDelete size={24} />
                 </button>
               </li>
             ))}
