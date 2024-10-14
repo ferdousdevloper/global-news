@@ -27,8 +27,7 @@ const AllNews: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(1); // Default to 1 in case the total isn't returned from server
-
-  const newsPerPage = 9; // Number of news items per page
+  const [newsPerPage, setNewsPerPage] = useState<number>(9); // News items per page
 
   const auth = useAuth();
   const { loading: authLoading } = auth || {};
@@ -42,8 +41,9 @@ const AllNews: React.FC = () => {
         const fetchedNews = response.data;
         setNews(fetchedNews);
 
-        // Update total pages. If the data doesn't have the total, we'll estimate it based on response length.
-        const estimatedTotalPages = fetchedNews.length < newsPerPage ? currentPage + 1 : currentPage + 2;
+        // Estimate total pages based on the number of items returned and the current page.
+        const estimatedTotalPages =
+          fetchedNews.length < newsPerPage ? currentPage + 1 : currentPage + 2;
         setTotalPages(estimatedTotalPages);
 
         setLoading(false);
@@ -54,20 +54,32 @@ const AllNews: React.FC = () => {
     };
 
     fetchNews();
-  }, [currentPage]);
+  }, [currentPage, newsPerPage]);
 
-  const handlePageChange = (newPage: number) => {
-    if (newPage >= 0 && newPage < totalPages) {
-      setCurrentPage(newPage);
-    }
+  const handlePrevious = () => {
+    if (currentPage > 0) setCurrentPage(currentPage - 1);
   };
+
+  const handleNext = () => {
+    if (currentPage < totalPages - 1) setCurrentPage(currentPage + 1);
+  };
+
+  const handleNewsPerPage = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setNewsPerPage(Number(event.target.value));
+    setCurrentPage(0); // Reset to the first page
+  };
+
+  const pages = Array.from({ length: totalPages }, (_, index) => index);
 
   if (loading || authLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div className="pt-10 container mx-auto px-4">
+      {/* Live News Section */}
       <LiveNews />
+
+      {/* All News Section */}
       <div className="p-6 text-white">
         <h1 className="text-2xl md:text-3xl font-bold mb-4">All News</h1>
 
@@ -78,7 +90,6 @@ const AllNews: React.FC = () => {
               key={item._id}
               className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 glass"
             >
-              {/* Image and Title Link */}
               <Link to={`/news/${item._id}`}>
                 <img
                   src={item.image}
@@ -97,7 +108,6 @@ const AllNews: React.FC = () => {
               </Link>
               <hr className="my-4" />
 
-              {/* Description with "See More" */}
               <p className="text-gray-300 mt-1">
                 {item.description.length > 300 ? (
                   <>
@@ -115,7 +125,6 @@ const AllNews: React.FC = () => {
                 )}
               </p>
 
-              {/* Buttons Section */}
               <div className="flex justify-between items-center text-xl md:text-2xl my-3">
                 <Favorite newsId={item._id} />
                 <Bookmark newsId={item._id} />
@@ -126,24 +135,62 @@ const AllNews: React.FC = () => {
         </div>
 
         {/* Pagination Section */}
-        <div className="flex justify-center mt-6">
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 0}
-            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 mr-2"
-          >
-            Previous
-          </button>
-          <span className="px-4 py-2 text-sm text-gray-300">
-            Page {currentPage + 1} of {totalPages}
-          </span>
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages - 1}
-            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 ml-2"
-          >
-            Next
-          </button>
+        <div className="flex justify-center items-center py-4">
+          {/* Previous Button */}
+          <p>
+            <button
+              className="btn mr-1 bg-gray-800 text-white"
+              onClick={handlePrevious}
+              disabled={currentPage === 0} // Disable if on the first page
+            >
+              Previous
+            </button>
+          </p>
+
+          {/* Page Numbers */}
+          {pages.map((page) => (
+            <button
+              key={page}
+              className={`${
+                currentPage === page
+                  ? "btn bg-red-900 text-white"
+                  : "btn mr-1 bg-gray-800 text-white"
+              }`}
+              onClick={() => setCurrentPage(page)}
+            >
+              {page + 1}
+            </button>
+          ))}
+
+          {/* Next Button */}
+          <p>
+            <button
+              className="btn ml-1 bg-gray-800 text-white"
+              onClick={handleNext}
+              disabled={currentPage === totalPages - 1} // Disable if on the last page
+            >
+              Next
+            </button>
+          </p>
+
+          {/* News Per Page Selector */}
+          <label htmlFor="" className="ml-2 flex justify-center items-center">
+            <div>
+              <span className="text-white px-2">News Per Page:</span>
+            </div>
+            <div>
+              <select
+                value={newsPerPage}
+                onChange={handleNewsPerPage}
+                className="btn bg-gray-800 text-white"
+              >
+                <option value="4">6</option>
+                <option value="9">12</option>
+                <option value="20">18</option>
+                <option value="20">24</option>
+              </select>
+            </div>
+          </label>
         </div>
       </div>
     </div>

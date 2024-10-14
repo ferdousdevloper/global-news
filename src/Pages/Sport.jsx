@@ -88,7 +88,7 @@ const Sport = () => {
               <Favorite newsId={liveSportsNews._id} />
                 <Bookmark newsId={liveSportsNews._id} />
                 <ShareDropdown url={`http://localhost:3001/news/${liveSportsNews._id}`} />
-                <IoShareSocialOutline />
+                
               </div>
             </div>
           </div>

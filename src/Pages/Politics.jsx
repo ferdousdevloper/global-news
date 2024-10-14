@@ -210,7 +210,7 @@ const Politics = () => {
                   </p>
                   <hr className="my-2" />
                   <div className="flex justify-around items-center text-lg md:text-xl my-1 text-slate-100">
-                    <MdFavoriteBorder />
+                  <Favorite newsId={popularSingleNews._id} />
                     <Bookmark newsId={popularSingleNews._id} />
                     <ShareDropdown url={`http://localhost:3001/news/${popularSingleNews._id}`} />
                   </div>
