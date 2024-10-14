@@ -27,7 +27,7 @@ const AllNews: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(1); // Default to 1 in case the total isn't returned from server
-  const [newsPerPage, setNewsPerPage] = useState<number>(9); // News items per page
+  const [newsPerPage, setNewsPerPage] = useState<number>(12); // News items per page
 
   const auth = useAuth();
   const { loading: authLoading } = auth || {};
@@ -184,10 +184,10 @@ const AllNews: React.FC = () => {
                 onChange={handleNewsPerPage}
                 className="btn bg-gray-800 text-white"
               >
-                <option value="4">6</option>
-                <option value="9">12</option>
-                <option value="20">18</option>
-                <option value="20">24</option>
+                <option value="6">6</option>
+                <option value="12">12</option>
+                <option value="18">18</option>
+                <option value="24">24</option>
               </select>
             </div>
           </label>
