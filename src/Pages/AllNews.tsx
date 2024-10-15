@@ -134,64 +134,63 @@ const AllNews: React.FC = () => {
           ))}
         </div>
 
-        {/* Pagination Section */}
-        <div className="flex justify-center items-center py-4">
-          {/* Previous Button */}
-          <p>
-            <button
-              className="btn mr-1 bg-gray-800 text-white"
-              onClick={handlePrevious}
-              disabled={currentPage === 0} // Disable if on the first page
-            >
-              Previous
-            </button>
-          </p>
+       {/* Pagination Section */}
+<div className="flex flex-wrap justify-center items-center py-4 space-y-2 md:space-y-0">
+  {/* Previous Button */}
+  <p className="w-full md:w-auto flex justify-center md:inline">
+    <button
+      className="btn mr-1 bg-gray-800 text-white px-3 py-2"
+      onClick={handlePrevious}
+      disabled={currentPage === 0}
+    >
+      Previous
+    </button>
+  </p>
 
-          {/* Page Numbers */}
-          {pages.map((page) => (
-            <button
-              key={page}
-              className={`${
-                currentPage === page
-                  ? "btn bg-red-900 text-white"
-                  : "btn mr-1 bg-gray-800 text-white"
-              }`}
-              onClick={() => setCurrentPage(page)}
-            >
-              {page + 1}
-            </button>
-          ))}
+  {/* Page Numbers */}
+  <div className="flex flex-wrap justify-center space-x-1">
+    {pages.map((page) => (
+      <button
+        key={page}
+        className={`${
+          currentPage === page
+            ? "btn bg-red-900 text-white"
+            : "btn bg-gray-800 text-white"
+        } px-3 py-2`}
+        onClick={() => setCurrentPage(page)}
+      >
+        {page + 1}
+      </button>
+    ))}
+  </div>
 
-          {/* Next Button */}
-          <p>
-            <button
-              className="btn ml-1 bg-gray-800 text-white"
-              onClick={handleNext}
-              disabled={currentPage === totalPages - 1} // Disable if on the last page
-            >
-              Next
-            </button>
-          </p>
+  {/* Next Button */}
+  <p className="w-full md:w-auto flex justify-center md:inline">
+    <button
+      className="btn ml-1 bg-gray-800 text-white px-3 py-2"
+      onClick={handleNext}
+      disabled={currentPage === totalPages - 1}
+    >
+      Next
+    </button>
+  </p>
 
-          {/* News Per Page Selector */}
-          <label htmlFor="" className="ml-2 flex justify-center items-center">
-            <div>
-              <span className="text-white px-2">News Per Page:</span>
-            </div>
-            <div>
-              <select
-                value={newsPerPage}
-                onChange={handleNewsPerPage}
-                className="btn bg-gray-800 text-white"
-              >
-                <option value="6">6</option>
-                <option value="12">12</option>
-                <option value="18">18</option>
-                <option value="24">24</option>
-              </select>
-            </div>
-          </label>
-        </div>
+  {/* News Per Page Selector */}
+  <label htmlFor="" className="ml-2 flex justify-center items-center space-x-2">
+    <span className="text-white">News Per Page:</span>
+    <select
+      value={newsPerPage}
+      onChange={handleNewsPerPage}
+      className="btn bg-gray-800 text-white px-2 py-2"
+    >
+      <option value="6">6</option>
+      <option value="12">12</option>
+      <option value="18">18</option>
+      <option value="24">24</option>
+    </select>
+  </label>
+</div>
+
       </div>
     </div>
   );
