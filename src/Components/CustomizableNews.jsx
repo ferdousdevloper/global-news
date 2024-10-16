@@ -33,17 +33,15 @@ const CustomizableNews = ({ openFilter }) => {
         `http://localhost:3001/newss/filter?region=${selectRegion}&category=${selectCategory}&topic=${selectTopic}`
       );
       console.log(data);
-      // You can handle the filtered news data here, such as updating state with the filtered results.
     } catch (error) {
       console.error('Error fetching filtered news:', error);
     }
   };
 
   const handleReset = () => {
-    setSelectRegion('Region')
-    setSelectCategory('Category')
-    setSelectTopic('Topic')
-    console.log('hit reset button')
+    setSelectRegion('')
+    setSelectCategory('')
+    setSelectTopic('')
   }
 
 
@@ -61,7 +59,7 @@ const CustomizableNews = ({ openFilter }) => {
           value={selectRegion}
           onChange={(e) => setSelectRegion(e.target.value)}
         >
-          <option className="disabled selected text-[#02AA08]">Region</option>
+          <option value='' className="disabled selected text-[#02AA08]">Region</option>
           {region?.map((reg) => (
             <option className="text-[#02AA08]">{reg}</option>
           ))}
@@ -73,7 +71,7 @@ const CustomizableNews = ({ openFilter }) => {
           value={selectCategory}
           onChange={(e) => setSelectCategory(e.target.value)}
         >
-          <option className="disabled selected text-[#02AA08]">Category</option>
+          <option value='' className="disabled selected text-[#02AA08]">Category</option>
           {category?.map((cat) => (
             <option className="text-[#02AA08]">{cat}</option>
           ))}
@@ -85,7 +83,7 @@ const CustomizableNews = ({ openFilter }) => {
           value={selectTopic}
           onChange={(e) => setSelectTopic(e.target.value)}
         >
-          <option className="disabled selected text-[#02AA08]">Topic</option>
+          <option value='' className="disabled selected text-[#02AA08]">Topic</option>
           {title?.map((tit) => (
             <option className="text-[#02AA08]">{tit}</option>
           ))}

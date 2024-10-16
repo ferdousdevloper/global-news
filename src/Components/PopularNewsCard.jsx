@@ -11,7 +11,7 @@ import axios from 'axios';
 
 
 const PopularNewsCard = ({ news }) => {
-    console.log(news)
+    // console.log(news)
     const { _id, image, category, title, date_time, description } = news
     const { user, loading: authLoading } = auth || {};
     const [newss, setNewss] = useState([]);
