@@ -35,20 +35,32 @@ const ShareDropdown: React.FC<ShareDropdownProps> = ({ url }) => {
 
   return (
     <div className="relative inline-block">
+      {/* Share Icon */}
       <IoShareSocialOutline
-        className="cursor-pointer text-slate-100 hover:text-black z-50"
+        className="cursor-pointer text-slate-100 hover:text-black z-50" // Ensuring higher z-index
         onClick={() => setIsOpen((prev) => !prev)}
       />
+      
+      {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 bottom-10 mt-2 w-48 bg-black rounded shadow-lg z-50 glass">
+        <div className="absolute right-0 mt-2 w-48 bg-black rounded shadow-lg z-100 glass"> {/* Increased z-index */}
           <div className="flex flex-col p-2">
-            <button onClick={() => handleShare("facebook")} className="flex items-center p-2 hover:bg-colorPrimary">
+            <button
+              onClick={() => handleShare("facebook")}
+              className="flex items-center p-2 hover:bg-colorPrimary text-white"
+            >
               <FaFacebookF className="mr-2" /> Facebook
             </button>
-            <button onClick={() => handleShare("twitter")} className="flex items-center p-2 hover:bg-colorPrimary">
+            <button
+              onClick={() => handleShare("twitter")}
+              className="flex items-center p-2 hover:bg-colorPrimary text-white"
+            >
               <FaTwitter className="mr-2" /> Twitter
             </button>
-            <button onClick={() => handleShare("linkedin")} className="flex items-center p-2 hover:bg-colorPrimary">
+            <button
+              onClick={() => handleShare("linkedin")}
+              className="flex items-center p-2 hover:bg-colorPrimary text-white"
+            >
               <FaLinkedinIn className="mr-2" /> LinkedIn
             </button>
           </div>

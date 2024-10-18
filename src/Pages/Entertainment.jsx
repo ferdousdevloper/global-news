@@ -5,6 +5,9 @@ import { IoShareSocialOutline } from 'react-icons/io5';
 import { MdFavoriteBorder } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import LatestCard from './LatestCard';
+import Favorite from '../Components/Favorite';
+import Bookmark from '../Components/Bookmark';
+import ShareDropdown from '../Components/Home/ShareDropdown';
 
 const Entertainment = () => {
 
@@ -18,7 +21,7 @@ const Entertainment = () => {
     useEffect(() => {
         const fetchEntertainmentNews = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/news');
+                const response = await axios.get('https://global-news-server-phi.vercel.app/news');
                 const newsData = response.data;
                 console.log(newsData);
                 // Filter for Entertainment news
@@ -57,39 +60,66 @@ const Entertainment = () => {
             </div>
 
             {/* Live Entertainment News */}
-            <Link to={`/news/${liveEntertainmentNews?._id}`}>
-                {
-                    liveEntertainmentNews && <div className="flex flex-col md:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden glass my-10">
-                        <div className="md:w-1/2 w-[500px] h-[500px]">
-                            <img
-                                src={liveEntertainmentNews?.image}
-                                alt={liveEntertainmentNews?.title}
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                        <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
-                            <div>
-                                <h3 className="text-2xl font-bold mb-2">{liveEntertainmentNews?.title}</h3>
-                                <hr className='my-4' />
-                                <p className="text-gray-300 mb-4">{liveEntertainmentNews?.description.slice(0, 1000)}...</p>
-                            </div>
-                            <div>
-                                <p className="text-gray-100 text-sm mb-2">{new Date(liveEntertainmentNews?.timestamp).toLocaleString()}</p>
-                                {liveEntertainmentNews?.isLive && (
-                                    <span className="px-4 py-1 bg-red-600 text-white text-xs font-semibold uppercase rounded-full">
-                                        Live
-                                    </span>
-                                )}
-                                <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
-                                    <MdFavoriteBorder />
-                                    <CiBookmark />
-                                    <IoShareSocialOutline />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </Link>
+{
+    liveEntertainmentNews && (
+        <div className="flex flex-col md:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden glass my-10">
+            <div className="md:w-1/2 w-[500px] h-[500px]">
+                <img
+                    src={liveEntertainmentNews?.image}
+                    alt={liveEntertainmentNews?.title}
+                    className="w-full h-full object-cover"
+                />
+            </div>
+            <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
+                <div>
+                    <h3 className="text-2xl font-bold mb-2">
+                        {liveEntertainmentNews?.title}
+                    </h3>
+                    <hr className="my-4" />
+                    
+                    {/* Description with See More functionality */}
+                    <p className="text-gray-300 mb-4">
+                        {liveEntertainmentNews?.description.length > 1000 ? (
+                            <>
+                                {liveEntertainmentNews?.description.slice(0, 1000)}...
+                                <Link
+                                    to={`/news/${liveEntertainmentNews?._id}`}
+                                    className="text-blue-500 hover:text-blue-300"
+                                >
+                                    {" "}See More
+                                </Link>
+                            </>
+                        ) : (
+                            liveEntertainmentNews?.description
+                        )}
+                    </p>
+                </div>
+
+                <div>
+                    <p className="text-gray-100 text-sm mb-2">
+                        {new Date(liveEntertainmentNews?.timestamp).toLocaleString()}
+                    </p>
+                    {liveEntertainmentNews?.isLive && (
+                        <span className="px-4 py-1 bg-red-600 text-white text-xs font-semibold uppercase rounded-full">
+                            Live
+                        </span>
+                    )}
+                   <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100 relative z-10">
+    <Favorite newsId={liveEntertainmentNews._id} />
+    <Bookmark newsId={liveEntertainmentNews._id} />
+
+    {/* Share Dropdown */}
+    <div className="relative">
+        <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${liveEntertainmentNews._id}`} />
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    )
+}
+
             {/* All Entertainment News */}
             <div className='flex flex-col lg:flex-row gap-5 px-4'>
                 <div className="lg:w-9/12 w-full bg-neutral-950 glass p-5 rounded-xl">

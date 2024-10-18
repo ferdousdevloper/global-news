@@ -164,6 +164,18 @@ const NavBar: React.FC = () => {
               Entertainment
             </NavLink>
             <NavLink
+              to="/category/about"
+              className={({ isActive }) =>
+                `px-2 py-1 rounded ${
+                  isActive
+                    ? "bg-[#02AA08] text-white"
+                    : "hover:bg-[#02AA08] hover:text-white"
+                }`
+              }
+            >
+              About
+            </NavLink>
+            <NavLink
               to="/contact"
               className={({ isActive }) =>
                 `px-2 py-1 rounded ${
@@ -184,11 +196,19 @@ const NavBar: React.FC = () => {
 
             {/* Conditionally render DASHBOARD link based on isAdmin and user authentication */}
             {user && isAdmin && (
-              <NavLink to="/dashboard/profile" className={({ isActive }) => `px-2 py-1 rounded ${isActive ? "bg-[#02AA08] text-white" : "hover:bg-[#02AA08] hover:text-white"}`}>
+              <NavLink
+                to="/dashboard/profile"
+                className={({ isActive }) =>
+                  `px-2 py-1 rounded ${
+                    isActive
+                      ? "bg-[#02AA08] text-white"
+                      : "hover:bg-[#02AA08] hover:text-white"
+                  }`
+                }
+              >
                 DASHBOARD
               </NavLink>
             )}
-
           </div>
 
           {/* Right Side: Login/Logout Button */}
@@ -640,6 +660,18 @@ const NavBar: React.FC = () => {
             >
               Sports
             </NavLink>
+            <NavLink
+              to="/category/about"
+              className={({ isActive }) =>
+                `block px-2 py-1 rounded ${
+                  isActive
+                    ? "bg-[#02AA08] text-white"
+                    : "hover:bg-[#02AA08] hover:text-white"
+                }`
+              }
+            >
+              About
+            </NavLink>
 
             <NavLink
               to="/dashboard/profile"
@@ -716,7 +748,7 @@ const NavBar: React.FC = () => {
           </div>
         )}
       </nav>
-      <CustomizableNews openFilter={openFilter}></CustomizableNews>
+      <CustomizableNews openFilter={openFilter} handleFilter={handleFilter}></CustomizableNews>      
     </>
   );
 };

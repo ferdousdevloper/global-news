@@ -23,11 +23,11 @@ const MyFavorites: React.FC = () => {
     const fetchUserFavorites = async () => {
       if (user) {
         try {
-          const favoritesResponse = await axios.get(`http://localhost:3001/favorites/${user.email}`);
+          const favoritesResponse = await axios.get(`https://global-news-server-phi.vercel.app/favorites/${user.email}`);
           const favorites = favoritesResponse.data;
 
           const articlePromises = favorites.map((newsId: string) =>
-            axios.get(`http://localhost:3001/news/${newsId}`)
+            axios.get(`https://global-news-server-phi.vercel.app/news/${newsId}`)
           );
 
           const articlesResponses = await Promise.all(articlePromises);
@@ -48,7 +48,7 @@ const MyFavorites: React.FC = () => {
   const handleRemoveFavorite = async (newsId: string) => {
     if (user) {
       try {
-        await axios.delete('http://localhost:3001/favorites', {
+        await axios.delete('https://global-news-server-phi.vercel.app/favorites', {
           data: { email: user.email, newsId },
         });
         setFavoriteArticles((prevArticles) => prevArticles.filter(article => article._id !== newsId));
@@ -67,9 +67,10 @@ const MyFavorites: React.FC = () => {
   }
 
   return (
-    <div className="bg-neutral-950 p-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="bg-neutral-950 p-6 glass rounded-lg">
+      <div className="md:container mx-auto">
         <h1 className="text-3xl font-bold mb-6 text-center text-slate-50">My Favorites</h1>
+        <hr className='py-4' />
         {favoriteArticles.length > 0 ? (
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {favoriteArticles.map((article) => (

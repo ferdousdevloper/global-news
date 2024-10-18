@@ -1,9 +1,9 @@
 import axios from "axios";
-import { CiBookmark } from "react-icons/ci";
-import { IoShareSocialOutline } from "react-icons/io5";
-import { MdFavoriteBorder } from "react-icons/md";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Favorite from "../Components/Favorite";
+import ShareDropdown from "../Components/Home/ShareDropdown";
+import Bookmark from "../Components/Bookmark";
 
 const Technology = () => {
   const [allNews, setAllNews] = useState([]);
@@ -37,17 +37,17 @@ const Technology = () => {
   useEffect(() => {
     const fetchTechNews = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/news");
+        const response = await axios.get("https://global-news-server-phi.vercel.app/news");
         const newsData = response.data;
         const techNews = newsData.filter(
           (singleNews) => singleNews.category === "Technology"
         );
-        const popularTechNews = allNews.filter(
+        const popularTechNews = newsData.filter(
           (singleNews) =>
             singleNews.category === "Technology" &&
             singleNews.popular_news === true
         );
-        const liveNews = allNews.filter(
+        const liveNews = newsData.filter(
           (singleNews) =>
             singleNews.category === "Technology" && singleNews.isLive === true
         );
@@ -89,7 +89,7 @@ const Technology = () => {
         </p>
       </div>
 
-      {/* Live Politics News */}
+      {/* Live Technology News */}
       {liveTechNews && (
         <div className="flex flex-col md:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden glass my-10">
           <div className="md:w-1/2 w-full">
@@ -117,56 +117,71 @@ const Technology = () => {
                 </span>
               )}
               <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
-                <MdFavoriteBorder />
-                <CiBookmark />
-                <IoShareSocialOutline />
+                <Favorite newsId={liveTechNews._id} />
+                <Bookmark newsId={liveTechNews._id} />
+                <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${liveTechNews._id}`} />
               </div>
             </div>
           </div>
         </div>
       )}
 
+      {/* All Technology News */}
       <div className="flex flex-col lg:flex-row gap-5">
-        {/* Politics News bar section */}
         <div className="lg:w-9/12 w-full bg-neutral-950 glass p-5 rounded-xl container mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {" "}
             {allNews.map((item) => (
-              <Link to={`/news/${item._id}`} key={item._id}>
-                <div className="border p-4 rounded-lg shadow-lg glass h-[520px]">
+              <div
+                key={item._id}
+                className="border p-4 rounded-lg shadow-lg glass flex flex-col h-full min-h-[400px]"
+              >
+                <Link to={`/news/${item._id}`}>
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-60 object-cover mb-4 rounded-md"
+                    className="w-full h-40 object-cover mb-4 rounded-md"
                   />
-                  <h3 className="text-base badge font-semibold mb-1 ">
+                </Link>
+                <div className="flex-grow flex flex-col">
+                  <h3 className="text-base badge font-semibold mb-1">
                     {item.category}
                   </h3>
-                  <h2 className="text-xl font-bold mb-2 text-slate-50">
-                    {item.title}
-                  </h2>
+                  <Link to={`/news/${item._id}`}>
+                    <h2 className="text-xl font-bold mb-2 text-slate-50 hover:underline">
+                      {item.title}
+                    </h2>
+                  </Link>
                   <p className="text-sm mb-2 text-slate-100">
                     {new Date(item.date_time).toLocaleDateString()}
                   </p>
-                  <p className="text-slate-100">
-                    {item.description.slice(0, 100)}...
+                  <p className="text-slate-100 flex-grow">
+                    {item.description.length > 80 ? (
+                      <>
+                        {item.description.slice(0, 80)}...
+                        <Link
+                          to={`/news/${item._id}`}
+                          className="text-green-500 hover:text-green-300"
+                        >
+                          {" "}
+                          See More
+                        </Link>
+                      </>
+                    ) : (
+                      item.description
+                    )}
                   </p>
-                  <div>
-                    <p className="text-gray-100 text-sm mb-2">
-                      {new Date(liveTechNews?.timestamp).toLocaleString()}
-                    </p>
-                    <div className="flex justify-around items-center text-xl md:text-2xl my-5 text-slate-100">
-                      <MdFavoriteBorder />
-                      <CiBookmark />
-                      <IoShareSocialOutline />
-                    </div>
-                  </div>
                 </div>
-              </Link>
+                <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
+                  <Favorite newsId={item._id} />
+                  <Bookmark newsId={item._id} />
+                  <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${item._id}`} />
+                </div>
+              </div>
             ))}
           </div>
         </div>
-        {/* popular politics news section */}
+
+        {/* Popular News Section */}
         <div className="lg:w-3/12 w-full bg-neutral-950 glass p-5 rounded-xl text-white">
           <div className="mb-8 space-x-5 border-b-2 border-opacity-10 dark:border-violet-600">
             <button
@@ -176,10 +191,9 @@ const Technology = () => {
               Popular
             </button>
           </div>
-          {/* popular news card */}
           {popularNews.map((popularSingleNews) => (
             <Link
-              to={`/news/${popularNews._id}`}
+              to={`/news/${popularSingleNews._id}`}
               key={popularSingleNews._id}
               className="flex flex-col divide-y my-2 glass dark:divide-gray-300 h-40"
             >
@@ -191,15 +205,14 @@ const Technology = () => {
                 />
                 <div className="flex flex-col flex-grow space-y-2">
                   <p>{popularSingleNews.title}</p>
-
                   <p className="text-base badge font-semibold mb-1">
                     {popularSingleNews.category}
                   </p>
                   <hr className="my-2" />
                   <div className="flex justify-around items-center text-lg md:text-xl my-1 text-slate-100">
-                    <MdFavoriteBorder />
-                    <CiBookmark />
-                    <IoShareSocialOutline />
+                    <Favorite newsId={popularSingleNews._id} />
+                    <Bookmark newsId={popularSingleNews._id} />
+                    <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${popularSingleNews._id}`} />
                   </div>
                 </div>
               </div>
@@ -208,56 +221,31 @@ const Technology = () => {
         </div>
       </div>
 
-      {/* pagination section */}
-      <div className=" flex justify-center items-center py-4">
-        <p>
-          <button
-            className="btn mr-1 bg-gray-800 text-white"
-            onClick={handlePrevious}
-          >
-            Previous
-          </button>
-        </p>
-        {pages.map((page) => (
-          <button
-            className={
-              (currentPage === page && "btn bg-red-900 text-white") ||
-              "btn mr-1 bg-gray-800 text-white"
-            }
-            onClick={() => setCurrentPage(page)}
-            key={page}
-          >
-            {page + 1}
-          </button>
-        ))}
-
-        <p>
-          <button
-            className="btn ml-1 bg-gray-800 text-white"
-            onClick={handleNext}
-          >
-            Next
-          </button>
-        </p>
-        <label htmlFor="" className="ml-2 flex justify-center items-center">
-          <div>
-            <span className="text-white px-2"> News Per Page:</span>
-          </div>
-
-          <div>
-            {" "}
-            <select
-              name=""
-              value={newsPerPage}
-              onChange={handleNewsPerPage}
-              className="btn bg-gray-800 text-white"
-            >
-              <option value="8">4</option>
-              <option value="20">10</option>
-              <option value="40">20</option>
-            </select>
-          </div>
-        </label>
+      {/* Pagination Section */}
+      <div className="flex justify-center items-center py-4">
+        <button
+          className="btn mr-1 bg-gray-800 text-white"
+          onClick={handlePrevious}
+          disabled={currentPage === 0}
+        >
+          Previous
+        </button>
+        <select
+          value={newsPerPage}
+          onChange={handleNewsPerPage}
+          className="bg-gray-800 text-white px-3 py-2 rounded-lg"
+        >
+          <option value="4">4</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+        </select>
+        <button
+          className="btn ml-1 bg-gray-800 text-white"
+          onClick={handleNext}
+          disabled={currentPage === pages.length - 1}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

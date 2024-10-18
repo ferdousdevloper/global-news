@@ -35,6 +35,7 @@ import ManageNews from "./Pages/Dashboard/ManageNews";
 import PopularDetails from "./Pages/PopularDetails";
 import Technology from "./Pages/Technology";
 import MyFavorites from "./Pages/Dashboard/NormalUser/MyFavorites";
+import About from "./Pages/About";
 
 const Root = createBrowserRouter([
   {
@@ -50,7 +51,7 @@ const Root = createBrowserRouter([
         path: "/category/:popularId",
         element: <PopularDetails></PopularDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:3001/news/${params.popularId}`),
+          fetch(`https://global-news-server-phi.vercel.app/news/${params.popularId}`),
       },
       {
         path: "/category/politics",
@@ -79,6 +80,10 @@ const Root = createBrowserRouter([
       {
         path: "/category/entertainment",
         element: <Entertainment />,
+      },
+      {
+        path: "/category/about",
+        element: <About />,
       },
       {
         path: "/contact",
@@ -173,9 +178,9 @@ const Root = createBrowserRouter([
         element: <ManageBookmarks />,
       },
       {
-        path: '/dashboard/my-favorites',
-        element: <MyFavorites/>
-      }
+        path: "/dashboard/my-favorites",
+        element: <MyFavorites />,
+      },
     ],
   },
 ]);

@@ -6,6 +6,8 @@ import ShareDropdown from "./ShareDropdown";
 import useAuth from "../../hooks/useAuth";
 import Bookmark from "../Bookmark";
 import Favorite from "../Favorite";
+import loadingAnimation from "../../loadingAnimation.json";
+import Lottie from "lottie-react";
 
 interface NewsItem {
   category: string;
@@ -26,7 +28,7 @@ const NewsSection: React.FC = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/news");
+        const response = await axios.get("https://global-news-server-phi.vercel.app/news");
         setNews(response.data);
         setLoading(false);
       } catch (err) {
@@ -38,7 +40,17 @@ const NewsSection: React.FC = () => {
     fetchNews();
   }, []);
 
-  if (loading || authLoading) return <p>Loading...</p>;
+  if (loading || authLoading)
+    return (
+      <div className="w-2/4 mx-auto">
+        <Lottie
+          animationData={loadingAnimation}
+          height={100}
+          width={100}
+          className=""
+        ></Lottie>
+      </div>
+    );
   if (error) return <p>{error}</p>;
 
   const latestNews = news.slice(0, 7);
@@ -51,22 +63,41 @@ const NewsSection: React.FC = () => {
           <h2 className="text-3xl font-bold mb-4 text-slate-50">All News</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {allNews.map((item) => (
-              <div key={item._id} className="border p-4 rounded-lg shadow-lg glass flex flex-col h-full min-h-[400px]">
+              <div
+                key={item._id}
+                className="border p-4 rounded-lg shadow-lg glass flex flex-col h-full min-h-[400px]"
+              >
                 <Link to={`/news/${item._id}`}>
-                  <img src={item.image} alt={item.title} className="w-full h-40 object-cover mb-4 rounded-md" />
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-40 object-cover mb-4 rounded-md"
+                  />
                 </Link>
 
                 <div className="flex-grow flex flex-col">
-                  <h3 className="text-base badge font-semibold mb-1 ">{item.category}</h3>
+                  <h3 className="text-base badge font-semibold mb-1 ">
+                    {item.category}
+                  </h3>
                   <Link to={`/news/${item._id}`}>
-                    <h2 className="text-xl font-bold mb-2 text-slate-50 hover:underline">{item.title}</h2>
+                    <h2 className="text-xl font-bold mb-2 text-slate-50 hover:underline">
+                      {item.title}
+                    </h2>
                   </Link>
-                  <p className="text-sm mb-2 text-slate-100">{new Date(item.date_time).toLocaleDateString()}</p>
+                  <p className="text-sm mb-2 text-slate-100">
+                    {new Date(item.date_time).toLocaleDateString()}
+                  </p>
                   <p className="text-slate-100 flex-grow">
                     {item.description.length > 80 ? (
                       <>
                         {item.description.slice(0, 80)}...
-                        <Link to={`/news/${item._id}`} className="text-green-500 hover:text-green-300"> See More</Link>
+                        <Link
+                          to={`/news/${item._id}`}
+                          className="text-green-500 hover:text-green-300"
+                        >
+                          {" "}
+                          See More
+                        </Link>
                       </>
                     ) : (
                       item.description
@@ -75,10 +106,12 @@ const NewsSection: React.FC = () => {
                 </div>
 
                 <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
-                <Favorite newsId={item._id} />
+                  <Favorite newsId={item._id} />
                   {/* Use the Bookmark component here */}
                   <Bookmark newsId={item._id} />
-                  <ShareDropdown url={`http://localhost:3001/news/${item._id}`} />
+                  <ShareDropdown
+                    url={`https://global-news-server-phi.vercel.app/news/${item._id}`}
+                  />
                 </div>
               </div>
             ))}
@@ -87,27 +120,44 @@ const NewsSection: React.FC = () => {
 
         {/* Latest News Section */}
         <div className="lg:w-3/12 w-full bg-neutral-950 glass p-5 rounded-xl">
-          <h2 className="text-2xl font-extrabold mb-4 text-slate-50">Latest News</h2>
+          <h2 className="text-2xl font-extrabold mb-4 text-slate-50">
+            Latest News
+          </h2>
           <div className="space-y-6">
             {latestNews.map((item) => (
-              <div key={item._id} className="border p-4 rounded-lg shadow-lg glass flex flex-col h-full min-h-[300px]">
+              <div
+                key={item._id}
+                className="border p-4 rounded-lg shadow-lg glass flex flex-col h-full min-h-[300px]"
+              >
                 <Link to={`/news/${item._id}`}>
-                  <img src={item.image} alt={item.title} className="w-full h-24 object-cover mb-2 rounded-md" />
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-24 object-cover mb-2 rounded-md"
+                  />
                 </Link>
 
                 <div className="flex-grow flex flex-col">
-                  <h3 className="text-base badge font-semibold mb-1 ">{item.category}</h3>
+                  <h3 className="text-base badge font-semibold mb-1 ">
+                    {item.category}
+                  </h3>
                   <Link to={`/news/${item._id}`}>
-                    <h3 className="text-lg font-semibold mb-1 text-slate-50 hover:underline">{item.title}</h3>
+                    <h3 className="text-lg font-semibold mb-1 text-slate-50 hover:underline">
+                      {item.title}
+                    </h3>
                   </Link>
-                  <p className="text-sm text-slate-100">{new Date(item.date_time).toLocaleDateString()}</p>
+                  <p className="text-sm text-slate-100">
+                    {new Date(item.date_time).toLocaleDateString()}
+                  </p>
                 </div>
 
                 <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
-                <Favorite newsId={item._id} />
+                  <Favorite newsId={item._id} />
                   {/* Use the Bookmark component here as well */}
                   <Bookmark newsId={item._id} />
-                  <ShareDropdown url={`http://localhost:3001/news/${item._id}`} />
+                  <ShareDropdown
+                    url={`https://global-news-server-phi.vercel.app/news/${item._id}`}
+                  />
                 </div>
               </div>
             ))}

@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { CiBookmark } from "react-icons/ci";
+import { IoShareSocialOutline } from "react-icons/io5";
+import { MdFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import LiveNews from "../Components/AllNews/LiveNews";
 import useAuth from "../hooks/useAuth";
-import ShareDropdown from "../Components/Home/ShareDropdown";
-import Bookmark from "../Components/Bookmark";
-import Favorite from "../Components/Favorite";
 
 interface NewsItem {
   _id: string;
@@ -23,73 +24,286 @@ interface NewsItem {
 
 const AllNews: React.FC = () => {
   const [news, setNews] = useState<NewsItem[]>([]);
+  const [filteredNews, setFilteredNews] = useState<NewsItem[]>([]);
+  const [bookmarked, setBookmarked] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const [totalPages, setTotalPages] = useState<number>(1); // Default to 1 in case the total isn't returned from server
-  const [newsPerPage, setNewsPerPage] = useState<number>(9); // News items per page
+  const [categories, setCategories] = useState<string[]>([]);
+  const [countries, setCountries] = useState<string[]>([]);
+  const [selectedFilter, setSelectedFilter] = useState<string>("All News");
+  const [selectedCountry, setSelectedCountry] = useState<string>(
+    "All Countries"
+  );
+  const [selectedDateFilter, setSelectedDateFilter] =
+    useState<string>("All Dates");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
+  // Fetch the user and loading state from the authentication hook
   const auth = useAuth();
-  const { loading: authLoading } = auth || {};
+  const { user, loading: authLoading } = auth || {};
+
+  // const customFilter = useSelector((state) => state.newsFilter)
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
         const response = await axios.get<NewsItem[]>(
-          `http://localhost:3001/news?pages=${currentPage}&size=${newsPerPage}`
+          "https://global-news-server-phi.vercel.app/news"
         );
-        const fetchedNews = response.data;
-        setNews(fetchedNews);
+        setNews(response.data);
+        setFilteredNews(response.data);
 
-        // Estimate total pages based on the number of items returned and the current page.
-        const estimatedTotalPages =
-          fetchedNews.length < newsPerPage ? currentPage + 1 : currentPage + 2;
-        setTotalPages(estimatedTotalPages);
+        const uniqueCategories = Array.from(
+          new Set<string>(response.data.map((item) => item.category))
+        );
+        setCategories(uniqueCategories);
+
+        const uniqueCountries = Array.from(
+          new Set<string>(response.data.map((item) => item.region))
+        );
+        setCountries(uniqueCountries);
 
         setLoading(false);
       } catch (error) {
         setError("Error fetching news");
+        console.error("Error fetching news:", error);
         setLoading(false);
       }
     };
 
     fetchNews();
-  }, [currentPage, newsPerPage]);
 
-  const handlePrevious = () => {
-    if (currentPage > 0) setCurrentPage(currentPage - 1);
+    // Load bookmarked news from localStorage
+    const storedBookmarks = localStorage.getItem("bookmarkedNews");
+    if (storedBookmarks) {
+      setBookmarked(JSON.parse(storedBookmarks));
+    }
+  }, []);
+
+  useEffect(() => {
+    filterNews();
+  }, [
+    searchTerm,
+    selectedFilter,
+    selectedCountry,
+    selectedDateFilter,
+    news,
+    bookmarked,
+  ]);
+
+  const filterNews = () => {
+    let updatedFilteredNews = news;
+
+    // Filter by search query
+    if (searchTerm) {
+      updatedFilteredNews = updatedFilteredNews.filter(
+        (item) =>
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.region.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Filter by category
+    if (selectedFilter !== "All News") {
+      if (selectedFilter === "Breaking News") {
+        updatedFilteredNews = updatedFilteredNews.filter(
+          (item) => item.breaking_news
+        );
+      } else if (selectedFilter === "Popular News") {
+        updatedFilteredNews = updatedFilteredNews.filter(
+          (item) => item.popular_news
+        );
+      } else if (selectedFilter === "Live News") {
+        updatedFilteredNews = updatedFilteredNews.filter(
+          (item) => item.isLive
+        );
+      } else {
+        updatedFilteredNews = updatedFilteredNews.filter(
+          (item) => item.category === selectedFilter
+        );
+      }
+    }
+
+    // Filter by country
+    if (selectedCountry !== "All Countries") {
+      updatedFilteredNews = updatedFilteredNews.filter(
+        (item) => item.region === selectedCountry
+      );
+    }
+
+    // Optionally filter by date
+    if (selectedDateFilter !== "All Dates") {
+      const today = new Date();
+      if (selectedDateFilter === "Today") {
+        updatedFilteredNews = updatedFilteredNews.filter(
+          (item) =>
+            new Date(item.date_time).toDateString() === today.toDateString()
+        );
+      } else if (selectedDateFilter === "Last 7 Days") {
+        const lastWeek = new Date();
+        lastWeek.setDate(today.getDate() - 7);
+        updatedFilteredNews = updatedFilteredNews.filter(
+          (item) => new Date(item.date_time) >= lastWeek
+        );
+      } else if (selectedDateFilter === "Last 30 Days") {
+        const lastMonth = new Date();
+        lastMonth.setDate(today.getDate() - 30);
+        updatedFilteredNews = updatedFilteredNews.filter(
+          (item) => new Date(item.date_time) >= lastMonth
+        );
+      }
+    }
+
+    setFilteredNews(updatedFilteredNews);
   };
 
-  const handleNext = () => {
-    if (currentPage < totalPages - 1) setCurrentPage(currentPage + 1);
+  const handleSearchChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchTerm(event.target.value);
   };
 
-  const handleNewsPerPage = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setNewsPerPage(Number(event.target.value));
-    setCurrentPage(0); // Reset to the first page
+  const resetFilters = () => {
+    setSelectedFilter("All News");
+    setSelectedCountry("All Countries");
+    setSelectedDateFilter("All Dates");
+    setSearchTerm("");
+    setFilteredNews(news);
   };
 
-  const pages = Array.from({ length: totalPages }, (_, index) => index);
+  const handleBookmark = async (newsId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+
+    // Check if user is authenticated
+    if (!user) {
+      Swal.fire({
+        icon: "warning",
+        title: "Not Authenticated",
+        text: "Please login to bookmark news.",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+
+    try {
+      const alreadyBookmarked = bookmarked.includes(newsId);
+      const updatedBookmarks = alreadyBookmarked
+        ? bookmarked.filter((id) => id !== newsId) // Remove bookmark
+        : [...bookmarked, newsId]; // Add bookmark
+
+      setBookmarked(updatedBookmarks);
+      localStorage.setItem(
+        "bookmarkedNews",
+        JSON.stringify(updatedBookmarks)
+      );
+
+      // Send POST request to add/remove bookmark in the backend
+      const url = alreadyBookmarked
+        ? "https://global-news-server-phi.vercel.app/remove-bookmark" // For removing bookmark
+        : "https://global-news-server-phi.vercel.app/bookmark"; // For adding bookmark
+
+      await axios.post(url, {
+        email: user.email, // Use the authenticated user's email
+        newsId,
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: alreadyBookmarked ? "Bookmark Removed!" : "Bookmarked!",
+        text: alreadyBookmarked
+          ? "This item has been removed from your bookmarks."
+          : "This item has been added to your bookmarks.",
+        confirmButtonText: "OK",
+        timer: 2000,
+      });
+    } catch (error) {
+      console.error("Error bookmarking:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error!",
+        text: "There was an error trying to bookmark this item. Please try again.",
+        confirmButtonText: "OK",
+      });
+    }
+  };
 
   if (loading || authLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div className="pt-10 container mx-auto px-4">
-      {/* Live News Section */}
       <LiveNews />
-
-      {/* All News Section */}
       <div className="p-6 text-white">
         <h1 className="text-2xl md:text-3xl font-bold mb-4">All News</h1>
 
+        {/* Filters Section */}
+        <div className="flex flex-wrap gap-4 mb-4">
+          <select
+            value={selectedFilter}
+            onChange={(e) => setSelectedFilter(e.target.value)}
+            className="px-4 py-2 border rounded-md w-full md:flex-1 bg-transparent glass text-gray-700"
+          >
+            <option>All News</option>
+            <option>Breaking News</option>
+            <option>Popular News</option>
+            <option>Live News</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={selectedCountry}
+            onChange={(e) => setSelectedCountry(e.target.value)}
+            className="px-4 py-2 border rounded-md w-full md:flex-1 bg-transparent glass text-gray-700"
+          >
+            <option>All Countries</option>
+            {countries.map((country) => (
+              <option key={country} value={country}>
+                {country}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={selectedDateFilter}
+            onChange={(e) => setSelectedDateFilter(e.target.value)}
+            className="px-4 py-2 border rounded-md w-full md:flex-1 bg-transparent glass text-gray-700"
+          >
+            <option>All Dates</option>
+            <option>Today</option>
+            <option>Last 7 Days</option>
+            <option>Last 30 Days</option>
+          </select>
+
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search news..."
+            className="px-4 py-2 border rounded-md w-full md:flex-1 bg-transparent glass text-gray-700"
+          />
+
+          <button
+            onClick={resetFilters}
+            className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 w-full md:w-auto"
+          >
+            Reset Filters
+          </button>
+        </div>
+
         {/* News Grid Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {news.map((item) => (
+          {filteredNews.map((item) => (
             <div
               key={item._id}
               className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 glass"
             >
+              {/* Image and Title Link */}
               <Link to={`/news/${item._id}`}>
                 <img
                   src={item.image}
@@ -97,7 +311,9 @@ const AllNews: React.FC = () => {
                   className="w-full h-48 object-cover rounded-md"
                 />
                 <div className="flex justify-between items-center my-3">
-                  <p className="text-sm text-gray-500 badge">{item.category}</p>
+                  <p className="text-sm text-gray-500 badge">
+                    {item.category}
+                  </p>
                   <p className="text-sm text-gray-300">
                     {new Date(item.date_time).toLocaleString()}
                   </p>
@@ -108,6 +324,7 @@ const AllNews: React.FC = () => {
               </Link>
               <hr className="my-4" />
 
+              {/* Description with "See More" */}
               <p className="text-gray-300 mt-1">
                 {item.description.length > 300 ? (
                   <>
@@ -125,72 +342,18 @@ const AllNews: React.FC = () => {
                 )}
               </p>
 
+              {/* Buttons Section */}
               <div className="flex justify-between items-center text-xl md:text-2xl my-3">
-                <Favorite newsId={item._id} />
-                <Bookmark newsId={item._id} />
-                <ShareDropdown url={`http://localhost:3001/news/${item._id}`} />
+                <MdFavoriteBorder />
+                <CiBookmark
+                  className={`cursor-pointer ${bookmarked.includes(item._id) ? "text-green-500" : ""
+                    }`}
+                  onClick={(e) => handleBookmark(item._id, e)}
+                />
+                <IoShareSocialOutline />
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Pagination Section */}
-        <div className="flex justify-center items-center py-4">
-          {/* Previous Button */}
-          <p>
-            <button
-              className="btn mr-1 bg-gray-800 text-white"
-              onClick={handlePrevious}
-              disabled={currentPage === 0} // Disable if on the first page
-            >
-              Previous
-            </button>
-          </p>
-
-          {/* Page Numbers */}
-          {pages.map((page) => (
-            <button
-              key={page}
-              className={`${
-                currentPage === page
-                  ? "btn bg-red-900 text-white"
-                  : "btn mr-1 bg-gray-800 text-white"
-              }`}
-              onClick={() => setCurrentPage(page)}
-            >
-              {page + 1}
-            </button>
-          ))}
-
-          {/* Next Button */}
-          <p>
-            <button
-              className="btn ml-1 bg-gray-800 text-white"
-              onClick={handleNext}
-              disabled={currentPage === totalPages - 1} // Disable if on the last page
-            >
-              Next
-            </button>
-          </p>
-
-          {/* News Per Page Selector */}
-          <label htmlFor="" className="ml-2 flex justify-center items-center">
-            <div>
-              <span className="text-white px-2">News Per Page:</span>
-            </div>
-            <div>
-              <select
-                value={newsPerPage}
-                onChange={handleNewsPerPage}
-                className="btn bg-gray-800 text-white"
-              >
-                <option value="4">6</option>
-                <option value="9">12</option>
-                <option value="20">18</option>
-                <option value="20">24</option>
-              </select>
-            </div>
-          </label>
         </div>
       </div>
     </div>
