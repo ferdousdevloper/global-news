@@ -9,7 +9,7 @@ interface Article {
   image: string;
   category: string;
   description: string;
-  date_time: string;
+  timestamp: string;
   authorName: string;
 }
 
@@ -53,19 +53,20 @@ const SavedArticles: React.FC = () => {
   }
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">Saved Articles</h1>
+    <div className="bg-neutral-950 p-6 glass rounded-lg md:container mx-auto">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-100">Saved Articles</h1>
+      <hr className='py-4' />
       {savedArticles.length > 0 ? (
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {savedArticles.map((article) => (
             <li
               key={article._id}
-              className="border p-4 rounded-lg shadow-md bg-white hover:bg-gray-100 transition duration-300"
+              className="border p-4 rounded-lg shadow-md bg-neutral-800 transition duration-300 glass"
             >
               <img src={article.image} alt={article.title} className="w-full h-48 object-cover mb-4 rounded-lg" />
-              <h2 className="text-xl font-semibold">{article.title}</h2>
-              <p className="text-gray-600 mb-2">{article.category}</p>
-              <p className="text-gray-600 mb-4">
+              <h2 className="text-xl font-semibold text-gray-100">{article.title}</h2>
+              <p className="text-gray-300 mb-2 ">{article.category}</p>
+              <p className="text-gray-100 mb-4">
                 {article.description.slice(0, 80)}...
                 <Link
                   to={`/news/${article._id}`}
@@ -74,8 +75,8 @@ const SavedArticles: React.FC = () => {
                   See More
                 </Link>
               </p>
-              <p className="text-gray-500">By {article.authorName}</p>
-              <p className="text-gray-500">{article.date_time}</p>
+              <p className="text-gray-400">By {article.authorName}</p>
+              <p className="text-gray-400">{new Date(article.timestamp).toLocaleDateString()}</p>
             </li>
           ))}
         </ul>

@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import LiveNews from "../Components/AllNews/LiveNews";
 import useAuth from "../hooks/useAuth";
-import { useSelector } from "react-redux";
 
 interface NewsItem {
   _id: string;
