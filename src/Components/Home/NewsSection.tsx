@@ -1,11 +1,11 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { CiBookmark } from "react-icons/ci";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
-import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 import ShareDropdown from "./ShareDropdown";
+import useAuth from "../../hooks/useAuth";
+import Bookmark from "../Bookmark";
+import Favorite from "../Favorite";
 
 interface NewsItem {
   category: string;
@@ -18,12 +18,10 @@ interface NewsItem {
 
 const NewsSection: React.FC = () => {
   const [news, setNews] = useState<NewsItem[]>([]);
-  const [bookmarked, setBookmarked] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
   const auth = useAuth();
-  const { user, loading: authLoading } = auth || {};
+  const { loading: authLoading } = auth || {};
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -37,62 +35,8 @@ const NewsSection: React.FC = () => {
         setLoading(false);
       }
     };
-
     fetchNews();
-
-    const storedBookmarks = localStorage.getItem("bookmarkedNews");
-    if (storedBookmarks) {
-      setBookmarked(JSON.parse(storedBookmarks));
-    }
   }, []);
-
-  const handleBookmark = async (newsId: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    if (!user) {
-      Swal.fire({
-        icon: "warning",
-        title: "Not Authenticated",
-        text: "Please login to bookmark news.",
-        confirmButtonText: "OK",
-      });
-      return;
-    }
-
-
-    try {
-      const alreadyBookmarked = bookmarked.includes(newsId);
-      const updatedBookmarks = alreadyBookmarked
-        ? bookmarked.filter((id) => id !== newsId)
-        : [...bookmarked, newsId];
-
-      setBookmarked(updatedBookmarks);
-      localStorage.setItem("bookmarkedNews", JSON.stringify(updatedBookmarks));
-
-      const url = alreadyBookmarked
-        ? "http://localhost:3001/remove-bookmark"
-        : "http://localhost:3001/bookmark";
-
-      await axios.post(url, { email: user.email, newsId });
-
-      Swal.fire({
-        icon: "success",
-        title: alreadyBookmarked ? "Bookmark Removed!" : "Bookmarked!",
-        text: alreadyBookmarked
-          ? "This item has been removed from your bookmarks."
-          : "This item has been added to your bookmarks.",
-        confirmButtonText: "OK",
-        timer: 2000,
-      });
-    } catch (error) {
-      console.error("Error bookmarking:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: "There was an error trying to bookmark this item. Please try again.",
-        confirmButtonText: "OK",
-      });
-    }
-  };
 
   if (loading || authLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -131,19 +75,17 @@ const NewsSection: React.FC = () => {
                 </div>
 
                 <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
-                  <MdFavoriteBorder />
-                  <CiBookmark
-                    className={`cursor-pointer ${bookmarked.includes(item._id) ? "text-green-500" : ""}`}
-                    onClick={(e) => handleBookmark(item._id, e)}
-                  />
+                <Favorite newsId={item._id} />
+                  {/* Use the Bookmark component here */}
+                  <Bookmark newsId={item._id} />
                   <ShareDropdown url={`http://localhost:3001/news/${item._id}`} />
                 </div>
               </div>
             ))}
           </div>
-          <button className="mt-6 bg-[#02AA08] glass text-white px-4 py-2 rounded hover:bg-[#028A06]">See More</button>
         </div>
 
+        {/* Latest News Section */}
         <div className="lg:w-3/12 w-full bg-neutral-950 glass p-5 rounded-xl">
           <h2 className="text-2xl font-extrabold mb-4 text-slate-50">Latest News</h2>
           <div className="space-y-6">
@@ -162,17 +104,14 @@ const NewsSection: React.FC = () => {
                 </div>
 
                 <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
-                  <MdFavoriteBorder />
-                  <CiBookmark
-                    className={`cursor-pointer ${bookmarked.includes(item._id) ? "text-green-500" : ""}`}
-                    onClick={(e) => handleBookmark(item._id, e)}
-                  />
+                <Favorite newsId={item._id} />
+                  {/* Use the Bookmark component here as well */}
+                  <Bookmark newsId={item._id} />
                   <ShareDropdown url={`http://localhost:3001/news/${item._id}`} />
                 </div>
               </div>
             ))}
           </div>
-          <button className="mt-6 bg-[#02AA08] text-white px-4 py-2 rounded hover:bg-[#028A06] glass">See More</button>
         </div>
       </div>
     </div>

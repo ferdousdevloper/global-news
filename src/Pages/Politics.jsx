@@ -4,6 +4,9 @@ import { CiBookmark } from "react-icons/ci";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
+import ShareDropdown from "../Components/Home/ShareDropdown";
+import Bookmark from "../Components/Bookmark";
+import Favorite from "../Components/Favorite";
 
 const Politics = () => {
   const [allNews, setAllNews] = useState([]);
@@ -13,14 +16,8 @@ const Politics = () => {
   const [livePoliticsNews, setLivePoliticsNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   fetch(`http://localhost:3001/news?pages=${currentPage}&size=${newsPerPage}`)
-  //     .then((res) => res.json())
-  //     .then((data) => setNewsPerPage(data));
-  // }, [currentPage, newsPerPage]);
-
-  const numberofPages = Math.ceil(allNews.length / 2);
+  
+  const numberofPages = Math.ceil(allNews.length / newsPerPage);
   const pages = [...Array(numberofPages).keys()];
 
   const handleNewsPerPage = (e) => {
@@ -90,7 +87,7 @@ const Politics = () => {
         <p className="mt-3">
           Stay informed with the latest political news from around the world.
           Explore in-depth coverage, analysis, and updates on global political
-          events, government policies, elections, and more.
+          events, government policies, elections, and more..
         </p>
       </div>
 
@@ -124,9 +121,9 @@ const Politics = () => {
                 </span>
               )}
               <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
-                <MdFavoriteBorder />
-                <CiBookmark />
-                <IoShareSocialOutline />
+              <Favorite newsId={livePoliticsNews._id} />
+                <Bookmark newsId={livePoliticsNews._id} />
+                <ShareDropdown url={`http://localhost:3001/news/${livePoliticsNews._id}`} />
               </div>
             </div>
           </div>
@@ -137,42 +134,53 @@ const Politics = () => {
         {/* Politics News bar section */}
         <div className="lg:w-9/12 w-full bg-neutral-950 glass p-5 rounded-xl container mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {" "}
             {allNews.map((item) => (
-              <Link to={`/news/${item._id}`} key={item._id}>
-                <div className="border p-4 rounded-lg shadow-lg glass h-[520px]">
+              <div key={item._id} className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 glass">
+                <Link to={`/news/${item._id}`}>
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-60 object-cover mb-4 rounded-md"
+                    className="w-full h-48 object-cover rounded-md"
                   />
-                  <h3 className="text-base badge font-semibold mb-1 ">
-                    {item.category}
-                  </h3>
-                  <h2 className="text-xl font-bold mb-2 text-slate-50">
+                  <div className="flex justify-between items-center my-3">
+                    <p className="text-sm text-gray-500 badge">
+                      {item.category}
+                    </p>
+                    <p className="text-sm text-gray-300">
+                      {new Date(item.date_time).toLocaleString()}
+                    </p>
+                  </div>
+                  <h2 className="text-xl font-semibold mt-2 hover:underline">
                     {item.title}
                   </h2>
-                  <p className="text-sm mb-2 text-slate-100">
-                    {new Date(item.date_time).toLocaleDateString()}
-                  </p>
-                  <p className="text-slate-100">
-                    {item.description.slice(0, 100)}...
-                  </p>
-                  <div>
-                    <p className="text-gray-100 text-sm mb-2">
-                      {new Date(livePoliticsNews?.timestamp).toLocaleString()}
-                    </p>
-                    <div className="flex justify-around items-center text-xl md:text-2xl my-5 text-slate-100">
-                      <MdFavoriteBorder />
-                      <CiBookmark />
-                      <IoShareSocialOutline />
-                    </div>
-                  </div>
+                </Link>
+                <hr className="my-4" />
+                <p className="text-gray-300 mt-1">
+                  {item.description.length > 300 ? (
+                    <>
+                      {item.description.slice(0, 300)}...
+                      <Link
+                        to={`/news/${item._id}`}
+                        className="text-blue-500 hover:text-blue-300"
+                      >
+                        {" "}
+                        See More
+                      </Link>
+                    </>
+                  ) : (
+                    item.description
+                  )}
+                </p>
+                <div className="flex justify-between items-center text-xl md:text-2xl my-3">
+                <Favorite newsId={item._id} />
+                  <Bookmark newsId={item._id} />
+                  <ShareDropdown url={`http://localhost:3001/news/${item._id}`} />
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
+
         {/* popular politics news section */}
         <div className="lg:w-3/12 w-full bg-neutral-950 glass p-5 rounded-xl text-white">
           <div className="mb-8 space-x-5 border-b-2 border-opacity-10 dark:border-violet-600">
@@ -183,10 +191,9 @@ const Politics = () => {
               Popular
             </button>
           </div>
-          {/* popular news card */}
           {popularNews.map((popularSingleNews) => (
             <Link
-              to={`/news/${popularNews._id}`}
+              to={`/news/${popularSingleNews._id}`}
               key={popularSingleNews._id}
               className="flex flex-col divide-y my-2 glass dark:divide-gray-300 h-40"
             >
@@ -198,15 +205,14 @@ const Politics = () => {
                 />
                 <div className="flex flex-col flex-grow space-y-2">
                   <p>{popularSingleNews.title}</p>
-
                   <p className="text-base badge font-semibold mb-1">
                     {popularSingleNews.category}
                   </p>
                   <hr className="my-2" />
                   <div className="flex justify-around items-center text-lg md:text-xl my-1 text-slate-100">
-                    <MdFavoriteBorder />
-                    <CiBookmark />
-                    <IoShareSocialOutline />
+                  <Favorite newsId={popularSingleNews._id} />
+                    <Bookmark newsId={popularSingleNews._id} />
+                    <ShareDropdown url={`http://localhost:3001/news/${popularSingleNews._id}`} />
                   </div>
                 </div>
               </div>
@@ -216,7 +222,7 @@ const Politics = () => {
       </div>
 
       {/* pagination section */}
-      <div className=" flex justify-center items-center py-4">
+      <div className="flex justify-center items-center py-4">
         <p>
           <button
             className="btn mr-1 bg-gray-800 text-white"
@@ -237,7 +243,6 @@ const Politics = () => {
             {page + 1}
           </button>
         ))}
-
         <p>
           <button
             className="btn ml-1 bg-gray-800 text-white"
@@ -250,9 +255,7 @@ const Politics = () => {
           <div>
             <span className="text-white px-2"> News Per Page:</span>
           </div>
-
           <div>
-            {" "}
             <select
               name=""
               value={newsPerPage}

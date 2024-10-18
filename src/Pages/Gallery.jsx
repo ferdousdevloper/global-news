@@ -27,8 +27,8 @@ const Gallery = () => {
 
 
   return (
-    <div>
-      <h2 className='h-full mt-20 text-center text-3xl font-semibold text-white py-6'>Our News Gallery</h2>
+    <div className="md:container md:mx-auto py-10 mb-20">
+      <h2 className='h-full mt-20 text-center text-3xl font-semibold text-white py-6 '>Our News Gallery</h2>
 
       {
         frames?.map(frame => <GalleryCard

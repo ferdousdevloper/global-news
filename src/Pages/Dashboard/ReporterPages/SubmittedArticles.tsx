@@ -4,6 +4,8 @@ import React from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
+import Swal from 'sweetalert2';  // Import SweetAlert2
+import { Toaster } from 'react-hot-toast';
 
 interface Article {
   _id: string;
@@ -53,11 +55,22 @@ const SubmittedArticles: React.FC = () => {
     },
   });
 
-  // Handle delete article
+  // Handle delete article with SweetAlert2 confirmation
   const handleDelete = (articleId: string) => {
-    if (window.confirm('Are you sure you want to delete this article?')) {
-      deleteArticleMutation.mutate(articleId);
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteArticleMutation.mutate(articleId);
+        Swal.fire('Deleted!', 'Your article has been deleted.', 'success');
+      }
+    });
   };
 
   if (loading) {
@@ -69,31 +82,32 @@ const SubmittedArticles: React.FC = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Submitted Articles</h1>
+    <div className="p-6 glass bg-neutral-900 min-h-screen">
+      <Toaster></Toaster>
+      <h1 className="text-4xl font-bold mb-6 text-center text-gray-100">Submitted Articles</h1>
       <hr className="my-10 border-2" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {articles.length > 0 ? (
           articles.map((article) => (
-            <div key={article._id} className="bg-white shadow-lg rounded-lg overflow-hidden transform transition hover:scale-105 duration-300">
+            <div key={article._id} className="shadow-lg bg-neutral-900 rounded-lg overflow-hidden transform transition hover:scale-105 duration-300 glass">
               <img
                 src={article.image || 'https://via.placeholder.com/400x200'} // Placeholder if no image is available
                 alt={article.title}
                 className="w-full h-48 object-cover"
               />
               <div className="p-4">
-                <h2 className="text-xl font-bold mb-2 text-gray-800">{article.title}</h2>
-                <p className="text-gray-600 text-sm">
+                <h2 className="text-xl font-bold mb-2 text-gray-100">{article.title}</h2>
+                <p className="text-gray-100 text-sm">
                   {article.description.slice(0, 100)}...
                 </p>
                 <div className="mt-4">
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-100">
                     <strong>Category:</strong> {article.category}
                   </p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-100">
                     <strong>Region:</strong> {article.region}
                   </p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-100">
                     <strong>Date:</strong> {new Date(article.timestamp).toLocaleString()}
                   </p>
                   {article.breaking_news && (
@@ -106,7 +120,7 @@ const SubmittedArticles: React.FC = () => {
                       <strong>Popular News</strong>
                     </p>
                   )}
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-200">
                     <strong>Status:</strong> {article.isLive ? 'Live' : 'Normal'}
                   </p>
                 </div>

@@ -20,12 +20,11 @@ const CustomizableNews = ({ openFilter , handleFilter}) => {
   })
   // console.log(news)
 
-  const region = [...new Set(news?.map((region) => region.region))];
 
-  const category = [...new Set(news?.map((category) => category.category))];
-
-  const title = [...new Set(news?.map((title) => title.title))];
-  // console.log(title)
+  // Extract unique regions, categories, and titles from the news array
+  const region = [...new Set(news?.map((item) => item.region))];
+  const category = [...new Set(news?.map((item) => item.category))];
+  const title = [...new Set(news?.map((item) => item.title))];
 
   const handleSearch = async () => {
     try {
@@ -62,7 +61,9 @@ const CustomizableNews = ({ openFilter , handleFilter}) => {
         >
           <option value='' className="disabled selected text-[#02AA08]">Region</option>
           {region?.map((reg) => (
-            <option className="text-[#02AA08]">{reg}</option>
+            <option key={reg} className="text-[#02AA08]">
+              {reg}
+            </option>
           ))}
         </select>
       </div>
@@ -74,7 +75,9 @@ const CustomizableNews = ({ openFilter , handleFilter}) => {
         >
           <option value='' className="disabled selected text-[#02AA08]">Category</option>
           {category?.map((cat) => (
-            <option className="text-[#02AA08]">{cat}</option>
+            <option key={cat} className="text-[#02AA08]">
+              {cat}
+            </option>
           ))}
         </select>
       </div>
@@ -86,7 +89,9 @@ const CustomizableNews = ({ openFilter , handleFilter}) => {
         >
           <option value='' className="disabled selected text-[#02AA08]">Topic</option>
           {title?.map((tit) => (
-            <option className="text-[#02AA08]">{tit}</option>
+            <option key={tit} className="text-[#02AA08]">
+              {tit}
+            </option>
           ))}
         </select>
       </div>

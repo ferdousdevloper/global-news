@@ -1,16 +1,16 @@
 import axios from "axios";
-import { CiBookmark } from "react-icons/ci";
-import { IoShareSocialOutline } from "react-icons/io5";
-import { MdFavoriteBorder } from "react-icons/md";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Favorite from "../Components/Favorite";
+import ShareDropdown from "../Components/Home/ShareDropdown";
+import Bookmark from "../Components/Bookmark";
 
-const Business = () => {
+const Technology = () => {
   const [allNews, setAllNews] = useState([]);
   const [popularNews, setPopularNews] = useState([]);
   const [newsPerPage, setNewsPerPage] = useState(8);
   const [currentPage, setCurrentPage] = useState(0);
-  const [liveBusinessNews, setLiveBusinessNews] = useState([]);
+  const [liveTechNews, setLiveTechNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -35,25 +35,25 @@ const Business = () => {
   };
 
   useEffect(() => {
-    const fetchBusinessNews = async () => {
+    const fetchTechNews = async () => {
       try {
         const response = await axios.get("http://localhost:3001/news");
         const newsData = response.data;
-        const businessNews = newsData.filter(
-          (singleNews) => singleNews.category === "Business"
+        const techNews = newsData.filter(
+          (singleNews) => singleNews.category === "Technology"
         );
-        const popularBusinessNews = allNews.filter(
+        const popularTechNews = newsData.filter(
           (singleNews) =>
-            singleNews.category === "Business" &&
+            singleNews.category === "Technology" &&
             singleNews.popular_news === true
         );
-        const liveNews = allNews.filter(
+        const liveNews = newsData.filter(
           (singleNews) =>
-            singleNews.category === "Business" && singleNews.isLive === true
+            singleNews.category === "Technology" && singleNews.isLive === true
         );
-        setLiveBusinessNews(liveNews[0]);
-        setAllNews(businessNews);
-        setPopularNews(popularBusinessNews);
+        setLiveTechNews(liveNews[0]);
+        setAllNews(techNews);
+        setPopularNews(popularTechNews);
 
         setLoading(false);
       } catch (err) {
@@ -62,7 +62,7 @@ const Business = () => {
       }
     };
 
-    fetchBusinessNews();
+    fetchTechNews();
   }, [currentPage, newsPerPage, allNews]);
 
   if (loading) {
@@ -80,94 +80,108 @@ const Business = () => {
   return (
     <div className="bg-gray-800 container mx-auto min-h-screen pt-20">
       <div className="lg:w-1/2 mx-auto my-3 lg:my-4 text-center text-gray-100">
-        <h2 className="font-bold text-2xl lg:text-4xl">Business</h2>
+        <h2 className="font-bold text-2xl lg:text-4xl">Technology</h2>
         <p className="mt-3">
-          Stay Informed with the Latest Business News, Trends, and Market
-          Insights. Explore In-Depth Analysis on Global Markets, Emerging
-          Industries, and Economic Developments.
+          Discover the latest advancements and innovations in the world of
+          technology, covering everything from groundbreaking gadgets to
+          emerging trends. Stay informed with in-depth analysis and news on how
+          technology is shaping the future.
         </p>
       </div>
 
-      {/* Live Politics News */}
-      {liveBusinessNews && (
+      {/* Live Technology News */}
+      {liveTechNews && (
         <div className="flex flex-col md:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden glass my-10">
           <div className="md:w-1/2 w-full">
             <img
-              src={liveBusinessNews?.image}
-              alt={liveBusinessNews?.title}
+              src={liveTechNews?.image}
+              alt={liveTechNews?.title}
               className="w-full h-full object-cover"
             />
           </div>
           <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
             <div>
-              <h3 className="text-2xl font-bold mb-2">
-                {liveBusinessNews?.title}
-              </h3>
+              <h3 className="text-2xl font-bold mb-2">{liveTechNews?.title}</h3>
               <hr className="my-4" />
               <p className="text-gray-300 mb-4">
-                {liveBusinessNews?.description.slice(0, 1000)}...
+                {liveTechNews?.description.slice(0, 1000)}...
               </p>
             </div>
             <div>
               <p className="text-gray-100 text-sm mb-2">
-                {new Date(liveBusinessNews?.timestamp).toLocaleString()}
+                {new Date(liveTechNews?.timestamp).toLocaleString()}
               </p>
-              {liveBusinessNews?.isLive && (
+              {liveTechNews?.isLive && (
                 <span className="px-4 py-1 bg-red-600 text-white text-xs font-semibold uppercase rounded-full">
                   Live
                 </span>
               )}
               <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
-                <MdFavoriteBorder />
-                <CiBookmark />
-                <IoShareSocialOutline />
+                <Favorite newsId={liveTechNews._id} />
+                <Bookmark newsId={liveTechNews._id} />
+                <ShareDropdown url={`http://localhost:3001/news/${liveTechNews._id}`} />
               </div>
             </div>
           </div>
         </div>
       )}
 
+      {/* All Technology News */}
       <div className="flex flex-col lg:flex-row gap-5">
-        {/* Politics News bar section */}
         <div className="lg:w-9/12 w-full bg-neutral-950 glass p-5 rounded-xl container mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {" "}
             {allNews.map((item) => (
-              <Link to={`/news/${item._id}`} key={item._id}>
-                <div className="border p-4 rounded-lg shadow-lg glass h-[520px]">
+              <div
+                key={item._id}
+                className="border p-4 rounded-lg shadow-lg glass flex flex-col h-full min-h-[400px]"
+              >
+                <Link to={`/news/${item._id}`}>
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-60 object-cover mb-4 rounded-md"
+                    className="w-full h-40 object-cover mb-4 rounded-md"
                   />
-                  <h3 className="text-base badge font-semibold mb-1 ">
+                </Link>
+                <div className="flex-grow flex flex-col">
+                  <h3 className="text-base badge font-semibold mb-1">
                     {item.category}
                   </h3>
-                  <h2 className="text-xl font-bold mb-2 text-slate-50">
-                    {item.title}
-                  </h2>
+                  <Link to={`/news/${item._id}`}>
+                    <h2 className="text-xl font-bold mb-2 text-slate-50 hover:underline">
+                      {item.title}
+                    </h2>
+                  </Link>
                   <p className="text-sm mb-2 text-slate-100">
                     {new Date(item.date_time).toLocaleDateString()}
                   </p>
-                  <p className="text-slate-100">
-                    {item.description.slice(0, 100)}...
+                  <p className="text-slate-100 flex-grow">
+                    {item.description.length > 80 ? (
+                      <>
+                        {item.description.slice(0, 80)}...
+                        <Link
+                          to={`/news/${item._id}`}
+                          className="text-green-500 hover:text-green-300"
+                        >
+                          {" "}
+                          See More
+                        </Link>
+                      </>
+                    ) : (
+                      item.description
+                    )}
                   </p>
-                  <div>
-                    <p className="text-gray-100 text-sm mb-2">
-                      {new Date(liveBusinessNews?.timestamp).toLocaleString()}
-                    </p>
-                    <div className="flex justify-around items-center text-xl md:text-2xl my-5 text-slate-100">
-                      <MdFavoriteBorder />
-                      <CiBookmark />
-                      <IoShareSocialOutline />
-                    </div>
-                  </div>
                 </div>
-              </Link>
+                <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
+                  <Favorite newsId={item._id} />
+                  <Bookmark newsId={item._id} />
+                  <ShareDropdown url={`http://localhost:3001/news/${item._id}`} />
+                </div>
+              </div>
             ))}
           </div>
         </div>
-        {/* popular politics news section */}
+
+        {/* Popular News Section */}
         <div className="lg:w-3/12 w-full bg-neutral-950 glass p-5 rounded-xl text-white">
           <div className="mb-8 space-x-5 border-b-2 border-opacity-10 dark:border-violet-600">
             <button
@@ -177,10 +191,9 @@ const Business = () => {
               Popular
             </button>
           </div>
-          {/* popular news card */}
           {popularNews.map((popularSingleNews) => (
             <Link
-              to={`/news/${popularNews._id}`}
+              to={`/news/${popularSingleNews._id}`}
               key={popularSingleNews._id}
               className="flex flex-col divide-y my-2 glass dark:divide-gray-300 h-40"
             >
@@ -192,15 +205,14 @@ const Business = () => {
                 />
                 <div className="flex flex-col flex-grow space-y-2">
                   <p>{popularSingleNews.title}</p>
-
                   <p className="text-base badge font-semibold mb-1">
                     {popularSingleNews.category}
                   </p>
                   <hr className="my-2" />
                   <div className="flex justify-around items-center text-lg md:text-xl my-1 text-slate-100">
-                    <MdFavoriteBorder />
-                    <CiBookmark />
-                    <IoShareSocialOutline />
+                    <Favorite newsId={popularSingleNews._id} />
+                    <Bookmark newsId={popularSingleNews._id} />
+                    <ShareDropdown url={`http://localhost:3001/news/${popularSingleNews._id}`} />
                   </div>
                 </div>
               </div>
@@ -209,59 +221,34 @@ const Business = () => {
         </div>
       </div>
 
-      {/* pagination section */}
-      <div className=" flex justify-center items-center py-4">
-        <p>
-          <button
-            className="btn mr-1 bg-gray-800 text-white"
-            onClick={handlePrevious}
-          >
-            Previous
-          </button>
-        </p>
-        {pages.map((page) => (
-          <button
-            className={
-              (currentPage === page && "btn bg-red-900 text-white") ||
-              "btn mr-1 bg-gray-800 text-white"
-            }
-            onClick={() => setCurrentPage(page)}
-            key={page}
-          >
-            {page + 1}
-          </button>
-        ))}
-
-        <p>
-          <button
-            className="btn ml-1 bg-gray-800 text-white"
-            onClick={handleNext}
-          >
-            Next
-          </button>
-        </p>
-        <label htmlFor="" className="ml-2 flex justify-center items-center">
-          <div>
-            <span className="text-white px-2"> News Per Page:</span>
-          </div>
-
-          <div>
-            {" "}
-            <select
-              name=""
-              value={newsPerPage}
-              onChange={handleNewsPerPage}
-              className="btn bg-gray-800 text-white"
-            >
-              <option value="8">4</option>
-              <option value="20">10</option>
-              <option value="40">20</option>
-            </select>
-          </div>
-        </label>
+      {/* Pagination Section */}
+      <div className="flex justify-center items-center py-4">
+        <button
+          className="btn mr-1 bg-gray-800 text-white"
+          onClick={handlePrevious}
+          disabled={currentPage === 0}
+        >
+          Previous
+        </button>
+        <select
+          value={newsPerPage}
+          onChange={handleNewsPerPage}
+          className="bg-gray-800 text-white px-3 py-2 rounded-lg"
+        >
+          <option value="4">4</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+        </select>
+        <button
+          className="btn ml-1 bg-gray-800 text-white"
+          onClick={handleNext}
+          disabled={currentPage === pages.length - 1}
+        >
+          Next
+        </button>
       </div>
     </div>
   );
 };
 
-export default Business;
+export default Technology;

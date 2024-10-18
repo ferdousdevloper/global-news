@@ -1,6 +1,7 @@
 // src/Pages/Dashboard/ReporterPages/EditArticles.jsx
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const EditArticles = () => {
@@ -43,6 +44,7 @@ const EditArticles = () => {
     e.preventDefault();
     try {
       await axios.patch(`http://localhost:3001/news/edit-article/${articleId}`, article);
+      toast.success("Article updated successfully")
       navigate('/dashboard/submitted-articles'); // Redirect to submitted articles page after successful edit
     } catch (err) {
       setError(err.response?.data?.message || 'Error updating article'); // Improved error handling
@@ -54,7 +56,8 @@ const EditArticles = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Edit Article</h1>
+      <h1 className="text-2xl font-bold mb-4 text-gray-100">Edit Article</h1>
+      <hr className='py-4' />
       <form onSubmit={handleSubmit} className="bg-neutral-900 glass shadow-md text-white rounded-lg p-6 mb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <input
