@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import LiveNews from "../Components/AllNews/LiveNews";
 import useAuth from "../hooks/useAuth";
+import { useSelector } from "react-redux";
 
 interface NewsItem {
   _id: string;
@@ -41,6 +42,8 @@ const AllNews: React.FC = () => {
   // Fetch the user and loading state from the authentication hook
   const auth = useAuth();
   const { user, loading: authLoading } = auth || {};
+
+  // const customFilter = useSelector((state) => state.newsFilter)
 
   useEffect(() => {
     const fetchNews = async () => {

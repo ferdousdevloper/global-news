@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 
-const CustomizableNews = ({ openFilter }) => {
+const CustomizableNews = ({ openFilter , handleFilter}) => {
   // console.log(openFilter);
   const [selectRegion, setSelectRegion] = useState('')
   const [selectCategory, setSelectCategory] = useState('')
@@ -33,6 +33,7 @@ const CustomizableNews = ({ openFilter }) => {
         `http://localhost:3001/newss/filter?region=${selectRegion}&category=${selectCategory}&topic=${selectTopic}`
       );
       console.log(data);
+      handleFilter()
     } catch (error) {
       console.error('Error fetching filtered news:', error);
     }
@@ -52,7 +53,7 @@ const CustomizableNews = ({ openFilter }) => {
     <div
       className={`${openFilter ? "block md:flex" : "hidden md:hidden"
         } gap-4 md:gap-8 justify-end mt-[88px] absolute right-0`}
-    >
+    >     
       <div className="dropdown dropdown-hover z-50">
         <select
           className="bg-transparent border-b-2 border-green-700 w-full max-w-xs p-2"

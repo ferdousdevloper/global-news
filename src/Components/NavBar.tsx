@@ -679,7 +679,7 @@ const NavBar: React.FC = () => {
           </div>
         )}
       </nav>
-      <CustomizableNews openFilter={openFilter}></CustomizableNews>
+      <CustomizableNews openFilter={openFilter} handleFilter={handleFilter}></CustomizableNews>      
     </>
   );
 };
