@@ -19,8 +19,7 @@ const Banner: React.FC = () => {
   const [news, setNews] = useState<NewsItem[]>([]);
 
   useEffect(() => {
-    // Fetch the data from the dummy JSON file
-    fetch('https://global-news-server-phi.vercel.app/news')
+    fetch('http://localhost:3001/news')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

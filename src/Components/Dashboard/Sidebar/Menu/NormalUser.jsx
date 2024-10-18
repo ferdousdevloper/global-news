@@ -4,6 +4,7 @@ import useAuth from "../../../../hooks/useAuth";
 import useRole from "../../../../hooks/useRole";
 import MenuItem from "./MenuItem";
 import RequestReporterModal from "../../RequestReporterModal";
+import { MdFavorite } from "react-icons/md";
 
 const NormalUser = () => {
   const { user } = useAuth();
@@ -26,6 +27,11 @@ const NormalUser = () => {
         icon={BsFillBookmarksFill}
         label="Manage Bookmarks"
         address="manage-bookmarks"
+      />
+      <MenuItem
+        icon={MdFavorite}
+        label="My Favorites"
+        address="my-favorites"
       />
       <button
         className="bg-blue-600 text-white py-2 px-4 rounded-lg mt-4"

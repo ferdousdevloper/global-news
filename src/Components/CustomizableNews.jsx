@@ -5,21 +5,24 @@ import React from "react";
 const CustomizableNews = ({ openFilter }) => {
   console.log(openFilter);
 
-    const { data: news = [] } = useQuery({
-        queryKey: ['news'],
-        queryFn: async () => {
-            const { data } = await axios.get('https://global-news-server-phi.vercel.app/news')
-            return data;
-        }
-    })
-    console.log(news)
+  // Use react-query to fetch news
+  const { data = { news: [] } } = useQuery({
+    queryKey: ['news'],
+    queryFn: async () => {
+      const { data } = await axios.get('http://localhost:3001/news');
+      // Assuming the data has a "news" array
+      return data;
+    }
+  });
 
-  const region = [...new Set(news?.map((region) => region.region))];
+  const news = data.news; // Access the news array properly
 
-  const category = [...new Set(news?.map((category) => category.category))];
+  console.log(news); // This should now log an array of news items
 
-  const title = [...new Set(news?.map((title) => title.title))];
-  // console.log(title)
+  // Extract unique regions, categories, and titles from the news array
+  const region = [...new Set(news?.map((item) => item.region))];
+  const category = [...new Set(news?.map((item) => item.category))];
+  const title = [...new Set(news?.map((item) => item.title))];
 
   return (
     <div
@@ -31,7 +34,9 @@ const CustomizableNews = ({ openFilter }) => {
         <select className="bg-transparent border-b-2 border-green-700 w-full max-w-xs p-2">
           <option className="disabled selected text-[#02AA08]">Region</option>
           {region?.map((reg) => (
-            <option className="text-[#02AA08]">{reg}</option>
+            <option key={reg} className="text-[#02AA08]">
+              {reg}
+            </option>
           ))}
         </select>
       </div>
@@ -39,7 +44,9 @@ const CustomizableNews = ({ openFilter }) => {
         <select className="bg-transparent border-b-2 border-green-700 w-full max-w-xs p-2">
           <option className="disabled selected text-[#02AA08]">Category</option>
           {category?.map((cat) => (
-            <option className="text-[#02AA08]">{cat}</option>
+            <option key={cat} className="text-[#02AA08]">
+              {cat}
+            </option>
           ))}
         </select>
       </div>
@@ -47,7 +54,9 @@ const CustomizableNews = ({ openFilter }) => {
         <select className="bg-transparent border-b-2 border-green-700 w-full max-w-xs p-2">
           <option className="disabled selected text-[#02AA08]">Topic</option>
           {title?.map((tit) => (
-            <option className="text-[#02AA08]">{tit}</option>
+            <option key={tit} className="text-[#02AA08]">
+              {tit}
+            </option>
           ))}
         </select>
       </div>

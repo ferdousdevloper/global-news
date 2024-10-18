@@ -6,6 +6,7 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
 import ShareDropdown from "../Components/Home/ShareDropdown";
 import Bookmark from "../Components/Bookmark";
+import Favorite from "../Components/Favorite";
 
 const Politics = () => {
   const [allNews, setAllNews] = useState([]);
@@ -39,7 +40,7 @@ const Politics = () => {
   useEffect(() => {
     const fetchPoliticsNews = async () => {
       try {
-        const response = await axios.get("https://global-news-server-phi.vercel.app/news");
+        const response = await axios.get("http://localhost:3001/news");
         const newsData = response.data;
         const politicsNews = newsData.filter(
           (singleNews) => singleNews.category === "Politics"
@@ -120,9 +121,9 @@ const Politics = () => {
                 </span>
               )}
               <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
-                <MdFavoriteBorder />
+              <Favorite newsId={livePoliticsNews._id} />
                 <Bookmark newsId={livePoliticsNews._id} />
-                <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${livePoliticsNews._id}`} />
+                <ShareDropdown url={`http://localhost:3001/news/${livePoliticsNews._id}`} />
               </div>
             </div>
           </div>
@@ -171,9 +172,9 @@ const Politics = () => {
                   )}
                 </p>
                 <div className="flex justify-between items-center text-xl md:text-2xl my-3">
-                  <MdFavoriteBorder />
+                <Favorite newsId={item._id} />
                   <Bookmark newsId={item._id} />
-                  <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${item._id}`} />
+                  <ShareDropdown url={`http://localhost:3001/news/${item._id}`} />
                 </div>
               </div>
             ))}
@@ -209,9 +210,9 @@ const Politics = () => {
                   </p>
                   <hr className="my-2" />
                   <div className="flex justify-around items-center text-lg md:text-xl my-1 text-slate-100">
-                    <MdFavoriteBorder />
+                  <Favorite newsId={popularSingleNews._id} />
                     <Bookmark newsId={popularSingleNews._id} />
-                    <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${popularSingleNews._id}`} />
+                    <ShareDropdown url={`http://localhost:3001/news/${popularSingleNews._id}`} />
                   </div>
                 </div>
               </div>

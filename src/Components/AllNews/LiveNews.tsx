@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import ShareDropdown from "../Home/ShareDropdown";
 import Bookmark from "../Bookmark";
+import Favorite from "../Favorite";
 
 interface NewsArticle {
   _id: string;
@@ -26,7 +27,7 @@ const LiveNews: React.FC = () => {
     // Fetch the latest live news from the server
     const fetchLatestNews = async () => {
       try {
-        const response = await fetch('https://global-news-server-phi.vercel.app/news?isLive=true');  // Adjust your API endpoint if needed
+        const response = await fetch('http://localhost:3001/news?isLive=true');  // Adjust your API endpoint if needed
         if (!response.ok) {
           throw new Error("Failed to fetch live news");
         }
@@ -99,10 +100,10 @@ const LiveNews: React.FC = () => {
           <div>-
             <p className="text-gray-100 text-sm mb-2">{formattedDate}</p>
             <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
-              <MdFavoriteBorder />
+            <Favorite newsId={latestNews._id} />
               {/* Use Bookmark component */}
               <Bookmark newsId={latestNews._id} />
-              <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${latestNews._id}`} />
+              <ShareDropdown url={`http://localhost:3001/news/${latestNews._id}`} />
             </div>
           </div>
         </div>

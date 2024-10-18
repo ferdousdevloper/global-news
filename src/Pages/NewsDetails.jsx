@@ -6,6 +6,7 @@ import { MdFavoriteBorder } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 import ShareDropdown from '../Components/Home/ShareDropdown';
 import Bookmark from '../Components/Bookmark';
+import Favorite from '../Components/Favorite';
 
 const NewsDetail = () => {
   const { id } = useParams(); // Get the id from the URL
@@ -17,7 +18,7 @@ const NewsDetail = () => {
     // Fetch the news details based on the id
     const fetchNewsDetail = async () => {
       try {
-        const response = await axios.get(`https://global-news-server-phi.vercel.app/news/${id}`);
+        const response = await axios.get(`http://localhost:3001/news/${id}`);
         setNews(response.data);
         setLoading(false);
       } catch (err) {
@@ -82,9 +83,9 @@ const NewsDetail = () => {
               <h3 className='font-bold underline mb-4'>News:</h3>
               <p className="text-lg leading-relaxed mb-6 text-justify">{news.description}</p>
               <div className="flex justify-between items-center text-xl md:text-2xl my-3">
-                <MdFavoriteBorder />
+              <Favorite newsId={news._id} />
                 <Bookmark newsId={news._id} />
-                <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${news._id}`} />
+                <ShareDropdown url={`http://localhost:3001/news/${news._id}`} />
               </div>
             </div>
           </>
