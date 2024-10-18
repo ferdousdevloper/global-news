@@ -63,7 +63,7 @@ const LatestCard = ({ news }) => {
             <div className="flex justify-around items-center text-xl md:text-2xl my-3 text-slate-100">
                 <Favorite newsId={_id} />
                 <Bookmark newsId={_id} />
-                <ShareDropdown url={`http://localhost:3001/news/${_id}`} />
+                <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${_id}`} />
             </div>
         </div>
     );
