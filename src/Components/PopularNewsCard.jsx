@@ -8,8 +8,6 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 
 
-
-
 const PopularNewsCard = ({ news }) => {
     // console.log(news)
     const { _id, image, category, title, date_time, description } = news
@@ -127,21 +125,6 @@ const PopularNewsCard = ({ news }) => {
                 </div>
             </div>
 
-
-
-
-
-            {/* <figure className='h-52'>
-                <img
-                    className='w-full h-52'
-                    src={image}
-                    alt="popular news" />
-
-            </figure>
-            <div className="card-body">
-                <h2 className="card-title">{category}</h2>
-                <p>{title}</p>
-            </div> */}
         </div>
 
     );
