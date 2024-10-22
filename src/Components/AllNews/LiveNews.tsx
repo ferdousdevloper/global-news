@@ -7,6 +7,8 @@ import useAuth from "../../hooks/useAuth";
 import ShareDropdown from "../Home/ShareDropdown";
 import Bookmark from "../Bookmark";
 import Favorite from "../Favorite";
+import loadingAnimation from "../../loadingAnimation.json"
+import Lottie from "lottie-react";
 
 interface NewsArticle {
   _id: string;
@@ -27,7 +29,7 @@ const LiveNews: React.FC = () => {
     // Fetch the latest live news from the server
     const fetchLatestNews = async () => {
       try {
-        const response = await fetch('https://global-news-server-phi.vercel.app/news?isLive=true');  // Adjust your API endpoint if needed
+        const response = await fetch('http://localhost:3001/news?isLive=true');  // Adjust your API endpoint if needed
         if (!response.ok) {
           throw new Error("Failed to fetch live news");
         }
@@ -50,7 +52,16 @@ const LiveNews: React.FC = () => {
     fetchLatestNews();
   }, []);
 
-  if (authLoading) return <p>Loading...</p>;
+  if (authLoading) return (
+    <div className="w-2/4 mx-auto">
+      <Lottie
+        animationData={loadingAnimation}
+        height={100}
+        width={100}
+        className=""
+      ></Lottie>
+    </div>
+  );;
   if (error) {
     return <div className="p-6 text-red-600 text-center">{error}</div>;
   }
@@ -66,9 +77,17 @@ const LiveNews: React.FC = () => {
   const formattedDate = new Date(latestNews.timestamp).toLocaleString();
   return (
     <>
-      <h1 className="text-4xl mt-16 font-black btn cursor-auto glass text-red-600">LIVE ...</h1>
+      <h1 
+       data-aos="fade-right"
+       data-aos-duration="1000" 
+       data-aos-delay="200"
+      className="text-4xl mt-16 font-black btn cursor-auto glass text-red-600">LIVE ...</h1>
       <div className="flex flex-col md:flex-row border text-white border-gray-300 rounded-lg shadow-lg overflow-hidden glass">
-        <div className="md:w-1/2 w-full">
+        <div 
+         data-aos="zoom-in"
+         data-aos-duration="1000" 
+         data-aos-delay="250"
+        className="md:w-1/2 w-full">
           <img
             src={latestNews.image}
             alt={latestNews.title}
@@ -76,7 +95,11 @@ const LiveNews: React.FC = () => {
           />
         </div>
         <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
-          <div>
+          <div
+           data-aos="fade-up"
+           data-aos-duration="1000" 
+           data-aos-delay="300"
+          >
             <h3 className="text-2xl font-bold mb-2">{latestNews.title}</h3>
             <hr className="my-4" />
             {/* Description with "See More" */}
@@ -86,7 +109,7 @@ const LiveNews: React.FC = () => {
                   {latestNews.description.slice(0, 1000)}...
                   <Link
                     to={`/news/${latestNews._id}`}
-                    className="text-blue-500 hover:text-blue-300"
+                    className="text-colorPrimary hover:text-blue-300"
                   >
                     {" "} See Full News
                   </Link>
@@ -98,12 +121,20 @@ const LiveNews: React.FC = () => {
 
           </div>
           <div>-
-            <p className="text-gray-100 text-sm mb-2">{formattedDate}</p>
-            <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
+            <p 
+             data-aos="fade-up"
+             data-aos-duration="1000" 
+             data-aos-delay="350"
+            className="text-gray-100 text-sm mb-2">{formattedDate}</p>
+            <div 
+             data-aos="fade-up"
+             data-aos-duration="1000" 
+             data-aos-delay="400"
+            className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
             <Favorite newsId={latestNews._id} />
               {/* Use Bookmark component */}
               <Bookmark newsId={latestNews._id} />
-              <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${latestNews._id}`} />
+              <ShareDropdown url={`http://localhost:3001/news/${latestNews._id}`} />
             </div>
           </div>
         </div>

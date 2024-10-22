@@ -43,7 +43,7 @@ const ShareDropdown: React.FC<ShareDropdownProps> = ({ url }) => {
       
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-black rounded shadow-lg z-100 glass"> {/* Increased z-index */}
+        <div className="absolute right-0 bottom-8 mt-2 w-48 bg-black rounded shadow-lg z-100 glass"> {/* Increased z-index */}
           <div className="flex flex-col p-2">
             <button
               onClick={() => handleShare("facebook")}

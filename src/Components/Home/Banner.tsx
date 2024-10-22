@@ -19,7 +19,7 @@ const Banner: React.FC = () => {
   const [news, setNews] = useState<NewsItem[]>([]);
 
   useEffect(() => {
-    fetch('https://global-news-server-phi.vercel.app/news')
+    fetch('http://localhost:3001/news')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -38,7 +38,11 @@ const Banner: React.FC = () => {
   }, []);
 
   return (
-    <div className="banner-container">
+    <div 
+    data-aos="zoom-in"
+    data-aos-duration="1000" 
+    data-aos-delay="200"
+    className="banner-container">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

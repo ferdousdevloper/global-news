@@ -12,21 +12,25 @@ const BreakingNews: React.FC = () => {
 
   useEffect(() => {
     // Fetch the breaking news from dammy.json
-    fetch("https://global-news-server-phi.vercel.app/news")
+    fetch("http://localhost:3001/news")
       .then((response) => response.json())
       .then((data) => {
         // Filter the breaking news
         const latestBreakingNews = data.filter(
           (item: NewsItem) => item.breaking_news
         );
-        setBreakingNews(latestBreakingNews.slice(0, 5)); // Limit to 5 items
+        setBreakingNews(latestBreakingNews.slice(0, 9)); // Limit to 9 items
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
   return (
-    <div className="relative w-full bg-slate-900 text-white mr-2 h-16 flex items-center overflow-hidden border-y-2 border-red-400">
-      <div className=" bg-gradient-to-r from-red-700 to-red-500 p-4 text-xl font-bold uppercase text-nowrap">
+    <div 
+    data-aos="zoom-in"
+    data-aos-duration="1000" 
+    data-aos-delay="200"
+    className="relative w-full bg-red-900 text-white mr-2 h-16 flex items-center overflow-hidden border-y-2 border-red-400 glass">
+      <div className=" bg-gradient-to-r from-red-700 to-red-500 p-4 text-xl font-bold uppercase text-nowrap glass">
         Breaking News
       </div>
       <div className="ml-1 overflow-hidden whitespace-nowrap">

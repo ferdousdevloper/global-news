@@ -19,8 +19,11 @@ const LatestCard = ({ news }) => {
 
     return (
         <div
+        data-aos="zoom-in"
+           data-aos-duration="1000" 
+           data-aos-delay="400"
             key={_id}
-            className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 glass text-gray-300"
+            className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 glass text-gray-300 mb-4"
         >
             <Link to={`/news/${_id}`}>
                 <img
@@ -47,7 +50,7 @@ const LatestCard = ({ news }) => {
                         {description.slice(0, 150)}...
                         <Link
                             to={`/news/${_id}`}
-                            className="text-blue-500 hover:text-blue-300"
+                            className="text-colorPrimary hover:text-blue-300"
                         >
                             {" "}
                             See More
@@ -63,7 +66,7 @@ const LatestCard = ({ news }) => {
             <div className="flex justify-around items-center text-xl md:text-2xl my-3 text-slate-100">
                 <Favorite newsId={_id} />
                 <Bookmark newsId={_id} />
-                <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${_id}`} />
+                <ShareDropdown url={`http://localhost:3001/news/${_id}`} />
             </div>
         </div>
     );

@@ -17,7 +17,7 @@ const Bookmark: React.FC<BookmarkProps> = ({ newsId }) => {
     if (user) {
       const fetchBookmarkedNews = async () => {
         try {
-          const response = await axios.get(`https://global-news-server-phi.vercel.app/bookmarks/${user.email}`);
+          const response = await axios.get(`http://localhost:3001/bookmarks/${user.email}`);
           const userBookmarks = response.data;
           setBookmarked(userBookmarks.includes(newsId));
         } catch (err) {
@@ -44,8 +44,8 @@ const Bookmark: React.FC<BookmarkProps> = ({ newsId }) => {
 
     try {
       const url = bookmarked
-        ? "https://global-news-server-phi.vercel.app/bookmarks"  // DELETE route for removing bookmark
-        : "https://global-news-server-phi.vercel.app/bookmark";  // POST route for adding bookmark
+        ? "http://localhost:3001/bookmarks"  // DELETE route for removing bookmark
+        : "http://localhost:3001/bookmark";  // POST route for adding bookmark
 
       const method = bookmarked ? 'delete' : 'post';
 

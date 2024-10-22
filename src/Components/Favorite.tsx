@@ -17,7 +17,7 @@ const Favorite: React.FC<FavoriteProps> = ({ newsId }) => {
     if (user) {
       const fetchFavorites = async () => {
         try {
-          const response = await axios.get(`https://global-news-server-phi.vercel.app/favorites/${user.email}`);
+          const response = await axios.get(`http://localhost:3001/favorites/${user.email}`);
           const userFavorites = response.data;
           setIsFavorited(userFavorites.includes(newsId));
         } catch (err) {
@@ -44,8 +44,8 @@ const Favorite: React.FC<FavoriteProps> = ({ newsId }) => {
 
     try {
       const url = isFavorited
-        ? "https://global-news-server-phi.vercel.app/favorites"
-        : "https://global-news-server-phi.vercel.app/favorites";
+        ? "http://localhost:3001/favorites"
+        : "http://localhost:3001/favorites";
 
       // Perform the appropriate request to add/remove from favorites
       if (isFavorited) {

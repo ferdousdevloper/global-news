@@ -12,7 +12,6 @@ import Latest from "./Pages/Latest";
 import Entertainment from "./Pages/Entertainment";
 import Contact from "./Pages/Contact";
 import Business from "./Pages/Business";
-import Feature from "./Pages/Feature";
 import Opinion from "./Pages/Opinion";
 import Sport from "./Pages/Sport";
 import Gallery from "./Pages/Gallery";
@@ -37,6 +36,11 @@ import Technology from "./Pages/Technology";
 import MyFavorites from "./Pages/Dashboard/NormalUser/MyFavorites";
 import About from "./Pages/About";
 import Lifestyle from "./Pages/Lifestyle";
+import Aos from "aos";
+import "aos/dist/aos.css";
+
+// Initialize AOS
+Aos.init();
 
 const Root = createBrowserRouter([
   {
@@ -52,7 +56,7 @@ const Root = createBrowserRouter([
         path: "/category/:popularId",
         element: <PopularDetails></PopularDetails>,
         loader: ({ params }) =>
-          fetch(`https://global-news-server-phi.vercel.app/news/${params.popularId}`),
+          fetch(`http://localhost:3001/news/${params.popularId}`),
       },
       {
         path: "/category/politics",
@@ -106,10 +110,6 @@ const Root = createBrowserRouter([
       {
         path: "/category/technology",
         element: <Technology />,
-      },
-      {
-        path: "/category/feature",
-        element: <Feature />,
       },
       {
         path: "/category/opinion",

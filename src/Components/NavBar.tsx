@@ -428,19 +428,6 @@ const NavBar: React.FC = () => {
               Opinion
             </NavLink>
             <NavLink
-              to="/category/feature"
-              className={({ isActive }) =>
-                `block px-2 py-1 rounded ${
-                  isActive
-                    ? "bg-[#02AA08] text-white"
-                    : "hover:bg-[#02AA08] hover:text-white"
-                }`
-              }
-            >
-              Feature
-            </NavLink>
-
-            <NavLink
               to="/category/gallery"
               className={({ isActive }) =>
                 `block px-2 py-1 rounded ${

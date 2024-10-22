@@ -54,7 +54,7 @@ const SportCard = ({ news }) => {
             <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
             <Favorite newsId={news._id} />
                 <Bookmark newsId={news._id} />
-                <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${news._id}`} />
+                <ShareDropdown url={`http://localhost:3001/news/${news._id}`} />
             </div>
         </div>
     );

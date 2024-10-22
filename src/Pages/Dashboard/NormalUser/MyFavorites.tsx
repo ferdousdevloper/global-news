@@ -23,11 +23,11 @@ const MyFavorites: React.FC = () => {
     const fetchUserFavorites = async () => {
       if (user) {
         try {
-          const favoritesResponse = await axios.get(`https://global-news-server-phi.vercel.app/favorites/${user.email}`);
+          const favoritesResponse = await axios.get(`http://localhost:3001/favorites/${user.email}`);
           const favorites = favoritesResponse.data;
 
           const articlePromises = favorites.map((newsId: string) =>
-            axios.get(`https://global-news-server-phi.vercel.app/news/${newsId}`)
+            axios.get(`http://localhost:3001/news/${newsId}`)
           );
 
           const articlesResponses = await Promise.all(articlePromises);
@@ -48,7 +48,7 @@ const MyFavorites: React.FC = () => {
   const handleRemoveFavorite = async (newsId: string) => {
     if (user) {
       try {
-        await axios.delete('https://global-news-server-phi.vercel.app/favorites', {
+        await axios.delete('http://localhost:3001/favorites', {
           data: { email: user.email, newsId },
         });
         setFavoriteArticles((prevArticles) => prevArticles.filter(article => article._id !== newsId));
