@@ -79,12 +79,24 @@ const NewsComponent = () => {
   return (
     <div className="min-h-screen p-6 mt-16">
       <div className="container mx-auto max-w-7xl">
-        <h1 className="text-xl md:text-6xl fontBebas font-extrabold text-center mb-10 text-gray-100">
+        <h1
+        data-aos="zoom-in"
+        data-aos-duration="1000" 
+        data-aos-delay="200"
+        className="text-xl md:text-6xl fontBebas font-extrabold text-center mb-10 text-gray-100">
           POST ARTICLE
         </h1>
-        <hr className="my-10 border-2" />
-        <form onSubmit={handleSubmit} className="bg-neutral-900 glass shadow-md rounded-lg p-6 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <hr 
+        data-aos="zoom-in"
+        data-aos-duration="1000" 
+        data-aos-delay="250"
+        className="my-10 border-2" />
+        <form onSubmit={handleSubmit} className="bg-neutral-900 glass shadow-md rounded-lg p-6 mb-8 text-gray-100">
+          <div 
+          data-aos="zoom-in"
+          data-aos-duration="1000" 
+          data-aos-delay="400"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <input
               type="text"
               name="title"
@@ -123,6 +135,9 @@ const NewsComponent = () => {
             />
           </div>
           <textarea
+          data-aos="zoom-in"
+          data-aos-duration="1000" 
+          data-aos-delay="500"
             name="description"
             placeholder="Description"
             value={formData.description}
@@ -130,7 +145,11 @@ const NewsComponent = () => {
             required
             className="w-full p-2 border border-gray-300 rounded mb-4 h-96 bg-transparent"
           />
-          <div className="flex items-center space-x-4 mb-4">
+          <div 
+          data-aos="zoom-in"
+          data-aos-duration="1000" 
+          data-aos-delay="600"
+          className="flex items-center space-x-4 mb-4">
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
@@ -163,6 +182,9 @@ const NewsComponent = () => {
             </label>
           </div>
           <button
+          data-aos="zoom-in"
+          data-aos-duration="1000" 
+          data-aos-delay="700"
             type="submit"
             className="w-full bg-colorPrimary font-bold py-2 px-4 rounded hover:bg-green-700"
           >
@@ -173,12 +195,16 @@ const NewsComponent = () => {
         <ul className="space-y-6">
           {liveNews.map((article) => (
             <Link to={`/news/${article._id}`} key={article._id}>
-              <li className="bg-neutral-800 shadow-lg rounded-lg p-6 glass">
+              <li 
+              data-aos="zoom-in"
+              data-aos-duration="1000" 
+              data-aos-delay="800"
+              className="bg-neutral-800 shadow-lg rounded-lg p-6 glass text-gray-100">
                 <h3 className="text-xl font-semibold">{article.title}</h3>
                 <img
                   src={article.image}
                   alt={article.title}
-                  className="w-full h-48 object-cover mt-4 rounded-lg"
+                  className="w-full h-96 object-cover mt-4 rounded-lg"
                 />
                 <p className="mt-4">{article.description}</p>
                 <small className="block mt-2">

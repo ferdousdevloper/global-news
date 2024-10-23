@@ -15,7 +15,7 @@ interface NewsItem {
   title: string;
   image: string;
   description: string;
-  date_time: string;
+  timestamp: string;
 }
 
 const NewsSection: React.FC = () => {
@@ -60,10 +60,17 @@ const NewsSection: React.FC = () => {
     <div className="container mx-auto my-10" style={{ width: "85%" }}>
       <div className="flex flex-col lg:flex-row gap-5">
         <div className="lg:w-9/12 w-full bg-neutral-950 glass p-5 rounded-xl">
-          <h2 className="text-3xl font-bold mb-4 text-slate-50">All News</h2>
+          <h2
+           data-aos="fade-left"
+           data-aos-duration="1000" 
+           data-aos-delay="200"
+          className="text-3xl font-bold mb-4 text-slate-50">All News</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {allNews.map((item) => (
               <div
+              data-aos="zoom-in"
+              data-aos-duration="1000" 
+              data-aos-delay="300"
                 key={item._id}
                 className="border p-4 rounded-lg shadow-lg glass flex flex-col h-full min-h-[400px]"
               >
@@ -85,7 +92,7 @@ const NewsSection: React.FC = () => {
                     </h2>
                   </Link>
                   <p className="text-sm mb-2 text-slate-100">
-                    {new Date(item.date_time).toLocaleDateString()}
+                    {new Date(item.timestamp).toLocaleDateString()}
                   </p>
                   <p className="text-slate-100 flex-grow">
                     {item.description.length > 80 ? (
@@ -98,6 +105,7 @@ const NewsSection: React.FC = () => {
                           {" "}
                           See More
                         </Link>
+                        <hr />
                       </>
                     ) : (
                       item.description
@@ -120,12 +128,19 @@ const NewsSection: React.FC = () => {
 
         {/* Latest News Section */}
         <div className="lg:w-3/12 w-full bg-neutral-950 glass p-5 rounded-xl">
-          <h2 className="text-2xl font-extrabold mb-4 text-slate-50">
+          <h2
+           data-aos="fade-left"
+           data-aos-duration="1000" 
+           data-aos-delay="200"
+          className="text-2xl font-extrabold mb-4 text-slate-50">
             Latest News
           </h2>
           <div className="space-y-6">
             {latestNews.map((item) => (
               <div
+              data-aos="fade-up"
+              data-aos-duration="1000" 
+              data-aos-delay="300"
                 key={item._id}
                 className="border p-4 rounded-lg shadow-lg glass flex flex-col h-full min-h-[300px]"
               >
@@ -147,9 +162,11 @@ const NewsSection: React.FC = () => {
                     </h3>
                   </Link>
                   <p className="text-sm text-slate-100">
-                    {new Date(item.date_time).toLocaleDateString()}
+                    {new Date(item.timestamp).toLocaleDateString()}
                   </p>
                 </div>
+
+                <hr />
 
                 <div className="flex justify-between items-center text-xl md:text-2xl mt-auto pt-4 text-slate-100">
                   <Favorite newsId={item._id} />
