@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { AiOutlineClose } from "react-icons/ai";
 
 interface RequestReporterModalProps {
@@ -43,10 +44,10 @@ const RequestReporterModal: React.FC<RequestReporterModalProps> = ({
 
     const result = await response.json();
     if (result.modifiedCount > 0) {
-      alert("Request sent successfully!");
+      toast.success("Request sent successfully!");
       setStatus("Requested"); // Update status to 'Requested' after successful request
     } else {
-      alert("Failed to send request!");
+      toast.error("Failed to send request!");
     }
 
     onClose();
@@ -56,9 +57,9 @@ const RequestReporterModal: React.FC<RequestReporterModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center">
-      <div className="bg-white p-5 rounded-lg max-w-md w-full text-black">
+      <div className="p-5 rounded-lg max-w-md w-full text-black glass">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">Request to Become a Reporter</h2>
+          <h2 className="text-lg font-semibold text-gray-100">Request to Become a Reporter</h2>
           <button onClick={onClose}>
             <AiOutlineClose size={24} className="text-black" />
           </button>
@@ -76,7 +77,7 @@ const RequestReporterModal: React.FC<RequestReporterModalProps> = ({
         <form onSubmit={handleSubmit}>
           {/* Full Name Field */}
           <div className="mb-4">
-            <label htmlFor="fullName" className="block text-sm font-medium text-gray-900">
+            <label htmlFor="fullName" className="block text-sm font-medium text-gray-100">
               Full Name
             </label>
             <input
@@ -91,7 +92,7 @@ const RequestReporterModal: React.FC<RequestReporterModalProps> = ({
 
           {/* Image URL Field */}
           <div className="mb-4">
-            <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-900">
+            <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-100">
               Image URL
             </label>
             <input
@@ -106,7 +107,7 @@ const RequestReporterModal: React.FC<RequestReporterModalProps> = ({
 
           {/* Email Field */}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-900">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-100">
               Email Address
             </label>
             <input
@@ -123,7 +124,7 @@ const RequestReporterModal: React.FC<RequestReporterModalProps> = ({
           <div className="flex justify-end">
             <button
               type="submit"
-              className="bg-blue-600 text-white py-2 px-4 rounded-lg"
+              className="bg-colorPrimary text-white py-2 px-4 rounded-lg"
               disabled={status === "Requested"} // Disable submit if already requested
             >
               Submit Request

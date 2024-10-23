@@ -12,7 +12,6 @@ import Latest from "./Pages/Latest";
 import Entertainment from "./Pages/Entertainment";
 import Contact from "./Pages/Contact";
 import Business from "./Pages/Business";
-import Feature from "./Pages/Feature";
 import Opinion from "./Pages/Opinion";
 import Sport from "./Pages/Sport";
 import Gallery from "./Pages/Gallery";
@@ -20,22 +19,26 @@ import PrivateRoute from "./Routes/PrivateRoute";
 import NewsDetail from "./Pages/NewsDetails";
 //import Dashboard from "./LayOut/Dashboard";
 import Profile from "./Pages/Dashboard/Profile";
-import AllUsers from "./Pages/Dashboard/AllUsers";
+import AllUsers from "./Pages/Dashboard/AdminPages/AllUsers";
 import NewsForm from "./Pages/NewsForm";
 import DashboardLayout from "./LayOut/DashboardLayout";
 import ReporterRequestManagement from "./Pages/Dashboard/AdminPages/ReporterRequestManagement";
-import BanSuspendUsers from "./Pages/Dashboard/AdminPages/BanSuspendUsers";
-import ManageNewsArticles from "./Pages/Dashboard/AdminPages/ManageNewsArticles";
 import SubmittedArticles from "./Pages/Dashboard/ReporterPages/SubmittedArticles";
 import EditArticles from "./Pages/Dashboard/ReporterPages/EditArticles";
 import DeleteArticles from "./Pages/Dashboard/ReporterPages/DeleteArticles";
 import SavedArticles from "./Pages/Dashboard/NormalUser/SavedArticles";
 import ManageBookmarks from "./Pages/Dashboard/NormalUser/ManageBookmarks";
-import ManageNews from "./Pages/Dashboard/ManageNews";
+import ManageNews from "./Pages/Dashboard/AdminPages/ManageNews";
 import PopularDetails from "./Pages/PopularDetails";
 import Technology from "./Pages/Technology";
 import MyFavorites from "./Pages/Dashboard/NormalUser/MyFavorites";
 import About from "./Pages/About";
+import Lifestyle from "./Pages/Lifestyle";
+import Aos from "aos";
+import "aos/dist/aos.css";
+
+// Initialize AOS
+Aos.init();
 
 const Root = createBrowserRouter([
   {
@@ -82,6 +85,11 @@ const Root = createBrowserRouter([
         element: <Entertainment />,
       },
       {
+        path: "/category/lifestyle",
+        element: <Lifestyle />,
+      },
+
+      {
         path: "/category/about",
         element: <About />,
       },
@@ -89,10 +97,10 @@ const Root = createBrowserRouter([
         path: "/contact",
         element: <Contact></Contact>,
       },
-      // {
-      //   path: "/gallery",
-      //   element: <Gallery></Gallery>,
-      // },
+      {
+        path: "/gallery",
+        element: <Gallery></Gallery>,
+      },
       {
         path: "/category/business",
         element: <Business />,
@@ -102,20 +110,12 @@ const Root = createBrowserRouter([
         element: <Technology />,
       },
       {
-        path: "/category/feature",
-        element: <Feature />,
-      },
-      {
         path: "/category/opinion",
         element: <Opinion />,
       },
       {
         path: "/category/sports",
         element: <Sport />,
-      },
-      {
-        path: "/category/gallery",
-        element: <Gallery />,
       },
       {
         path: "/news/:id",
@@ -149,10 +149,6 @@ const Root = createBrowserRouter([
       {
         path: "/dashboard/reporter-request",
         element: <ReporterRequestManagement />,
-      },
-      {
-        path: "/dashboard/ban-suspend-users",
-        element: <BanSuspendUsers />,
       },
       {
         path: "/dashboard/manage-news-articles",

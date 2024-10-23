@@ -51,14 +51,22 @@ const ReporterRequestManagement: React.FC = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Reporter Request Management</h1>
+    <div className="p-6 max-w-4xl mx-auto text-gray-100">
+      <h1 
+      data-aos="fade-up"
+      data-aos-duration="1000"
+      data-aos-delay="100"
+      className="text-2xl font-bold mb-6">Reporter Request Management</h1>
 
-      <div className="bg-white shadow-md rounded-lg p-4">
+      <div className="glass shadow-md rounded-lg p-4">
         {users.length === 0 ? (
           <p>No pending reporter requests.</p>
         ) : (
-          <table className="w-full text-left">
+          <table 
+          data-aos="zoom-in"
+        data-aos-duration="1000"
+        data-aos-delay="300"
+          className="w-full text-left">
             <thead>
               <tr>
                 <th className="py-2">Full Name</th>

@@ -68,28 +68,55 @@ const SignInPage = () => {
       <div className="relative flex w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden z-10 border border-[#02AA08]">
         {/* Left Side - Register */}
         <div className="w-1/2 bg-[#02AA08] p-8 flex flex-col justify-center items-center">
-          <h2 className="text-white text-4xl font-bold">Welcome Back!</h2>
-          <p className="text-white mt-4 text-lg">
+          <h2 
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="100"
+          className="text-white text-4xl font-bold">Welcome Back!</h2>
+          <p 
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="200"
+          className="text-white mt-4 text-lg">
             Don't have an account? Please register!!
           </p>
-          <button className="mt-6 px-6 py-3 border-2 border-white text-white rounded-full hover:bg-white hover:text-[#02AA08] transition">
+          <button 
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="300"
+          className="mt-6 px-6 py-3 border-2 border-white text-white rounded-full hover:bg-white hover:text-[#02AA08] transition">
             <Link to="/register">Register</Link>
           </button>
         </div>
 
         {/* Right Side - Sign In */}
         <div className="w-1/2 bg-gray-800 p-8 flex flex-col justify-center">
-          <h2 className="text-[#02AA08] text-3xl font-bold mb-4">
+          <h2 
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="100"
+          className="text-[#02AA08] text-3xl font-bold mb-4">
             Sign in to your account
           </h2>
-          <p className="text-gray-400 mb-8">or use your email for sign in</p>
+          <p 
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="150"
+          className="text-gray-400 mb-8">or use your email for sign in</p>
 
           {/* Email Input */}
           <div className="mb-4">
-            <label className="block text-gray-400" htmlFor="email">
+            <label 
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="200"
+            className="block text-gray-400" htmlFor="email">
               Email
             </label>
             <input
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="250"
               id="email"
               type="email"
               value={email}
@@ -101,10 +128,17 @@ const SignInPage = () => {
 
           {/* Password Input */}
           <div className="mb-6">
-            <label className="block text-gray-400" htmlFor="password">
+            <label 
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="300"
+            className="block text-gray-400" htmlFor="password">
               Password
             </label>
             <input
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="350"
               id="password"
               type="password"
               value={password}
@@ -119,13 +153,20 @@ const SignInPage = () => {
 
           {/* Sign In Button */}
           <button
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="400"
             onClick={handleSubmit}
             className="w-full py-2 bg-[#02AA08] text-white rounded-md hover:bg-green-400 transition"
           >
             SIGN IN
           </button>
           {/* social login section */}
-          <div className="flex items-center pt-4 space-x-1 text-white">
+          <div 
+          data-aos="zoom-in"
+          data-aos-duration="1000"
+          data-aos-delay="500"
+          className="flex items-center pt-4 space-x-1 text-white">
             <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
             <p className="px-3 text-sm dark:text-gray-600">
               Login with social accounts
@@ -134,6 +175,9 @@ const SignInPage = () => {
           </div>
           <div className="flex justify-center space-x-4 text-gray-300">
             <button
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="500"
               aria-label="Log in with Google"
               className="p-3 rounded-sm text-[#02AA08]"
               onClick={handleGoogleSignIn}
@@ -147,6 +191,9 @@ const SignInPage = () => {
               </svg>
             </button>
             <button
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="550"
               aria-label="Log in with Twitter"
               className="p-3 rounded-sm text-[#02AA08]"
             >
@@ -159,6 +206,9 @@ const SignInPage = () => {
               </svg>
             </button>
             <button
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="600"
               aria-label="Log in with GitHub"
               className="p-3 rounded-sm text-[#02AA08]"
             >

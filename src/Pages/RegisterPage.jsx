@@ -74,21 +74,41 @@ const RegisterPage = () => {
       <div className="relative flex w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden z-10 border border-[#02AA08]">
         {/* Left Side - Sign In */}
         <div className="w-1/2 bg-[#02AA08] p-8 flex flex-col justify-center items-center">
-          <h2 className="text-white text-4xl font-bold">Welcome!</h2>
-          <p className="text-white mt-4 text-lg">
+          <h2 
+           data-aos="fade-up"
+           data-aos-duration="1000"
+           data-aos-delay="100"
+          className="text-white text-4xl font-bold">Welcome!</h2>
+          <p 
+           data-aos="fade-up"
+           data-aos-duration="1000"
+           data-aos-delay="200"
+          className="text-white mt-4 text-lg">
             Already have an account? Please sign in!
           </p>
-          <button className="mt-6 px-6 py-3 border-2 border-white text-white rounded-full hover:bg-white hover:text-[#02AA08] transition">
+          <button 
+           data-aos="fade-up"
+           data-aos-duration="1000"
+           data-aos-delay="300"
+          className="mt-6 px-6 py-3 border-2 border-white text-white rounded-full hover:bg-white hover:text-[#02AA08] transition">
             <Link to="/login">Sign In</Link>
           </button>
         </div>
 
         {/* Right Side - Register */}
         <div className="w-1/2 bg-gray-800 p-8 flex flex-col justify-center">
-          <h2 className="text-[#02AA08] text-3xl font-bold mb-4">
+          <h2 
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="100"
+          className="text-[#02AA08] text-3xl font-bold mb-4">
             Create your account
           </h2>
-          <p className="text-gray-400 mb-8">
+          <p 
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="150"
+          className="text-gray-400 mb-8">
             or use your email for registration
           </p>
 
@@ -98,10 +118,17 @@ const RegisterPage = () => {
           <form onSubmit={handleSubmit}>
             {/* Name Input */}
             <div className="mb-4">
-              <label className="block text-gray-400" htmlFor="name">
+              <label 
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+              className="block text-gray-400" htmlFor="name">
                 Full Name
               </label>
               <input
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="250"
                 id="name"
                 type="text"
                 placeholder="Full Name"
@@ -114,10 +141,17 @@ const RegisterPage = () => {
 
             {/* Email Input */}
             <div className="mb-4">
-              <label className="block text-gray-400" htmlFor="email">
+              <label 
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="300"
+              className="block text-gray-400" htmlFor="email">
                 Email
               </label>
               <input
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="350"
                 id="email"
                 type="email"
                 name="email"
@@ -130,10 +164,17 @@ const RegisterPage = () => {
 
             {/* Password Input */}
             <div className="mb-6">
-              <label className="block text-gray-400" htmlFor="password">
+              <label 
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="400"
+              className="block text-gray-400" htmlFor="password">
                 Password
               </label>
               <input
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="450"
                 id="password"
                 type="password"
                 name="password"
@@ -146,6 +187,9 @@ const RegisterPage = () => {
 
             {/* Register Button */}
             <button
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="500"
               type="submit"
               className="w-full py-2 bg-[#02AA08] text-white rounded-md hover:bg-green-400 transition"
               disabled={loading}

@@ -1,11 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';  // Import SweetAlert2
 import { Toaster } from 'react-hot-toast';
+import Lottie from 'lottie-react';
+import loadingAnimation from "../../../loadingAnimation.json"
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6';
 
 interface Article {
   _id: string;
@@ -23,6 +26,10 @@ interface Article {
 const SubmittedArticles: React.FC = () => {
   const { user, loading } = useAuth() || {};
   const queryClient = useQueryClient();
+
+   // Pagination state
+ const [currentPage, setCurrentPage] = useState<number>(1);
+ const [itemsPerPage] = useState<number>(3); // Show 6 items per page
 
   // Fetch articles using TanStack Query
   const { data: articles = [], refetch } = useQuery<Article[]>({
@@ -74,22 +81,54 @@ const SubmittedArticles: React.FC = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="w-2/4 mx-auto">
+        <Lottie
+          animationData={loadingAnimation}
+          height={100}
+          width={100}
+        ></Lottie>
+      </div>
+    );
   }
 
   if (!user) {
     return <p>No user found. Please log in.</p>;
   }
 
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentNews = articles.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(articles.length / itemsPerPage);
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
   return (
     <div className="p-6 glass bg-neutral-900 min-h-screen">
       <Toaster></Toaster>
-      <h1 className="text-4xl font-bold mb-6 text-center text-gray-100">Submitted Articles</h1>
-      <hr className="my-10 border-2" />
+      <h1 
+       data-aos="zoom-in"
+       data-aos-duration="1000" 
+       data-aos-delay="200"
+      className="text-4xl font-bold mb-6 text-center text-gray-100">Submitted Articles</h1>
+      <hr 
+       data-aos="zoom-in"
+       data-aos-duration="1000" 
+       data-aos-delay="300"
+      className="my-10 border-2" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {articles.length > 0 ? (
-          articles.map((article) => (
-            <div key={article._id} className="shadow-lg bg-neutral-900 rounded-lg overflow-hidden transform transition hover:scale-105 duration-300 glass">
+          currentNews.map((article) => (
+            <div 
+            data-aos="zoom-in"
+            data-aos-duration="1000" 
+            data-aos-delay="300"
+            key={article._id} className="shadow-lg bg-neutral-900 rounded-lg overflow-hidden transform transition hover:scale-105 duration-300 glass">
               <img
                 src={article.image || 'https://via.placeholder.com/400x200'} // Placeholder if no image is available
                 alt={article.title}
@@ -145,8 +184,50 @@ const SubmittedArticles: React.FC = () => {
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-600 col-span-full">No articles found</p>
+          <p className="text-center text-gray-100 col-span-full">No articles found</p>
         )}
+      </div>
+      {/* Pagination Section */}
+      <div className="mt-6 flex justify-center items-center text-white">
+        <button
+          className="px-4 py-2 mx-1 bg-colorPrimary glass rounded-lg"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          <FaArrowLeft />
+        </button>
+
+        {currentPage > 1 && (
+          <button
+            className="px-4 py-2 mx-1 rounded-lg bg-gray-800 glass"
+            onClick={() => handlePageChange(currentPage - 1)}
+          >
+            {currentPage - 1}
+          </button>
+        )}
+
+        <span
+          className="px-4 py-2 mx-1 rounded-lg bg-colorPrimary glass text-white"
+        >
+          {currentPage}
+        </span>
+
+        {currentPage < totalPages && (
+          <button
+            className="px-4 py-2 mx-1 rounded-lg bg-gray-800 glass"
+            onClick={() => handlePageChange(currentPage + 1)}
+          >
+            {currentPage + 1}
+          </button>
+        )}
+
+        <button
+          className="px-4 py-2 mx-1 bg-colorPrimary glass rounded-lg"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          <FaArrowRight />
+        </button>
       </div>
     </div>
   );

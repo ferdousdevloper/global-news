@@ -38,7 +38,11 @@ const Banner: React.FC = () => {
   }, []);
 
   return (
-    <div className="banner-container">
+    <div 
+    data-aos="zoom-in"
+    data-aos-duration="1000" 
+    data-aos-delay="200"
+    className="banner-container">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

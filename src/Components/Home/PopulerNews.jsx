@@ -29,7 +29,11 @@ const PopulerNews = () => {
       className="md:container glass p-4 rounded-xl mx-auto my-10 border-t-2 border-[#02AA08] pt-8"
       style={{ width: "85%" }}
     >
-      <h2 className="-mt-8 text-3xl font-bold mb-4 pt-4 text-slate-50 ">
+      <h2
+       data-aos="fade-left"
+       data-aos-duration="1000" 
+       data-aos-delay="200"
+      className="-mt-8 text-3xl font-bold mb-4 pt-4 text-slate-50 ">
         Populars News
       </h2>
       <Swiper
@@ -63,7 +67,8 @@ const PopulerNews = () => {
       >
         {populars?.map((news) =>
           news.popular_news === true ? (
-            <SwiperSlide key={news.id} className="lg:w-9/12 w-full bg-neutral-950 glass p-2 rounded-xl">
+            <SwiperSlide 
+            key={news.id} className="lg:w-9/12 w-full bg-neutral-950 glass p-2 rounded-xl">
               <PopularNewsCard news={news}></PopularNewsCard>
             </SwiperSlide>
           ) : (

@@ -33,7 +33,11 @@ const faqData = [
 const Faq = () => {
   return (
     <div className="container mx-auto py-8 text-white" style={{ width: "85%" }}>
-      <div className="mb-12 text-center ">
+      <div
+       data-aos="zoom-in"
+       data-aos-duration="1000" 
+       data-aos-delay="200"
+      className="mb-12 text-center ">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-wider">
           Frequently Asked Questions
         </h2>
@@ -44,7 +48,11 @@ const Faq = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-4 md:gap-8">
         {/* Banner Section */}
-        <div className="w-2/3 mx-auto">
+        <div 
+         data-aos="zoom-in"
+         data-aos-duration="1000" 
+         data-aos-delay="400"
+        className="w-2/3 mx-auto">
           <Lottie
             animationData={faqAnimation}
             height={300}
@@ -56,6 +64,9 @@ const Faq = () => {
         <div className="space-y-1 w-full ">
           {faqData.slice(0, 5).map((faq, index) => (
             <div
+            data-aos="zoom-in"
+            data-aos-duration="1000" 
+            data-aos-delay="400"
               key={index}
               className="collapse collapse-arrow join-faq border-base-300 border"
             >

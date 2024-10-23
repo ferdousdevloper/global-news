@@ -19,8 +19,11 @@ const LatestCard = ({ news }) => {
 
     return (
         <div
+        data-aos="zoom-in"
+           data-aos-duration="1000" 
+           data-aos-delay="400"
             key={_id}
-            className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 glass text-gray-300"
+            className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 glass text-gray-300 mb-4"
         >
             <Link to={`/news/${_id}`}>
                 <img
@@ -47,7 +50,7 @@ const LatestCard = ({ news }) => {
                         {description.slice(0, 150)}...
                         <Link
                             to={`/news/${_id}`}
-                            className="text-blue-500 hover:text-blue-300"
+                            className="text-colorPrimary hover:text-blue-300"
                         >
                             {" "}
                             See More

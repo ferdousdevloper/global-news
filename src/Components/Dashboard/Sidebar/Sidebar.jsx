@@ -11,12 +11,16 @@ import ReporterMenu from "./Menu/ReporterMenu";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { IoIosHome } from "react-icons/io";
 import { FaListAlt } from "react-icons/fa";
+import useUser from "../../../hooks/useUser";
+import Lottie from "lottie-react";
+import blocked from "../../../Blocked.json"
 
 const Sidebar = () => {
   const { logOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [role, isLoading] = useRole();
   const navigate = useNavigate(); // Initialize useNavigate
+  const [isBlock] = useUser()
 
   // Sidebar Responsive Handler
   const toggleSidebar = () => {
@@ -63,11 +67,21 @@ const Sidebar = () => {
 
         {/* Navigation Items */}
         <div className='flex flex-col justify-between flex-1 mt-6'>
-          <nav>
-            {role === 'Normal User' && <NormalUser />}
-            {role === 'Reporter' && <ReporterMenu />}
-            {role === 'admin' && <AdminMenu />}
-          </nav>
+        {isBlock ? (<>
+              <div className="w-2/4 mx-auto">
+        <Lottie
+          animationData={blocked}
+          height={100}
+          width={100}
+        ></Lottie>
+      </div>
+              <h1 className="text-2xl text-center text-error mx-5">You're Blocked by admin</h1>
+              </>) :(<nav>
+              {role === 'Normal User' && <NormalUser />}
+              {role === 'Reporter' && <ReporterMenu />}
+              {role === 'admin' && <AdminMenu />}
+            </nav>)}
+          
         </div>
 
         {/* Profile Menu */}

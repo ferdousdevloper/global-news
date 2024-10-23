@@ -8,9 +8,21 @@ const About = () => {
   useEffect(() => {
     AOS.init();
   }, []);
+
   return (
-    <div className="space-y-4 md:space-y-7 lg:space-y-10 bg-gray-800 text-gray-100 text-opacity-70 container mx-auto pt-20">
-      <div className="grid grid-cols-1 md:grid-cols-6 gap-2 my-3 lg:my-4 px-2 md:px-4 lg:px-8">
+    <div
+      className="space-y-4 md:space-y-7 lg:space-y-10 bg-gray-800 text-gray-100 text-opacity-70 pt-20 relative"
+      style={{
+        backgroundImage: "url('https://i.postimg.cc/zBjZ9q5N/pexels-veeterzy-303383.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        opacity: 0.8,
+      }}
+    >
+      <div className="absolute inset-0 bg-black opacity-60"></div>
+      <h1 className="text-center text-6xl text-white underline font-black">ABOUT US</h1>
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-6 gap-2 my-3 lg:my-4 px-2 md:px-4 lg:px-8  container mx-auto">
         <div className="text-3xl font-medium underline col-span-1 md:col-span-2 text-center">
           Our History
         </div>
@@ -49,7 +61,7 @@ const About = () => {
 
       <hr className="border border-gray-100 my-8 md:my-10" />
 
-      <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-6 gap-8  container mx-auto">
         <div data-aos="fade-down-right" className="col-span-1 md:col-span-3">
           <div className="text-3xl font-medium underline mb-3 text-center">
             What We Cover
@@ -89,12 +101,14 @@ const About = () => {
           <img
             className="min-h-full min-w-full hover:scale-105 transition-all duration-300 pr-4 md:pr-10"
             src="https://i.ibb.co.com/fx3wVs7/47ec03bebff5d8e8026a79b1601c7f6e.jpg"
-            alt=""
+            alt="news coverage"
           />
         </div>
       </div>
+
       <hr className="border border-gray-100 my-8 md:my-10" />
-      <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
+
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-6 gap-8  container mx-auto">
         <div
           data-aos="fade-right"
           data-aos-offset="300"
@@ -104,7 +118,7 @@ const About = () => {
           <img
             className="min-h-full min-w-full hover:scale-105 transition-all pl-2 md:pl-6"
             src="https://i.ibb.co.com/jwDx7nF/360-F-698685684-BNd-KCJLywox-Cmra-GSqps0b-Lre-Fe-URelm.jpg"
-            alt=""
+            alt="vision"
           />
         </div>
         <div
@@ -140,9 +154,11 @@ const About = () => {
           </div>
         </div>
       </div>
+
       <hr className="border border-gray-100 my-8 md:my-10" />
+
       {/* Our values section */}
-      <div data-aos="fade-up" data-aos-duration="2000">
+      <div data-aos="fade-up" data-aos-duration="2000" className="relative z-10  container mx-auto pb-8">
         <div className="space-y-4 max-w-5xl mx-auto text-center my-4">
           <div className="text-3xl font-bold underline">Our Values</div>
           <div className="text-justify px-2 md:px-1">
@@ -159,46 +175,11 @@ const About = () => {
             story without bias, providing multiple perspectives so that readers
             can form their own informed opinions. We also place a strong
             emphasis on accountability—to our readers and to the truth. Our
-            journalists adhere to the highest ethical standards, ensuring that
-            we uphold the principles of fairness and responsibility in all our
-            coverage. <br />
-            <br />
-            Inclusivity is another key value. We believe in representing voices
-            from all walks of life, covering stories that reflect the diversity
-            of the world we live in. Whether it’s local or global news, we are
-            dedicated to fostering understanding and promoting dialogue across
-            different cultures and communities.
+            journalists adhere to the highest ethical standards, and we are
+            always open to feedback and corrections when necessary.
           </div>
         </div>
       </div>
-
-      <hr className="border border-gray-100 my-8 md:my-10" />
-
-      {/* contact us section */}
-      <section
-        data-aos="fade-down"
-        data-aos-easing="linear"
-        data-aos-duration="2000"
-        className="space-y-4 max-w-5xl mx-auto text-center my-4"
-      >
-        <div className="text-3xl font-semibold">Join the Conversation</div>
-        <div>
-          If you have any questions, story suggestions, or would like to
-          contribute to our platform, feel free to reach out via our [Contact
-          Page] or email us at info@globalnews.com. Thank you for choosing
-          Global News—your window to the world.
-        </div>
-        <div className="text-5xl flex">
-          <FaCaretDown className=" text-red-600 mx-auto" />
-        </div>
-        <div className="pb-10">
-          <Link to="/contact">
-            <button className="text-white font-medium text-lg bg-green-800 btn outline-none border-none">
-              Contact Us
-            </button>
-          </Link>
-        </div>
-      </section>
     </div>
   );
 };
