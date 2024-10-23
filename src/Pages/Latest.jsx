@@ -27,7 +27,7 @@ const Latest = () => {
   useEffect(() => {
     const fetchLatestNews = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/news');
+        const response = await axios.get('https://global-news-server-phi.vercel.app/news');
         const newsData = response.data;
         // Sort the newsData by timestamp in descending order (newest first)
         const sortedNewsData = newsData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
@@ -119,7 +119,7 @@ const Latest = () => {
 
                 <div className="relative">
                   <ShareDropdown
-                    url={`http://localhost:3001/news/${liveLatestNews._id}`}
+                    url={`https://global-news-server-phi.vercel.app/news/${liveLatestNews._id}`}
                   />
                 </div>
               </div>

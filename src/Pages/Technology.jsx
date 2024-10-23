@@ -25,7 +25,7 @@ const Technology = () => {
   useEffect(() => {
     const fetchTechNews = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/news");
+        const response = await axios.get("https://global-news-server-phi.vercel.app/news");
         const newsData = response.data;
         const techNews = newsData.filter(
           (singleNews) => singleNews.category === "Technology"
@@ -133,7 +133,7 @@ const Technology = () => {
               <div className="flex justify-between items-center text-xl md:text-2xl my-3 text-slate-100">
                 <Favorite newsId={liveTechNews._id} />
                 <Bookmark newsId={liveTechNews._id} />
-                <ShareDropdown url={`http://localhost:3001/news/${liveTechNews._id}`} />
+                <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${liveTechNews._id}`} />
               </div>
             </div>
           </div>

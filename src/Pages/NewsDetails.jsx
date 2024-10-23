@@ -19,7 +19,7 @@ const NewsDetail = () => {
   useEffect(() => {
     const fetchNewsDetail = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/news/${id}`);
+        const response = await axios.get(`https://global-news-server-phi.vercel.app/news/${id}`);
         setNews(response.data);
         setLoading(false);
 
@@ -36,7 +36,7 @@ const NewsDetail = () => {
     const fetchRelatedNews = async (category) => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/news?category=${category}`
+          `https://global-news-server-phi.vercel.app/news?category=${category}`
         );
         const filteredNews = response.data.filter((n) => n._id !== id); // Exclude the current news item
         setRelatedNews(filteredNews);
@@ -149,7 +149,7 @@ const NewsDetail = () => {
                       <Favorite newsId={news._id} />
                       <Bookmark newsId={news._id} />
                       <ShareDropdown
-                        url={`http://localhost:3001/news/${news._id}`}
+                        url={`https://global-news-server-phi.vercel.app/news/${news._id}`}
                       />
                     </div>
                   </div>
@@ -219,7 +219,7 @@ const NewsDetail = () => {
               <div className="flex justify-between items-center text-xl md:text-2xl my-3">
                 <Favorite newsId={news._id} />
                 <Bookmark newsId={news._id} />
-                <ShareDropdown url={`http://localhost:3001/news/${news._id}`} />
+                <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${news._id}`} />
               </div>
             </div> */}
           </>

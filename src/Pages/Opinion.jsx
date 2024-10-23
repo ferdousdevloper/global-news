@@ -28,7 +28,7 @@ const Opinion = () => {
   useEffect(() => {
     const fetchOpinionNews = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/news");
+        const response = await axios.get("https://global-news-server-phi.vercel.app/news");
         const newsData = response.data;
         const opinionNews = newsData.filter(
           (singleNews) => singleNews.category === "Opinion"
@@ -141,7 +141,7 @@ const Opinion = () => {
 
                 <div className="relative">
                   <ShareDropdown
-                    url={`http://localhost:3001/news/${liveOpinionNews._id}`}
+                    url={`https://global-news-server-phi.vercel.app/news/${liveOpinionNews._id}`}
                   />
                 </div>
               </div>

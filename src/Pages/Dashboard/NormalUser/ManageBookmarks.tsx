@@ -31,11 +31,11 @@ const ManageBookmarks: React.FC = () => {
     const fetchUserBookmarks = async () => {
       if (user) {
         try {
-          const bookmarksResponse = await axios.get(`http://localhost:3001/bookmarks/${user.email}`);
+          const bookmarksResponse = await axios.get(`https://global-news-server-phi.vercel.app/bookmarks/${user.email}`);
           const bookmarks = bookmarksResponse.data;
 
           const articlePromises = bookmarks.map((newsId: string) =>
-            axios.get(`http://localhost:3001/news/${newsId}`)
+            axios.get(`https://global-news-server-phi.vercel.app/news/${newsId}`)
           );
 
           const articlesResponses = await Promise.all(articlePromises);
@@ -56,7 +56,7 @@ const ManageBookmarks: React.FC = () => {
   const handleRemoveBookmark = async (newsId: string) => {
     if (user) {
       try {
-        await axios.delete('http://localhost:3001/bookmarks', {
+        await axios.delete('https://global-news-server-phi.vercel.app/bookmarks', {
           data: { email: user.email, newsId },
         });
         setBookmarks((prevArticles) => prevArticles.filter(article => article._id !== newsId));
