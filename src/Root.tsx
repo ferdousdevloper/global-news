@@ -97,10 +97,10 @@ const Root = createBrowserRouter([
         path: "/contact",
         element: <Contact></Contact>,
       },
-      // {
-      //   path: "/gallery",
-      //   element: <Gallery></Gallery>,
-      // },
+      {
+        path: "/gallery",
+        element: <Gallery></Gallery>,
+      },
       {
         path: "/category/business",
         element: <Business />,
@@ -116,10 +116,6 @@ const Root = createBrowserRouter([
       {
         path: "/category/sports",
         element: <Sport />,
-      },
-      {
-        path: "/category/gallery",
-        element: <Gallery />,
       },
       {
         path: "/news/:id",
