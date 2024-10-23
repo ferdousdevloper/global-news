@@ -3,7 +3,6 @@ import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
-import CustomizableNews from "./CustomizableNews";
 import useAdmin from "../hooks/useAdmin";
 import { FaSquareArrowUpRight } from "react-icons/fa6";
 
@@ -414,7 +413,7 @@ const NavBar: React.FC = () => {
               Opinion
             </NavLink>
             <NavLink
-              to="/category/gallery"
+              to="/gallery"
               className={({ isActive }) =>
                 `block px-2 py-1 rounded ${
                   isActive
@@ -564,7 +563,7 @@ const NavBar: React.FC = () => {
             </NavLink>
 
             <NavLink
-              to="/category/gallery"
+              to="/gallery"
               className={({ isActive }) =>
                 `block px-2 py-1 rounded ${
                   isActive
@@ -678,10 +677,6 @@ const NavBar: React.FC = () => {
           </div>
         )}
       </nav>
-      <CustomizableNews
-        openFilter={openFilter}
-        handleFilter={handleFilter}
-      ></CustomizableNews>
     </>
   );
 };
