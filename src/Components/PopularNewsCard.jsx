@@ -21,7 +21,7 @@ const PopularNewsCard = ({ news }) => {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await axios.get("http://localhost:3001/news");
+                const response = await axios.get("https://global-news-server-phi.vercel.app/news");
                 setNewss(response.data);
                 setLoading(false);
             } catch (err) {
@@ -61,8 +61,8 @@ const PopularNewsCard = ({ news }) => {
     //         localStorage.setItem("bookmarkedNews", JSON.stringify(updatedBookmarks));
 
     //         const url = alreadyBookmarked
-    //             ? "http://localhost:3001/remove-bookmark"
-    //             : "http://localhost:3001/bookmark";
+    //             ? "https://global-news-server-phi.vercel.app/remove-bookmark"
+    //             : "https://global-news-server-phi.vercel.app/bookmark";
 
     //         await axios.post(url, { email: user.email, newsId });
 
@@ -122,7 +122,7 @@ const PopularNewsCard = ({ news }) => {
                         className={`cursor-pointer ${bookmarked.includes(_id) ? "text-green-500" : ""}`}
                         onClick={(e) => handleBookmark(_id, e)}
                     />
-                    <ShareDropdown url={`http://localhost:3001/news/${_id}`} />
+                    <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${_id}`} />
                 </div> */}
             </div>
 

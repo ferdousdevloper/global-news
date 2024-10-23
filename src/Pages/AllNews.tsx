@@ -48,7 +48,7 @@ const AllNews: React.FC = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get<NewsItem[]>("http://localhost:3001/news");
+        const response = await axios.get<NewsItem[]>("https://global-news-server-phi.vercel.app/news");
         setNews(response.data);
         setFilteredNews(response.data);
 
@@ -161,8 +161,8 @@ const AllNews: React.FC = () => {
       localStorage.setItem("bookmarkedNews", JSON.stringify(updatedBookmarks));
 
       const url = alreadyBookmarked
-        ? "http://localhost:3001/remove-bookmark"
-        : "http://localhost:3001/bookmark";
+        ? "https://global-news-server-phi.vercel.app/remove-bookmark"
+        : "https://global-news-server-phi.vercel.app/bookmark";
 
       await axios.post(url, {
         email: user.email,

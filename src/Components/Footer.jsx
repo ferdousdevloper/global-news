@@ -56,17 +56,17 @@ const Footer = () => {
             <div className="space-y-3 text-center">
               <ul className="space-y-5">
                 <li>
-                  <a rel="noopener noreferrer" href="http://localhost:3000/category/politics">
+                  <a rel="noopener noreferrer" href="https://global-news-client.vercel.app/category/politics">
                     Politics
                   </a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="http://localhost:3000/category/sports">
+                  <a rel="noopener noreferrer" href="https://global-news-client.vercel.app/category/sports">
                     Sports
                   </a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="http://localhost:3000/category/entertainment">
+                  <a rel="noopener noreferrer" href="https://global-news-client.vercel.app/category/entertainment">
                     Entertainment
                   </a>
                 </li>
@@ -78,12 +78,12 @@ const Footer = () => {
             <div className="space-y-3 text-center">
               <ul className="space-y-5">
                 <li>
-                  <a rel="noopener noreferrer" href="http://localhost:3000/all-news">
+                  <a rel="noopener noreferrer" href="https://global-news-client.vercel.app/all-news">
                     All news
                   </a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="http://localhost:3000/category/technology">
+                  <a rel="noopener noreferrer" href="https://global-news-client.vercel.app/category/technology">
                     Tech
                   </a>
                 </li>
@@ -95,17 +95,17 @@ const Footer = () => {
             <div className="space-y-3 text-center">
               <ul className="space-y-5">
                 <Link to="/category/about">
-                  <a rel="noopener noreferrer" href="http://localhost:3000/category/about">
+                  <a rel="noopener noreferrer" href="https://global-news-client.vercel.app/category/about">
                     About
                   </a>
                 </Link>
                 <li>
-                  <a rel="noopener noreferrer" href="http://localhost:3000">
+                  <a rel="noopener noreferrer" href="https://global-news-client.vercel.app">
                     FAQ
                   </a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="http://localhost:3000">
+                  <a rel="noopener noreferrer" href="https://global-news-client.vercel.app">
                     Advertise
                   </a>
                 </li>

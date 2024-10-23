@@ -26,7 +26,7 @@ const Business = () => {
   useEffect(() => {
     const fetchBusinessNews = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/news");
+        const response = await axios.get("https://global-news-server-phi.vercel.app/news");
         const newsData = response.data;
         const businessNews = newsData.filter(
           (singleNews) => singleNews.category === "Business"
@@ -135,7 +135,7 @@ const Business = () => {
 
                 <div className="relative">
                   <ShareDropdown
-                    url={`http://localhost:3001/news/${liveBusinessNews._id}`}
+                    url={`https://global-news-server-phi.vercel.app/news/${liveBusinessNews._id}`}
                   />
                 </div>
               </div>

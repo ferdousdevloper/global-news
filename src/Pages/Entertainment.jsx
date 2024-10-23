@@ -26,7 +26,7 @@ const Entertainment = () => {
     useEffect(() => {
         const fetchEntertainmentNews = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/news');
+                const response = await axios.get('https://global-news-server-phi.vercel.app/news');
                 const newsData = response.data;
                 // Filter for Entertainment news
                 const filteredEntertainmentNews = newsData.filter(news => news.category === 'Entertainment');
@@ -128,7 +128,7 @@ const Entertainment = () => {
                                     <Bookmark newsId={liveEntertainmentNews._id} />
 
                                     <div className="relative">
-                                        <ShareDropdown url={`http://localhost:3001/news/${liveEntertainmentNews._id}`} />
+                                        <ShareDropdown url={`https://global-news-server-phi.vercel.app/news/${liveEntertainmentNews._id}`} />
                                     </div>
                                 </div>
                             </div>
