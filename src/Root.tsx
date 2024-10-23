@@ -19,18 +19,16 @@ import PrivateRoute from "./Routes/PrivateRoute";
 import NewsDetail from "./Pages/NewsDetails";
 //import Dashboard from "./LayOut/Dashboard";
 import Profile from "./Pages/Dashboard/Profile";
-import AllUsers from "./Pages/Dashboard/AllUsers";
+import AllUsers from "./Pages/Dashboard/AdminPages/AllUsers";
 import NewsForm from "./Pages/NewsForm";
 import DashboardLayout from "./LayOut/DashboardLayout";
 import ReporterRequestManagement from "./Pages/Dashboard/AdminPages/ReporterRequestManagement";
-import BanSuspendUsers from "./Pages/Dashboard/AdminPages/BanSuspendUsers";
-import ManageNewsArticles from "./Pages/Dashboard/AdminPages/ManageNewsArticles";
 import SubmittedArticles from "./Pages/Dashboard/ReporterPages/SubmittedArticles";
 import EditArticles from "./Pages/Dashboard/ReporterPages/EditArticles";
 import DeleteArticles from "./Pages/Dashboard/ReporterPages/DeleteArticles";
 import SavedArticles from "./Pages/Dashboard/NormalUser/SavedArticles";
 import ManageBookmarks from "./Pages/Dashboard/NormalUser/ManageBookmarks";
-import ManageNews from "./Pages/Dashboard/ManageNews";
+import ManageNews from "./Pages/Dashboard/AdminPages/ManageNews";
 import PopularDetails from "./Pages/PopularDetails";
 import Technology from "./Pages/Technology";
 import MyFavorites from "./Pages/Dashboard/NormalUser/MyFavorites";
@@ -155,10 +153,6 @@ const Root = createBrowserRouter([
       {
         path: "/dashboard/reporter-request",
         element: <ReporterRequestManagement />,
-      },
-      {
-        path: "/dashboard/ban-suspend-users",
-        element: <BanSuspendUsers />,
       },
       {
         path: "/dashboard/manage-news-articles",

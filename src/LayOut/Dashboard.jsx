@@ -8,7 +8,6 @@ import { useState } from "react";
 import RequestReporterModal from "../Components/Dashboard/RequestReporterModal";
 import { ToastBar, Toaster } from "react-hot-toast";
 
-
 const Dashboard = () => {
   const [isAdmin, isLoading, isError] = useAdmin();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -40,7 +39,9 @@ const Dashboard = () => {
       {/* dashboard side bar */}
       <div
         className={`w-64 min-h-screen bg-[#1A1A1A] text-white glass ${
-          sidebarOpen ? "block transition-all duration-300 glass" : "hidden transition-all duration-300"
+          sidebarOpen
+            ? "block transition-all duration-300 glass"
+            : "hidden transition-all duration-300"
         } lg:block glass`}
       >
         <div>
@@ -119,17 +120,16 @@ const Dashboard = () => {
             </NavLink>
           </li>
 
-       {/* Request Reporter Button */}
-<li>
-  <button
-    onClick={openModal}
-    className="flex items-center space-x-2 px-2 py-1 rounded bg-transparent text-[#02AA08] hover:bg-[#02AA08] hover:text-white border border-[#02AA08] transition-all"
-  >
-    <FaUser />
-    <span>Request Reporter</span>
-  </button>
-</li>
-
+          {/* Request Reporter Button */}
+          <li>
+            <button
+              onClick={openModal}
+              className="flex items-center space-x-2 px-2 py-1 rounded bg-transparent text-[#02AA08] hover:bg-[#02AA08] hover:text-white border border-[#02AA08] transition-all"
+            >
+              <FaUser />
+              <span>Request Reporter</span>
+            </button>
+          </li>
         </ul>
       </div>
       {/* dashboard content */}

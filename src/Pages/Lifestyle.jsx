@@ -9,6 +9,8 @@ import Bookmark from "../Components/Bookmark";
 import ShareDropdown from "../Components/Home/ShareDropdown";
 import LatestCard from "./LatestCard";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import Lottie from "lottie-react";
+import loadingAnimation from "../loadingAnimation.json"
 
 const Lifestyle = () => {
   const [allNews, setAllNews] = useState([]);
@@ -19,7 +21,7 @@ const Lifestyle = () => {
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // Show 4 news items per page
+  const itemsPerPage = 6; // Show 6 news items per page
 
   useEffect(() => {
     const fetchLifestyleNews = async () => {
@@ -54,8 +56,12 @@ const Lifestyle = () => {
 
   if (loading) {
     return (
-      <div>
-        <span className="loading loading-bars loading-lg"></span>
+      <div className="w-2/4 mx-auto">
+        <Lottie
+          animationData={loadingAnimation}
+          height={100}
+          width={100}
+        ></Lottie>
       </div>
     );
   }
@@ -153,7 +159,7 @@ const Lifestyle = () => {
         <div className="lg:w-9/12 w-full bg-neutral-950 glass p-5 rounded-xl container mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {" "}
-            {allNews.map((item) => (
+            {currentNews.map((item) => (
               <LatestCard key={item._id} news={item} />
             ))}
           </div>

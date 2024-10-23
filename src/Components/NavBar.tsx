@@ -5,6 +5,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
 import CustomizableNews from "./CustomizableNews";
 import useAdmin from "../hooks/useAdmin";
+import { FaSquareArrowUpRight } from "react-icons/fa6";
 
 const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -38,7 +39,7 @@ const NavBar: React.FC = () => {
 
   return (
     <>
-      <nav className="bg-gray-800 glass text-white shadow-md fixed z-50 top-0 w-full">
+      <nav className="glass text-white shadow-md fixed z-50 top-0 w-full">
         <div className="container mx-auto flex justify-between items-center p-4">
           <div className="flex justify-center items-center gap-4">
             {/* Hamburger Menu for exploring all news features */}
@@ -193,14 +194,17 @@ const NavBar: React.FC = () => {
               <NavLink
                 to="/dashboard/profile"
                 className={({ isActive }) =>
-                  `px-2 py-1 rounded ${
+                  `px-2 py-1 rounded text-colorPrimary  ${
                     isActive
                       ? "bg-[#02AA08] text-white"
                       : "hover:bg-[#02AA08] hover:text-white"
                   }`
                 }
               >
-                DASHBOARD
+                <div className="flex items-center gap-2 px-3 border border-colorPrimary rounded-full font-bold">
+                <FaSquareArrowUpRight />
+                <h1>DASHBOARD</h1>
+                </div>
               </NavLink>
             )}
           </div>
@@ -261,25 +265,7 @@ const NavBar: React.FC = () => {
                 </button>
               </Link>
             )}
-            {/* {user ? (
-            <button
-              onClick={handleLogout}
-              className="block px-4 py-2 rounded bg-[#02AA08] hover:bg-[#1b5c1d] text-white"
-            >
-              Logout
-            </button>
-          ) : (
-            <NavLink
-              to="/login"
-              className={({ isActive }) =>
-                `block px-4 py-2 rounded ${
-                  isActive ? "bg-[#02AA08]" : "bg-[#02AA08] hover:bg-[#1b5c1d]"
-                } text-white px-8`
-              }
-            >
-              Login
-            </NavLink>
-          )} */}
+          
           </div>
 
           {/* Hamburger Menu Icon (for small screens) */}
@@ -307,7 +293,7 @@ const NavBar: React.FC = () => {
 
         {/* Large screen Menu */}
         {isOpenMenu && (
-          <div className="hidden md:block bg-gray-700 max-w-md text-white space-y-2 px-4 py-2 scroll-m-0">
+          <div className="hidden md:block  max-w-md text-white space-y-2 px-4 py-2 scroll-m-0">
             <div>
               <div className="text-2xl font-bold">
                 <NavLink to="/">
@@ -440,18 +426,6 @@ const NavBar: React.FC = () => {
               Photo Gallery
             </NavLink>
             <NavLink
-              to="/category/sports"
-              className={({ isActive }) =>
-                `block px-2 py-1 rounded ${
-                  isActive
-                    ? "bg-[#02AA08] text-white"
-                    : "hover:bg-[#02AA08] hover:text-white"
-                }`
-              }
-            >
-              Sports
-            </NavLink>
-            <NavLink
               to="/category/entertainment"
               className={({ isActive }) =>
                 `block px-2 py-1 rounded ${
@@ -463,12 +437,6 @@ const NavBar: React.FC = () => {
             >
               Entertainment
             </NavLink>
-            <button
-              onClick={handleFilter}
-              className="hover:bg-[#02AA08] rounded p-2"
-            >
-              Filter News
-            </button>
           </div>
         )}
         {/* Mobile Menu */}
@@ -633,17 +601,20 @@ const NavBar: React.FC = () => {
             </NavLink>
 
             <NavLink
-              to="/dashboard/profile"
-              className={({ isActive }) =>
-                `px-2 py-1 rounded ${
-                  isActive
-                    ? "bg-[#02AA08] text-white"
-                    : "hover:bg-[#02AA08] hover:text-white"
-                }`
-              }
-            >
-              DASHBOARD
-            </NavLink>
+                to="/dashboard/profile"
+                className={({ isActive }) =>
+                  `px-2 py-1 rounded text-colorPrimary  ${
+                    isActive
+                      ? "bg-[#02AA08] text-white"
+                      : "hover:bg-[#02AA08] hover:text-white"
+                  }`
+                }
+              >
+                <div className="flex items-center gap-2 px-3 border border-colorPrimary rounded-full font-bold">
+                <FaSquareArrowUpRight />
+                <h1>DASHBOARD</h1>
+                </div>
+              </NavLink>
             <br />
 
             <button
